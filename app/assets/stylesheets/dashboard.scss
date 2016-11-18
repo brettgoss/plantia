@@ -1,0 +1,16 @@
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#dashboard {
+  border: 1px solid #6da773;
+  margin: 50px;
+  height: 550px;
+}
+.card {
+  display: inline-block;
+  background: #6da773;
+  margin: 22px;
+  padding: 5px;
+  width: 20em;
+  height: 20em;
+}

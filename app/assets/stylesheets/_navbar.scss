@@ -9,10 +9,15 @@
 }
 
 #brand {
+  display: inline-block;
   font-size: 2em;
   padding: 15px;
+
+  a {
+    color: #eee;
+  }
 }
 
-#logo {
-
+#URLS {
+  display: inline-block;
 }

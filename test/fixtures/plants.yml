@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nickname: MyString
+  common_name: MyString
+  light: MyString
+  water_freq: 1
+  user: one
+
+two:
+  nickname: MyString
+  common_name: MyString
+  light: MyString
+  water_freq: 1
+  user: two
