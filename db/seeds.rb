@@ -14,25 +14,25 @@ puts "Creating Users"
 User.create!({
   name: "Aileen",
   email: "aileen@fake.com",
-  password: "aileen",
+  password_digest: "aileen",
   })
 
 User.create!({
   name: "Brett",
   email: "brett@fake.com",
-  password: "brett",
+  password_digest: "brett",
   })
 
 User.create!({
   name: "Kim",
   email: "kim@fake.com",
-  password: "kim",
+  password_digest: "kim",
   })
 
 User.create!({
   name: "Linley",
   email: "linley@fake.com",
-  password: "linley",
+  password_digest: "linley",
   })
 
 puts "Seeding Plants!(LOL!!)"
