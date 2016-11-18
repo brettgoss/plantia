@@ -1,0 +1,21 @@
+<section class="plants-show">
+
+  <article class="plant-detail">
+
+      <div class="plant">
+        <dl class="dl-horizontal">
+        <% @plants each do |plant| %>
+          <dt>Name</dt>
+          <dd><%= @plant.nickname %></dd>
+          <dd><%= @plant.common_name %></dd>
+          <dt>Light Requirements</dt>
+          <dd><%= @plant.Light %></dd>
+          <dt>Watering Frequency</dt>
+          <dd><%= @plant.water_freq %></dd>
+          <%end%>
+        </dl>
+      </div>
+    </div>
+    <br>
+
+
