@@ -9,8 +9,10 @@ A web app where users can store houseplant care information and track watering s
 # Dependancies
 
 - Ruby
-- Rails
- - React-Rails
- - Active Record
-- PostgreSQL
-- SASS
+- [Rails](https://rubygems.org/gems/rails)
+ - [React](https://rubygems.org/gems/react-rails)
+ - [jQuery](https://rubygems.org/gems/jquery-rails)
+ - [SASS](https://rubygems.org/gems/sass-rails)
+
+
+- [PostgreSQL](https://rubygems.org/gems/pg)
