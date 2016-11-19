@@ -16,6 +16,6 @@ Rails.application.routes.draw do
 
   root to:'plants#index'
 
-  resources :plants, only: [:create, :edit, :show, :index, :destroy]
+  resources :plants
 
 end
