@@ -5,7 +5,7 @@ class PlantsController < ApplicationController
   end
 
   def new
-  	@plants = Plant.new
+  	@plant = Plant.new
   end
 
   def show
