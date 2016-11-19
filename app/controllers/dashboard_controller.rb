@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_filter :authorize
+  before_action :authorize
 
   def index
     @plants = Plant.all

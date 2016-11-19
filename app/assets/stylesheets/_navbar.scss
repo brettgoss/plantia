@@ -4,14 +4,16 @@
   top: 0;
   right: 0;
   left: 0;
-  background: #aaa;
+  background: $secondary-color;
   height: $nav-height;
+  margin-bottom: 50px;
+
 }
 
 #brand {
   display: inline-block;
-  font-size: 2em;
-  padding: 15px;
+  font-size: 2.5em;
+  padding: 5px 15px;
 
   a {
     color: #eee;
@@ -20,4 +22,9 @@
 
 #URLS {
   display: inline-block;
+}
+.userfunc {
+  line-height: 3.5em;
+  font-size: 1.5em;
+  margin-right: 20px;
 }
