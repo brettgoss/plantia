@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
 
-  resources :plants, only: [:create, :edit, :show, :index]
+  resources :plants, only: [:create, :edit, :show, :index, :destroy]
 
 end

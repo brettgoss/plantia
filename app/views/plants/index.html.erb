@@ -4,8 +4,27 @@
     <h1>See And Create Plants!</h1>
   </header>
 
-  <div class="plants">
-    <%= render @plants %>
+  <div class="well">
+    <%= link_to '+ New Plant', plants_path, class: 'btn btn-info' %>
+  </div>
+
+  <div class="panel panel-default plants">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Name</th>
+          <th>Light</th>
+          <th>Water</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @plants %>
+      </tbody>
+    </table>
+
   </div>
 
 </section>
