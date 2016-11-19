@@ -14,7 +14,7 @@ A web app where users can store houseplant care information and track watering s
  - [jQuery](https://rubygems.org/gems/jquery-rails)
  - [SASS](https://rubygems.org/gems/sass-rails)
  - [Bcrypt](https://rubygems.org/gems/bcrypt)
- - [Respc] (https://rubygems.org/gems/bcrypt)
+ - [Respc] (https://rubygems.org/gems/respc)
 
 
 
