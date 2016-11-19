@@ -8,11 +8,7 @@ var Dashboard = React.createClass({
   render: function() {
     console.log('Dashboard Loaded')
     return (
-      <div>
-        {
-          <Card data={this.state.plants} />
-        }
-      </div>
+      <Card data={this.state.plants} />
     )
   }
 });
