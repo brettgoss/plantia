@@ -1,9 +1,18 @@
 var Dashboard = React.createClass({
   getInitialState: function() {
-    return { plants:  [] }
+    return {
+      plants: this.props.data
+    }
   },
 
   render: function() {
-    return <Card />;
+    console.log('Dashboard Loaded')
+    return (
+      <div>
+        {
+          <Card data={this.state.plants} />
+        }
+      </div>
+    )
   }
 });
