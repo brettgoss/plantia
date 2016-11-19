@@ -13,8 +13,9 @@ class PlantsController < ApplicationController
   end
 
   def create
-  	@plant = Plant.new(product_params)
 
+  	@plant = Plant.new(product_params)
+  	@plant.user = current_user
   	if @plant.save
       redirect_to [:plants], notice: 'Plant created!'
     else
@@ -24,7 +25,7 @@ class PlantsController < ApplicationController
 
   def product_params
     params.require(:plant).permit(
-      :name,
+      :nickname,
       :common_name,
       :light,
       :water_freq,
