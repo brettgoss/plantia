@@ -5,12 +5,19 @@
   border: 1px solid #6da773;
   margin: 50px;
   height: 550px;
+  overflow: scroll;
+}
+#wrapper {
+  height: 150%;
 }
 .card {
   display: inline-block;
   background: #6da773;
-  margin: 22px;
+  margin: 20px;
   padding: 5px;
-  width: 20em;
-  height: 20em;
+  width: 21em;
+  height: 25em;
+}
+.card:hover {
+  opacity: 0.9;
 }

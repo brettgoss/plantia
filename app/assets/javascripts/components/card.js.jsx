@@ -1,12 +1,20 @@
 var Card = React.createClass({
 
   render: function() {
+    console.log(this.props.data)
     return (
       <div>
-        <div className="card">Test1</div>
-        <div className="card">Test2</div>
-        <div className="card">Test3</div>
-        <div className="card">Test4</div>
+        {
+          this.props.data.map(function(value, index){
+            return (
+              <div key={index} className="card">
+                <p>{value.nickname}</p>
+                <p>{value.common_name}</p>
+              </div>
+
+            )
+          })
+        }
       </div>
 
     )

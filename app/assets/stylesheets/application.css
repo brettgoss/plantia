@@ -11,9 +11,17 @@
  * It is generally better to create a new file per style scope.
  *
  *= require normalize-rails
+ *= require skeleton
  *= require_tree .
  *= require_self
  */
 a {
   text-decoration: none;
+  color: #008319;
 }
+a:hover {
+  color: black;
+}
+/*div,span,p {
+  border: 1px solid black;
+}*/
