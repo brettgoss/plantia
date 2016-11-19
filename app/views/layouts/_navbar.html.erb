@@ -4,14 +4,30 @@
   </span>
   <span id="URLS">
     <%= link_to 'dashboard', dashboard_index_url %>
-    <h1>Login</h1>
-
-<%= form_tag '/login' do %>
-
-  Email: <%= text_field_tag :email %>
-  Password: <%= password_field_tag :password %>
-  <%= submit_tag "Submit" %>
-
-<% end %>
+  </span>
+    <div class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <% if current_user %>
+        <%= current_user.name %>
+        <% else %>
+        Login
+        <% end %>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+      <% if current_user %>
+        <li><%= link_to "Logout", logout_path %></li>
+      <% else %>
+        <li>
+        <%= form_tag '/login' do %>
+          Email: <%= text_field_tag :email %>
+          Password: <%= password_field_tag :password %>
+          <%= submit_tag "Submit" %>
+          <% end %>
+      </li>
+      <% end %>
+      </ul>
+    </div>
   </span>
 </nav>
+
