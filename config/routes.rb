@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   # these routes are for showing users a login form, logging them in, and logging them out.
-  get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
@@ -17,6 +16,6 @@ Rails.application.routes.draw do
 
   root to:'plants#index'
 
-  resources :plants, only: [:create, :edit, :show, :index]
+  resources :plants, only: [:create, :edit, :show, :index, :destroy]
 
 end
