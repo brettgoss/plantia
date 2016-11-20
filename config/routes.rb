@@ -18,4 +18,7 @@ Rails.application.routes.draw do
 
   resources :plants
 
+  root to:'plants#show'
+  resources :plants, only: [:show]
+
 end
