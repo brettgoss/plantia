@@ -15,10 +15,10 @@ var Card = React.createClass({
                     <div className="plant-common">{value.common_name}</div>
                   </div>
                 </header>
-                <content>
-                  <h5>{value.light}</h5>
-                  <h5>Water every {value.water_freq} days</h5>
-                </content>
+                <div className="plant-content">
+                  <div className="plant-details">{value.light}</div>
+                  <div className="plant-details">Water every {value.water_freq} days</div>
+                </div>
               </div>
             )
           })
