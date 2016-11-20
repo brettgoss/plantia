@@ -13,7 +13,7 @@ var Dashboard = React.createClass({
     return (
       <div>
         <div id="button-all">
-          <a className="button">Water All</a>
+          <button className="button">Water All</button>
           <a className="button" href="/plants">See All</a>
         </div>
 
