@@ -26,7 +26,7 @@ User.create!({
 User.create!({
   name: "Kim",
   email: "kim@fake.com",
-  password: "kim",
+  password: "kimmy",
   })
 
 User.create!({
