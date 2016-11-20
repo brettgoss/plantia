@@ -1,3 +1,6 @@
+### Build Status:
+[![CircleCI](https://circleci.com/gh/Plantia/app/tree/master.svg?style=shield)](https://circleci.com/gh/Plantia/app/tree/master)
+
 # Plantia
 Keep track of your houseplants, the easy way.
 
