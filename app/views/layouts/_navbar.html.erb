@@ -17,10 +17,9 @@
       <% else %>
       <span class="userfunc u-pull-right">
         <%= form_for :sessions, url: '/login' do |f| %>
-          Login:
-          <%= f.text_field :email, placeholder: "email" %>
-          <%= f.password_field :password, placeholder: "password" %>
-          <%= f.submit "Submit", class: 'button-primary' %>
+          <%= f.text_field :email, placeholder: "email", class: "input" %>
+          <%= f.password_field :password, placeholder: "password", class: "input" %>
+          <%= f.submit "Login", class: 'button-default' %>
         <% end %>
       </span>
       <% end %>
