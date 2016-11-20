@@ -1,4 +1,4 @@
-<section class="plants-new">
+<div class="container">
 
   <header class="page-header">
     <h1>New Plant</h1>
@@ -10,7 +10,7 @@
 
   <div class="row">
     <div class="col-sm-6 col-sm-offset-1">
-        <%= form_for @plant, url: plants_path do |form| %> 
+        <%= form_for @plant, url: plants_path do |form| %>
 
           <% if form.object.errors.any? %>
             <div class="alert alert-danger">
@@ -48,4 +48,4 @@
     </div>
   </div>
 
-</section>
+</div>

@@ -27,6 +27,16 @@ class PlantsController < ApplicationController
     end
   end
 
+  def edit
+    @plant = Plant.find(params[:id])
+  end
+
+  def destroy
+    @plant = Plant.find params[:id]
+    @plant.destroy
+    redirect_to [:plants], notice: 'Plant deleted!'
+  end
+
   def water_event
     @event = WaterEvent.new
     @plant = Plant.find params[:id]

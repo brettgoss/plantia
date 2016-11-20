@@ -1,6 +1,6 @@
 class Plant < ApplicationRecord
   belongs_to :user
-  has_many :water_events
+  has_many :water_events, dependent: :destroy
 
   validates :nickname, presence: true
   validates :common_name, presence: true
