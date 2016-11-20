@@ -1,7 +1,8 @@
 class PlantsController < ApplicationController
   before_filter :authorize
   def index
-    @plants = Plant.all
+    @user = User.find(current_user.id)
+    @plants = @user.plants.all
   end
 
   def new
@@ -10,6 +11,11 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find params[:id]
+
+    if @plant.user != User.find(current_user.id)
+      redirect_to '/'# make this show an error.
+    end
+
   end
 
   def create

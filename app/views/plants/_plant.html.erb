@@ -1,17 +1,14 @@
-<tr>
-  <td>
-    <h4><%= plant.nickname %></h4>
-    <br>
-    <p><%= plant.common_name %></p>
-  </td>
-  <td>
-    <%= plant.light %>
-  </td>
-  <td>
-    <%= plant.water_freq %>
-  </td>
-
-  <td>
-    <%= link_to fa_icon('trash'), plant_path(plant), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
-  </td>
-</tr>
+<div class="row">
+  <tr>
+    <td>
+      <h5><%= plant.nickname %></h5>
+      <p><%= plant.common_name %></p>
+    </td>
+    <td>
+      <%= plant.light %>
+    </td>
+    <td>
+      <%= plant.water_freq %>
+    </td>
+  </tr>
+</div>
