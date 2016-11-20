@@ -16,6 +16,14 @@
   flex-wrap: wrap;
   padding: 0 4em;
 }
+#button-all {
+  justify-content: space-around;
+  margin: auto;
+
+  button {
+    margin: 8em;
+  }
+}
 .card {
   background: white;
   margin-top: 2em;
