@@ -1,11 +1,17 @@
 var Card = React.createClass({
+  getInitialState: function() {
+    return {
+      plants: this.props.data.plants,
+      water: this.props.data.water
+    }
+  },
 
   render: function() {
-    console.log(this.props.data)
+    console.log(this.state.water)
     return (
       <div className="wrapper">
         {
-          this.props.data.map(function(value, index){
+          this.props.data.plants.map((value, index) => {
             return (
               <div key={index} className="card">
                 <header className="plant-header">
@@ -17,6 +23,11 @@ var Card = React.createClass({
                 </header>
                 <div className="plant-content">
                   <div className="plant-details">{value.light}</div>
+                  <div className="plant-details">{this.props.data.water.map((item, index) => {
+                      if (item.plant_id == value.id) {
+                        return <div key={index}>{item.created_at}</div>
+                      }
+                    })}</div>
                   <div className="plant-details">Water every {value.water_freq} days</div>
                 </div>
               </div>

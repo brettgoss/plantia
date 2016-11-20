@@ -1,6 +1,5 @@
 class Plant < ApplicationRecord
   belongs_to :user
-  
   has_many :water_events
 
   validates :nickname, presence: true
