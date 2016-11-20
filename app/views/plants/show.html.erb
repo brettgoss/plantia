@@ -1,55 +1,56 @@
-
-
 <div class="container">
 
- <div class="row">
- <div class="four columns">
- </div>
- <div class="four columns">
-<h1><strong><%= @plant.nickname%></strong></h1>
-<h5> <em> <%= @plant.common_name%> </em> </h5>
-</div>
-<div class="four columns">
- </div>
-</div>
- <div class="row">
- <div class="four columns">
- </div>
- <div class="four columns">
-<table class="u-full-width">
-  <thead>
-    <tr>
-      <th>Light Requirements</th>
-      <th>Water</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @plant.light%></td>
-      <td>Every <%= @plant.water_freq %> days</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-<div class="four columns">
- </div>
-</div>
- <div class="row">
- <div class="three columns">
- </div>
- <div class="six columns">
-
-<form>
-  <label for="plant-log">Plant Log </label>
-  <textarea class="u-full-width" placeholder="Ex:03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea>
-</form>
-
-<div class="three columns">
- </div>
-</div>
-</div>
-</div>
+  <div class="row">
+    <div class="u-pull-right">
+      <%= link_to "Back", plants_url %> | Edit
+    </div>
 
 
+    <div class="four columns">
+      <h1>
+        <strong><%= @plant.nickname%></strong>
+      </h1>
+      <h5>
+        <em><%= @plant.common_name%></em>
+      </h5>
+    </div>
+  </div>
 
 
+  <div class="row">
+
+    <div class="four columns">
+    </div>
+
+    <div class="four columns">
+      <table class="u-full-width">
+        <thead>
+          <tr>
+            <th>Light Requirements</th>
+            <th>Water</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @plant.light%></td>
+            <td>Every <%= @plant.water_freq %> days</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="three columns">
+    </div>
+    <div class="six columns">
+
+      <form>
+        <label for="plant-log">Plant Log </label>
+        <textarea class="u-full-width" placeholder="Ex:03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea>
+      </form>
+
+    </div>
+  </div>
+</div>
