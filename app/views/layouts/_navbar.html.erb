@@ -4,9 +4,12 @@
       <span id="brand">
         <a href="/">Plantia</a>
       </span>
+      <% if current_user %>
       <span id="URLS">
         <%= link_to 'dashboard', dashboard_index_url %>
+        <%= link_to 'plants', plants_url %>
       </span>
+      <% end %>
     </div>
     <div class="six columns">
 
