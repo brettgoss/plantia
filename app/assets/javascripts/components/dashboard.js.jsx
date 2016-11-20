@@ -11,7 +11,15 @@ var Dashboard = React.createClass({
   render: function() {
     console.log('Dashboard Loaded')
     return (
-      <Card data={this.state} />
+      <div>
+        <div id="button-all">
+          <a className="button">Water All</a>
+          <a className="button" href="/plants">See All</a>
+        </div>
+
+        <Card data={this.state} />
+        {/* Water All and See All Buttons below cards */}
+      </div>
     )
   }
 });

@@ -48,12 +48,7 @@ var Card = React.createClass({
             )
           })
         }
-        {/* Water All and See All Buttons below cards */}
-        <div id="button-all">
 
-          <button>Water All</button>
-          <button>See All</button>
-        </div>
       </div>
 
     )

@@ -17,11 +17,13 @@
   padding: 0 4em;
 }
 #button-all {
-  justify-content: space-around;
+  display: flex;
+  justify-content: center;
   margin: auto;
 
-  button {
-    margin: 8em;
+  a {
+    margin: 2em;
+    width: 12em;
   }
 }
 .card {
