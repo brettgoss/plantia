@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   root to:'plants#show'
   resources :plants, only: [:show]
 
+  post '/water' => 'plants#water_event'
 end

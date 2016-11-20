@@ -43,6 +43,10 @@
 
   <div class="row">
     <div class="three columns">
+      water instances
+      <% @plant.water_events.each do |e| %>
+      <div><%= e.created_at %></div>
+      <% end %>
     </div>
     <div class="six columns">
 

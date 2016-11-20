@@ -1,6 +1,7 @@
 <div class="row">
   <tr>
     <td>
+      <%= button_to 'Water', [:water, :id => plant.id ] %>
       <%= link_to plant do %>
         <h5><%= plant.nickname %></h5>
       <% end %>
