@@ -16,6 +16,16 @@
   flex-wrap: wrap;
   padding: 0 4em;
 }
+#button-all {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+
+  a, button {
+    margin: 2em;
+    width: 12em;
+  }
+}
 .card {
   background: white;
   margin-top: 2em;
