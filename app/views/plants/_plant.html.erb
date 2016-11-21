@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= button_to 'Water', [:water, :id => plant.id ] %>
+    <%= button_to 'Water', water_events_path, method: 'post', remote: true, params: {water_event: {plant_id: plant.id}} %>
   </td>
   <td>
     <%= link_to plant do %>
@@ -11,7 +11,8 @@
     <%= plant.light %>
   </td>
   <td>
-    <%= plant.water_freq %>
+    Water every <%= plant.water_freq %> days
+    <p><%= plant.days_till_water %> days till next water
   </td>
   <td>
     <%= button_to 'Destroy', plant_path(plant.id), method: :delete, data: { confirm: "Are you sure?" } %>

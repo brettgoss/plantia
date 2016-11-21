@@ -17,5 +17,5 @@ Rails.application.routes.draw do
 
   resources :water_events, only: [:create, :destroy]
 
-  ## this was the old way? post '/water' => 'plants#water_event'
+  ## this was the old waypost '/water' => 'plants#water_event'
 end
