@@ -1,4 +1,23 @@
-<div id="center">
-  <div id="logo">Plantia</div>
-  <div id="sign-up">Sign Up</div>
+<div class="container">
+  <div class="row">
+    <div class="six columns">
+      <h4>Plants and things.</h4>
+    </div>
+    <div class="six columns">
+      <h2>Signup!</h2>
+
+      <%= form_for :user, url: '/users' do |f| %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "u-full-width" %>
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "u-full-width" %>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "u-full-width" %>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "u-full-width" %>
+        <%= f.submit "Submit", class: "button" %>
+      <% end %>
+    </div>
+  </div>
 </div>

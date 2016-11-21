@@ -1,11 +1,31 @@
-<section class="plants-index">
+<div class="container">
 
-  <header class="page-header">
-    <h1>See And Create Plants!</h1>
-  </header>
 
-  <div class="plants">
-    <%= render @plants %>
+  <h1>See And Create Plants!</h1>
+  <div class="12 columns" id="new_plant_button">
+    <%= link_to '+ New Plant', new_plant_path, class: 'button' %>
+  </div>
+  <div>
   </div>
 
-</section>
+
+  <div class="panel panel-default plants">
+
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Plant</th>
+          <th>Light</th>
+          <th>Water</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <%= render @plants %>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117232315) do
+ActiveRecord::Schema.define(version: 20161120001423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,5 +34,14 @@ ActiveRecord::Schema.define(version: 20161117232315) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "water_events", force: :cascade do |t|
+    t.datetime "date"
+    t.integer  "plant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_water_events_on_plant_id", using: :btree
+  end
+
   add_foreign_key "plants", "users"
+  add_foreign_key "water_events", "plants"
 end

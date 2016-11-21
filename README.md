@@ -1,3 +1,6 @@
+### Build Status:
+[![CircleCI](https://circleci.com/gh/Plantia/app/tree/master.svg?style=shield)](https://circleci.com/gh/Plantia/app/tree/master)
+
 # Plantia
 Keep track of your houseplants, the easy way.
 
@@ -14,6 +17,7 @@ A web app where users can store houseplant care information and track watering s
  - [jQuery](https://rubygems.org/gems/jquery-rails)
  - [SASS](https://rubygems.org/gems/sass-rails)
  - [Bcrypt](https://rubygems.org/gems/bcrypt)
+ - [Rspec](https://rubygems.org/gems/rspec)
 
 
 

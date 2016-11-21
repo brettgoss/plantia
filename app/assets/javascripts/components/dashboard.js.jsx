@@ -1,9 +1,17 @@
 var Dashboard = React.createClass({
+
+  // Sets the state from the props being passed down from the dashboard controller.
   getInitialState: function() {
-    return { plants:  [] }
+    return {
+      plants: this.props.plants,
+      water: this.props.water
+    }
   },
 
   render: function() {
-    return <Card />;
+    console.log('Dashboard Loaded')
+    return (
+      <Card data={this.state} />
+    )
   }
 });

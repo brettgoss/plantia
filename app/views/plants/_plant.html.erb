@@ -1,11 +1,17 @@
-
-
-<div class="plant">
-  <dl class="dl-horizontal">
-    <dd><%= plant.nickname %></dd>
-    <dd>Type: <%=plant.common_name%></dd>
-    <dd>Light requirements: <%=plant.light%></dd>
-    <dd>Water every <%=plant.water_freq%> days</dd>
-  </dl>
+<div class="row">
+  <tr>
+    <td>
+      <%= button_to 'Water', [:water, :id => plant.id ] %>
+      <%= link_to plant do %>
+        <h5><%= plant.nickname %></h5>
+      <% end %>
+      <p><%= plant.common_name %></p>
+    </td>
+    <td>
+      <%= plant.light %>
+    </td>
+    <td>
+      <%= plant.water_freq %>
+    </td>
+  </tr>
 </div>
-
