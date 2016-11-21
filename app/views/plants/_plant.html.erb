@@ -1,18 +1,19 @@
-<div class="row">
-  <tr>
-    <td>
-      <%= button_to 'Water', [:water, :id => plant.id ] %>
-      <%= button_to 'Destroy', plant_path(plant.id), method: :delete, data: { confirm: "Are you sure?" } %>
-      <%= link_to plant do %>
-        <h5><%= plant.nickname %></h5>
-      <% end %>
-      <p><%= plant.common_name %></p>
-    </td>
-    <td>
-      <%= plant.light %>
-    </td>
-    <td>
-      <%= plant.water_freq %>
-    </td>
-  </tr>
-</div>
+<tr>
+  <td>
+    <%= button_to 'Water', [:water, :id => plant.id ] %>
+  </td>
+  <td>
+    <%= link_to plant do %>
+      <h5><%= plant.nickname %></h5>
+    <% end %>
+    <p><em><%= plant.common_name %></em></p>
+  <td>
+    <%= plant.light %>
+  </td>
+  <td>
+    <%= plant.water_freq %>
+  </td>
+  <td>
+    <%= button_to 'Destroy', plant_path(plant.id), method: :delete, data: { confirm: "Are you sure?" } %>
+  </td>
+</tr>
