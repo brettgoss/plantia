@@ -18,11 +18,22 @@
 
 .main-container {
   margin-top: 7em;
+  display: flex;
+  justify-content: space-around;
 
-  #landing-summary,
-  #welcome-message {
-    font-weight: lighter;
+  .landing-header {
+    font-size: 2em;
+    font-style: italic;
+    font-weight: 200;
   }
-
-
+  #landing-summary p {
+    font-style: italic;
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+  #landing-welcome p {
+  }
+  .six-columns {
+    margin: auto;
+  }
 }
