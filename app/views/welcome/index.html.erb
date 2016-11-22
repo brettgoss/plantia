@@ -3,12 +3,10 @@
     <div class="six columns">
       <aside>
         <div id="landing-summary">
-          <h3><strong><em>Let us help you, help plants.</em></strong></h3>
-          <p>
-            <em>We are plant lovers just like you!
-            We want you to know that you don’t have to be blessed with a green thumb to keep houseplants alive and thriving.
-            Let Plantia keep track of your watering schedule and notify you when your green babies need some love.</em>
-          </p>
+          <div class="landing-header">Let us help you, help plants.</div>
+          <p>We are plant lovers just like you!</p>
+          <p>We want you to know that you don’t have to be blessed with a green thumb to keep houseplants alive and thriving.</p>
+          <p>Let Plantia keep track of your watering schedule and notify you when your green babies need some love.</p>
         </div>
       </aside>
     </div>
@@ -30,11 +28,13 @@
         <% end %>
       <% else %>
         <aside>
-          <div id="welcome-message">Welcome, <%= current_user.name %></div>
-          <p>
-            Head to your <%= link_to 'dashboard', dashboard_index_path %> to take a look at the status of your plants.
-            Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
-          </p>
+          <div id="landing-welcome">
+            <div class="landing-header">Welcome, <%= current_user.name %>.</div>
+            <p>
+              Head to your <%= link_to 'dashboard', dashboard_index_path %> to take a look at the status of your plants.
+              Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
+            </p>
+          </div>
         </aside>
       <% end %>
     </div>
