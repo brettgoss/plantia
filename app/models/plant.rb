@@ -14,8 +14,8 @@ class Plant < ApplicationRecord
     latest_water = water_events.order(water_date: :desc).limit(1).first
     return 0 unless latest_water
     # TODO Use `date` column instead of `created_at`
-    days_since_last_water = latest_water.created_at.to_date - Date.today
-    (water_freq - days_since_last_water).to_i + 1
+    days_since_last_water = latest_water.water_date.to_date - Date.today
+    (water_freq - days_since_last_water).to_i
   end
 
 end
