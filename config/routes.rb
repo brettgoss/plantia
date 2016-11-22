@@ -9,17 +9,13 @@ Rails.application.routes.draw do
 
   # These routes will be for signup. The first renders a form in the browse, the second will
   # receive the form and create a user in our database using the data given to us by the user.
-  get '/' => 'users#new'
   post '/users' => 'users#create'
 
   resources :dashboard, only: [:index]
 
-  root to:'plants#index'
-
   resources :plants
 
-  root to:'plants#show'
-  resources :plants, only: [:show]
+  resources :water_events, only: [:create, :destroy]
 
-  post '/water' => 'plants#water_event'
+  ## this was the old waypost '/water' => 'plants#water_event'
 end

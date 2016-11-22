@@ -27,16 +27,37 @@ class PlantsController < ApplicationController
     end
   end
 
-  def water_event
-    @event = WaterEvent.new
-    @plant = Plant.find params[:id]
-    @event.plant = @plant
-    if @event.save
-      redirect_to [:plants], notice: 'Plant Watered'
-    else
-      render :plants
-    end
+  def update
+  @plant = Plant.find(params[:id])
+
+  if @plant.update(plant_params)
+    redirect_to @plant
+  else
+    render 'edit'
   end
+end
+
+  def edit
+    @plant = Plant.find(params[:id])
+  end
+
+  def destroy
+    @plant = Plant.find params[:id]
+    @plant.destroy
+    redirect_to [:plants], notice: 'Plant deleted!'
+  end
+
+#this is now being handled by water controller
+  # def water_event
+  #   @event = WaterEvent.new
+  #   @plant = Plant.find params[:id]
+  #   @event.plant = @plant
+  #   if @event.save
+  #     redirect_to [:plants], notice: 'Plant Watered'
+  #   else
+  #     render :plants
+  #   end
+  # end
 
 private
   def plant_params

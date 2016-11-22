@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="u-pull-right">
-      <%= link_to "Back", plants_url %> | Edit
+      <%= link_to "Back", :back %> | <%= link_to 'Edit', edit_plant_path(@plant) %>
     </div>
 
 
@@ -45,7 +45,7 @@
     <div class="three columns">
       water instances
       <% @plant.water_events.each do |e| %>
-      <div><%= e.created_at %></div>
+      <div><%= e.created_at.strftime("%l:%M %p %b %d %Y") %></div>
       <% end %>
     </div>
     <div class="six columns">
