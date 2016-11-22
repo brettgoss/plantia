@@ -18,32 +18,34 @@ var Card = React.createClass({
             return (
               <div key={index} className="card">
                 {/* Plant card header */}
-                <header className="plant-header">
-                  <img className="plant-image" src="/favicon.ico"/>
-                  <div className="plant-head">
-                    <div className="plant-nickname">{value.nickname}</div>
-                    <div className="plant-common">{value.common_name}</div>
+                <a href={"/plants/" + value.id}>
+                  <header className="plant-header">
+                    <img className="plant-image" src="/favicon.ico"/>
+                    <div className="plant-head">
+                      <div className="plant-nickname">{value.nickname}</div>
+                      <div className="plant-common">{value.common_name}</div>
+                    </div>
+                  </header>
+
+                  {/* Plant card body */}
+                  <div className="plant-content">
+                    <div className="plant-details">{value.light}</div>
+
+                    <div className="plant-details">
+                      {
+                        // Maps the water info into each card
+                        this.props.data.water.map((item, index) => {
+                          // Only show the water info relavant to the card that it's inside
+                          if (item.plant_id == value.id) {
+                            return <div key={index}>{item.created_at}</div>
+                          }
+                        })
+                      }
+                    </div>
+
+                    <div className="plant-details">Water every {value.water_freq} days</div>
                   </div>
-                </header>
-
-                {/* Plant card body */}
-                <div className="plant-content">
-                  <div className="plant-details">{value.light}</div>
-
-                  <div className="plant-details">
-                    {
-                      // Maps the water info into each card
-                      this.props.data.water.map((item, index) => {
-                        // Only show the water info relavant to the card that it's inside
-                        if (item.plant_id == value.id) {
-                          return <div key={index}>{item.created_at}</div>
-                        }
-                      })
-                    }
-                  </div>
-
-                  <div className="plant-details">Water every {value.water_freq} days</div>
-                </div>
+                </a>
               </div>
             )
           })
