@@ -11,7 +11,7 @@ class Plant < ApplicationRecord
   # be watered again. If water date has passed then returns negative
   # number indicating how many days late the water would be.
   def days_till_water
-    latest_water = water_events.order(date: :desc).limit(1).first
+    latest_water = water_events.order(water_date: :desc).limit(1).first
     return 0 unless latest_water
     # TODO Use `date` column instead of `created_at`
     days_since_last_water = latest_water.created_at.to_date - Date.today
