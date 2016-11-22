@@ -47,16 +47,17 @@ end
     redirect_to [:plants], notice: 'Plant deleted!'
   end
 
-  def water_event
-    @event = WaterEvent.new
-    @plant = Plant.find params[:id]
-    @event.plant = @plant
-    if @event.save
-      redirect_to [:plants], notice: 'Plant Watered'
-    else
-      render :plants
-    end
-  end
+#this is now being handled by water controller
+  # def water_event
+  #   @event = WaterEvent.new
+  #   @plant = Plant.find params[:id]
+  #   @event.plant = @plant
+  #   if @event.save
+  #     redirect_to [:plants], notice: 'Plant Watered'
+  #   else
+  #     render :plants
+  #   end
+  # end
 
 private
   def plant_params

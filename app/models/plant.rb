@@ -7,4 +7,15 @@ class Plant < ApplicationRecord
   validates :light, presence: true
   validates :water_freq, presence: true
 
+  # Returns an integer number of days until the plant needs to
+  # be watered again. If water date has passed then returns negative
+  # number indicating how many days late the water would be.
+  def days_till_water
+    latest_water = water_events.order(date: :desc).limit(1).first
+    return 0 unless latest_water
+    # TODO Use `date` column instead of `created_at`
+    days_since_last_water = latest_water.created_at.to_date - Date.today
+    (water_freq - days_since_last_water).to_i + 1
+  end
+
 end
