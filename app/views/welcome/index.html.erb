@@ -1,22 +1,32 @@
-<div class="container">
+<div class="container main-container">
   <div class="row">
     <div class="six columns">
-      <h4>Plants and things.</h4>
+      <aside><div id="landing-summary">Plants and things.</div></aside>
     </div>
     <div class="six columns">
-      <h2>Signup!</h2>
+      <% if !current_user %>
+        <h2>Signup!</h2>
 
-      <%= form_for :user, url: '/users' do |f| %>
+        <%= form_for :user, url: '/users' do |f| %>
 
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "u-full-width" %>
-        <%= f.label :email %>
-        <%= f.text_field :email, class: "u-full-width" %>
-        <%= f.label :password %>
-        <%= f.password_field :password, class: "u-full-width" %>
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: "u-full-width" %>
-        <%= f.submit "Submit", class: "button" %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "u-full-width" %>
+          <%= f.label :email %>
+          <%= f.text_field :email, class: "u-full-width" %>
+          <%= f.label :password %>
+          <%= f.password_field :password, class: "u-full-width" %>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: "u-full-width" %>
+          <%= f.submit "Submit", class: "button" %>
+        <% end %>
+      <% else %>
+        <aside>
+          <div id="welcome-message">Welcome, <%= current_user.name %></div>
+          <p>
+            Head to your <%= link_to 'dashboard', dashboard_index_path %> to take a look at the status of your plants.
+            Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
+          </p>
+        </aside>
       <% end %>
     </div>
   </div>

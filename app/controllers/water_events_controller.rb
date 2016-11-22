@@ -2,7 +2,7 @@ class WaterEventsController < ApplicationController
 
   def create
     e = WaterEvent.new(water_event_params)
-    e.date = Date.today
+    e.water_date = Time.now.utc
     if e.save
       render json: e
     else
@@ -19,7 +19,7 @@ class WaterEventsController < ApplicationController
   private
 
   def water_event_params
-    params.require(:water_event).permit(:plant_id, :date)
+    params.require(:water_event).permit(:plant_id, :water_date)
   end
 
 end
