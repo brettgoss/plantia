@@ -16,7 +16,7 @@ var Card = React.createClass({
     if (this.state.value.id == this.state.water.plant_id) {
       event = (
         <div className="plant-details">
-          <div>{ moment(this.state.water.water_date).format('hh:mma - MMM D, Y').toString() }</div>
+          <div>{ moment(this.state.water.water_date).format('h:mma - MMM D, Y').toString() }</div>
         </div>
       )
     }
