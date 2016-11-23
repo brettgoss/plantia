@@ -22,17 +22,26 @@
         </ul>
       </div>
       <% end %>
-      <%= f.label :nickname %>
-      <%= f.text_field :nickname, class: 'form-control' %>
+      <div class="form-group">
+        <%= f.label :nickname %>
+        <%= f.text_field :nickname, class: 'form-control' %>
+      </div>
 
-      <%= f.label :common_name %>
-      <%= f.text_area :common_name, class: 'form-control' %>
+      <div class="form-group">
+        <%= f.label :common_name %>
+        <%= f.text_area :common_name, class: 'form-control' %>
+      </div>
 
-      <%= f.label :light %>
-      <%= f.text_area :light, class: 'form-control' %>
+      <div class="form-group">
+        <%= f.label :light %>
+        <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
+      </div>
 
-      <%= f.label :water_freq %>
-      <%= f.number_field :water_freq, class: 'form-control' %>
+      <div class="form-group" id="water_every">
+        <%= f.label 'Water Needs' %>
+        Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "??"  %> days
+      </div>
+
 
     <% end %>
   </div>

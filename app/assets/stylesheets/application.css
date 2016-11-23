@@ -12,9 +12,11 @@
  *
  *= require normalize-rails
  *= require skeleton
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
+
 a {
   text-decoration: none;
   color: #008319;
