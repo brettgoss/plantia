@@ -1,0 +1,39 @@
+<div class="container">
+
+  <header class="page-header">
+    <h1>Editing Plant</h1>
+  </header>
+  <div>
+
+    <%= form_for :plant, url: plant_path(@plant), method: :patch do |f| %>
+
+      <%= link_to 'Cancel', @plant, class: 'button' %>
+      <%= f.submit 'Save Edits', class: 'button' %>
+
+     <% if @plant.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@plant.errors.count, "error") %> prohibited this plant from being saved:
+        </h2>
+        <ul>
+          <% @plant.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <%= f.label :nickname %>
+      <%= f.text_field :nickname, class: 'form-control' %>
+
+      <%= f.label :common_name %>
+      <%= f.text_area :common_name, class: 'form-control' %>
+
+      <%= f.label :light %>
+      <%= f.text_area :light, class: 'form-control' %>
+
+      <%= f.label :water_freq %>
+      <%= f.number_field :water_freq, class: 'form-control' %>
+
+    <% end %>
+  </div>
+</div>

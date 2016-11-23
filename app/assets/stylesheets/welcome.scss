@@ -3,15 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "vars";
 
-#logo {
-  margin-top: 100px;
-  text-align: center;
-  color: $primary-color;
-  font-size: 500%;
-}
+// #logo {
+//   margin-top: 100px;
+//   text-align: center;
+//   color: $primary-color;
+//   font-size: 500%;
+// }
 
 #sign-up {
   border: 1px solid black;
   float: right;
   margin-right: 50px;
+}
+
+.main-container {
+  margin-top: 7em;
+
+  #landing-summary,
+  #welcome-message {
+    font-weight: lighter;
+    font-size: 2em;
+  }
+
 }
