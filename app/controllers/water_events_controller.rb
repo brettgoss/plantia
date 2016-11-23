@@ -3,7 +3,7 @@ class WaterEventsController < ApplicationController
   def create
     plant_id = params[:plant_id]
     if create_water_event(plant_id)
-      render json: e
+      render json: e, status: :ok
     else
       render json: e.errors, status: :unprocessable_entity
     end
