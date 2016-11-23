@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122024125) do
+ActiveRecord::Schema.define(version: 20161123222309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "plantlogs", force: :cascade do |t|
+    t.datetime "logtime"
+    t.string   "title"
+    t.text     "logtext"
+    t.integer  "plant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_plantlogs_on_plant_id", using: :btree
+  end
 
   create_table "plants", force: :cascade do |t|
     t.string   "nickname"
@@ -42,6 +52,7 @@ ActiveRecord::Schema.define(version: 20161122024125) do
     t.index ["plant_id"], name: "index_water_events_on_plant_id", using: :btree
   end
 
+  add_foreign_key "plantlogs", "plants"
   add_foreign_key "plants", "users"
   add_foreign_key "water_events", "plants"
 end
