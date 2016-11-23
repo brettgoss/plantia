@@ -4,7 +4,7 @@ class WaterEventsController < ApplicationController
     e = WaterEvent.new(water_event_params)
     e.water_date = Time.now.utc
     if e.save
-      render json: e
+      render json: e, status: :ok
     else
       render json: e.errors, status: :unprocessable_entity
     end
