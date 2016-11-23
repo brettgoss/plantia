@@ -35,13 +35,13 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :light %>
-            <%= f.text_area :light, class: 'form-control' %>
+            <%= form.label :light %>
+            <%= form.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :water_freq %>
-            <%= f.number_field :water_freq, class: 'form-control' %>
+          <div class="form-group" id="water_every">
+            <%= form.label 'Water Needs' %>
+            Water every <%= form.number_field :water_freq, class: 'form-control', placeholder: "??"  %> days
           </div>
 
           <%= f.submit 'Create Plant', class: 'btn btn-primary' %>
