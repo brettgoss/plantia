@@ -49,11 +49,46 @@
       <% end %>
     </div>
     <div class="six columns">
+<label for="plant-log">Plant Log </label>
+<h2>Add a log:</h2>
+<form>
+<%= form_for([@plant, @plant.plantlogs.build]) do |f| %>
+  <p>
+    <%= f.label :logtime %><br>
+    <%= f.date_field :logtime %>
+  </p>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_area :title %>
+  </p>
+  <p>
+    <%= f.label :logtext %><br>
+    <%= f.text_area :logtext %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+ </form>
 
-      <form>
-        <label for="plant-log">Plant Log </label>
-        <em><small><textarea class="u-full-width" placeholder= "E.g. 03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea></em></small>
-      </form>
+ <h2>Log History </h2>
+<% @plant.plantlogs.each do |log| %>
+  <p>
+    <strong>log date:</strong>
+    <%= log.logtime %>
+  </p>
+  <p>
+    <strong>Title:</strong>
+    <%= log.title %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= log.logtext %>
+  </p>
+<% end %>
+        <!-- <em><small><textarea class="u-full-width" placeholder= "E.g. 03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea></em></small> -->
+
 
     </div>
   </div>
