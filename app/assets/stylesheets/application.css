@@ -22,6 +22,9 @@ a {
 a:hover {
   color: black;
 }
+body {
+  margin-top: 8em;
+}
 /*div,span,p {
   border: 1px solid black;
 }*/
