@@ -49,8 +49,10 @@
     <div class="six columns">
 <label for="plant-log">Plant Log </label>
 <h2>Add a log:</h2>
-<form>
-<%= form_for([@plantlog, url:{action: "create"}]) do |log| %>
+
+
+<%= form_for [@plant, @plantlog] do |log| %>
+
   <p>
     <%= log.label :logtime %><br>
     <%= log.date_field :logtime %>
@@ -67,7 +69,6 @@
     <%= log.submit 'Create Plantlog' %>
   </p>
 <% end %>
- </form>
 
  <h2>Log History </h2>
 <% @plant.plantlogs.each do |log| %>

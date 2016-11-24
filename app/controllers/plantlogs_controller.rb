@@ -1,5 +1,7 @@
 class PlantlogsController < ApplicationController
-
+  def index
+    @plantlogs = Plantlog.all
+  end
   def create
     logger.error "In plantlog controller"
     @plant = Plant.find(params[:plant_id])
@@ -17,6 +19,5 @@ class PlantlogsController < ApplicationController
     def plantlog_params
       params.require(:plantlog).permit(:logtime, :title, :logtext, :plant_id)
     end
-end
 end
 

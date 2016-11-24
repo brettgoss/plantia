@@ -43,6 +43,8 @@ group :development, :test do
 end
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
+  gem 'capybara'
+  gem 'poltergeist'
   # for Testing
 end
 group :development do
