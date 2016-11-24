@@ -1,7 +1,9 @@
 class PlantlogsController < ApplicationController
+
   def index
     @plantlogs = Plantlog.all
   end
+
   def create
     logger.error "In plantlog controller"
     @plant = Plant.find(params[:plant_id])
@@ -10,7 +12,7 @@ class PlantlogsController < ApplicationController
       if @plantlog.save!
       redirect_to @plant
     else
-      redirect_to '/'
+      redirect_to '/' #This should probably throw an error?
     end
     # redirect_to plant_path(@plant)
   end
