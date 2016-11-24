@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20161123222309) do
   enable_extension "plpgsql"
 
   create_table "plantlogs", force: :cascade do |t|
-    t.datetime "logtime"
+    t.date     "logtime"
     t.string   "title"
     t.text     "logtext"
     t.integer  "plant_id"

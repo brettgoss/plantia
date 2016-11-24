@@ -94,7 +94,7 @@ Plant.create!({
 })
 
 Plantlog.create!({
-  logtime: 2016-04-05,
+  logtime: "2016-04-05",
   title:"Pruning",
   logtext: "Pruned Kaa. Looking so fresh and clean",
   plant_id: 6
