@@ -38,9 +38,7 @@
         </tbody>
       </table>
     </div>
-
   </div>
-
   <div class="row">
     <div class="three columns">
       <div>Water Events</div>
@@ -51,11 +49,47 @@
       <% end %>
     </div>
     <div class="six columns">
+<label for="plant-log">Plant Log </label>
+<h2>Add a log:</h2>
 
-      <form>
-        <label for="plant-log">Plant Log </label>
-        <textarea class="u-full-width" placeholder="Ex:03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea>
-      </form>
+
+<%= form_for [@plant, @plantlog] do |log| %>
+
+  <p>
+    <%= log.label :logtime %><br>
+    <%= log.date_field :logtime %>
+  </p>
+  <p>
+    <%= log.label :title %><br>
+    <%= log.text_area :title %>
+  </p>
+  <p>
+    <%= log.label :logtext %><br>
+    <%= log.text_area :logtext %>
+  </p>
+  <p>
+    <%= log.submit 'Create Plantlog' %>
+  </p>
+<% end %>
+
+ <h2>Log History </h2>
+<% @plant.plantlogs.each do |log| %>
+  <p>
+    <!-- <strong>log date:</strong> -->
+    <%= log.logtime %>
+  </p>
+  <p>
+    <!-- <strong>Title:</strong> -->
+    <%= log.title %>
+  </p>
+
+  <p>
+    <!-- <strong>Comment:</strong> -->
+    <%= log.logtext %>
+  </p>
+<% end %>
+        <!-- <em><small><textarea class="u-full-width" placeholder= "E.g. 03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea></em></small> -->
+
 
     </div>
   </div>

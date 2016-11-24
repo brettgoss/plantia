@@ -13,9 +13,17 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
 
-  resources :plants
+  resources :plants do
+    resources :plantlogs
+  end
 
   resources :water_events, only: [:create, :destroy]
 
+<<<<<<< HEAD
   post '/waterall' => 'water_events#water_all'
+=======
+
+
+  ## this was the old waypost '/water' => 'plants#water_event'
+>>>>>>> plant/log
 end

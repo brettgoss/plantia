@@ -1,0 +1,2 @@
+module PlantlogsHelper
+end

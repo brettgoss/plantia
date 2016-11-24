@@ -1,6 +1,7 @@
 class Plant < ApplicationRecord
   belongs_to :user
   has_many :water_events, dependent: :destroy
+  has_many :plantlogs
 
   validates :nickname, presence: true
   validates :common_name, presence: true
@@ -16,5 +17,4 @@ class Plant < ApplicationRecord
     days_since_last_water = latest_water.water_date.to_date - Date.today
     (water_freq - days_since_last_water).to_i
   end
-
 end
