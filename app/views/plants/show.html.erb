@@ -47,48 +47,46 @@
         <time class="timestring"><%= e.water_date %></time>
       </div>
       <% end %>
+      <br>
     </div>
-    <div class="six columns">
-<label for="plant-log">Plant Log </label>
-<h2>Add a log:</h2>
 
-
+    <div class= "twelve columns">
+<label for="plant-log"><h4><strong>Plant Log</strong></h4></label>
 <%= form_for [@plant, @plantlog] do |log| %>
-
+<div class= "four columns">
   <p>
-    <%= log.label :logtime %><br>
+    <%= log.label "Date" %>
     <%= log.date_field :logtime %>
-  </p>
-  <p>
-    <%= log.label :title %><br>
+
+    <%= log.label "Title" %>
     <%= log.text_area :title %>
-  </p>
-  <p>
-    <%= log.label :logtext %><br>
+
+    <%= log.label "Entry" %>
     <%= log.text_area :logtext %>
   </p>
   <p>
     <%= log.submit 'Create Plantlog' %>
   </p>
 <% end %>
-
+</div>
  <h2>Log History </h2>
 <% @plant.plantlogs.each do |log| %>
   <p>
-    <!-- <strong>log date:</strong> -->
+    <strong>Date: </strong>
     <%= log.logtime %>
   </p>
   <p>
-    <!-- <strong>Title:</strong> -->
+    <strong>Title: </strong>
     <%= log.title %>
   </p>
 
   <p>
-    <!-- <strong>Comment:</strong> -->
+    <strong>Entry: </strong>
     <%= log.logtext %>
   </p>
 <% end %>
-        <!-- <em><small><textarea class="u-full-width" placeholder= "E.g. 03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea></em></small> -->
+        <!-- Old Styling For Plant log -->
+        <!--<em><small><textarea class="u-full-width" placeholder= "E.g. 03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea></em></small> -->
 
 
     </div>
