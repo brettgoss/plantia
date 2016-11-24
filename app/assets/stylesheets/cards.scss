@@ -1,0 +1,45 @@
+// Dashboard Card CSS
+.card {
+  background: white;
+  margin: 2em 1.2em;
+  width: 15em;
+  height: 20em;
+  box-shadow: 0px 2px 5px #888888;
+}
+
+.card:hover {
+  box-shadow: 0px 3px 8px #424242;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.plant-header {
+  background: #81C784;
+  padding: 0em;
+  display: flex;
+  align-content: flex-start;
+
+  .plant-image {
+    margin: 0.7em;
+    height: 50px;
+  }
+
+  .plant-head {
+    margin: 10px 2px;
+    flex-wrap: wrap;
+
+    .plant-nickname {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .plant-common {
+      color: #fff;
+    }
+  }
+}
+.plant-content {
+  margin: 1em;
+
+}
