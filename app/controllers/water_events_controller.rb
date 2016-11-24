@@ -2,6 +2,7 @@ class WaterEventsController < ApplicationController
 
   def create
     plant_id = params[:plant_id]
+
     e = create_water_event(plant_id)
     puts e
     if e.save
@@ -19,6 +20,7 @@ class WaterEventsController < ApplicationController
   end
 
   def create_water_event(plant_id)
+
     plant_hash = { plant_id: plant_id}
     e = WaterEvent.new(plant_hash)
     e.water_date = Time.now.utc
@@ -47,6 +49,10 @@ class WaterEventsController < ApplicationController
 
 
   private
+
+  #   def water_all_params
+  #   params.require('/water_all').permit(:user_id)
+  # end
 
   def water_event_params
     params.require(:water_event).permit(:plant_id, :water_date)

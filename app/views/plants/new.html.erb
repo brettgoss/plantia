@@ -1,52 +1,60 @@
 <div class="container">
+  <div class="six columns">
+    <header class="page-header">
+      <h1>New Plant</h1>
+       <%= link_to 'Back', :plants, class: 'button' %>
+    </header>
+  </div>  
 
-  <header class="page-header">
-    <h1>New Plant</h1>
-  </header>
-
-  <div>
-    <%= link_to 'Back', :plants, class: 'button' %>
-  </div>
 
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-1">
+    <div class="six columns">
+      <%= form_for @plant, url: plants_path do |f| %>
 
-        <%= form_for @plant, url: plants_path do |f| %>
+        <% if f.object.errors.any? %>
+          <div>
+            <strong>The following errors prevented saving:</strong>
+            <ul>
+              <% f.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-          <% if f.object.errors.any? %>
-            <div>
-              <strong>The following errors prevented saving:</strong>
-              <ul>
-                <% f.object.errors.full_messages.each do |error| %>
-                  <li><%= error %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-          <div class="form-group">
-            <%= f.label :nickname %>
+        <div class="row">
+          <div class="six columns">
+            <%= f.label 'Plant Name' %>
             <%= f.text_field :nickname, class: 'form-control' %>
           </div>
 
-          <div class="form-group">
-            <%= f.label :common_name %>
-            <%= f.text_area :common_name, class: 'form-control' %>
+          <div class="six columns">
+            <%= f.label 'Plant Type' %>
+            <%= f.text_field :common_name, class: 'form-control' %>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+          <div class="six columns">
+            <%= f.label 'Light requirments' %>
+            <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
           </div>
 
-          <div class="form-group">
-            <%= form.label :light %>
-            <%= form.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
+          <div class="six columns" id="water_every">
+            <%= f.label 'Water requirments' %>
+            Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "?"  %> days
           </div>
+        </div>
 
-          <div class="form-group" id="water_every">
-            <%= form.label 'Water Needs' %>
-            Water every <%= form.number_field :water_freq, class: 'form-control', placeholder: "??"  %> days
-          </div>
+        <br>
+        <br>
+        
+        <%= f.submit 'Create Plant', class: 'btn btn-primary' %>
+      <% end %>
 
-          <%= f.submit 'Create Plant', class: 'btn btn-primary' %>
-        <% end %>
     </div>
   </div>
-
 </div>
