@@ -16,6 +16,6 @@
     <p><%= plant.days_till_water %> days till next water
   </td>
   <td>
-    <%= link_to fa_icon('trash'), plant_path(plant.id), class: 'button', method: :delete, data: { confirm: "Wait /n Are you sure you want to delete this plant forever?" } %>
+    <%= link_to fa_icon('trash'), plant_path(plant.id), class: 'button', method: :delete, data: { confirm: "Wait, are you sure this plant is dead?" } %>
   </td>
 </tr>
