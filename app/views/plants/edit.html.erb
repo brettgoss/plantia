@@ -35,17 +35,22 @@
     </div>
   </div>
 
+<br>
+<br>
+
   <div class="row">
+    <div class="six columns">
+      <%= f.label 'Light requirements' %>
+      <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'u-full-width' %>
+    </div>
     <div class="six columns" id="water_every">
       <%= f.label 'Water Requirements' %>
-      Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "??"  %> days
-    </div>
-
-    <div class="six columns">
-      <%= f.label :light %>
-      <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
+      Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "?"  %> days
     </div>
   </div>
+
+<br>
+<br>
 
     <%= f.submit 'Save Edits', class: 'button' %>
     <%= link_to 'Cancel', @plant, class: 'button' %>
