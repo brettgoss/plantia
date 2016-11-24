@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
 
   resources :plants do
-    resources :plantlogs
+    resources :plantlogs, only: [:create, :destroy]
   end
 
   resources :water_events, only: [:create, :destroy]
