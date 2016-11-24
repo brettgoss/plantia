@@ -43,9 +43,11 @@
 
   <div class="row">
     <div class="three columns">
-      water instances
+      <div>Water Events</div>
       <% @plant.water_events.each do |e| %>
-      <div class="timestring"><%= e.water_date %></div>
+      <div>
+        <time class="timestring"><%= e.water_date %></time>
+      </div>
       <% end %>
     </div>
     <div class="six columns">
@@ -58,12 +60,14 @@
     </div>
   </div>
 </div>
-<script>(function() {
- 'use strict';
+<script>
+(function() {
+  'use strict';
 
- $(document).ready(function() {
-   $('.timestring').each(function() {
-      this.textContent = moment(this.textContent).format('h:mma - MMM D, Y');
-   });
- });
-})();</script>
+  $(document).ready(function() {
+    $('.timestring').each(function() {
+      this.textContent = moment(this.textContent, 'YYYY-MM-DD hh:mm:ss ZZ').format('lll');
+    });
+  });
+})();
+</script>
