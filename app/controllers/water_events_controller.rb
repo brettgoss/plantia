@@ -2,7 +2,10 @@ class WaterEventsController < ApplicationController
 
   def create
     plant_id = params[:plant_id]
-    if create_water_event(plant_id)
+    e = create_water_event(plant_id)
+    puts e
+    if e.save
+      puts "Saved!", plant_id
       render json: e, status: :ok
     else
       render json: e.errors, status: :unprocessable_entity
@@ -16,34 +19,34 @@ class WaterEventsController < ApplicationController
   end
 
   def create_water_event(plant_id)
-    plant_hash = {plant_id: plant_id}
+    plant_hash = { plant_id: plant_id}
     e = WaterEvent.new(plant_hash)
     e.water_date = Time.now.utc
-    return e.save
+    e
   end
 
   def water_all
-    plantaroos = current_user.plants.all
-    failed_plantaroos = []
+    plants = current_user.plants.all
+    failed_plants = []
+    success_plants = []
 
-    plantaroos.each do |plant|
-      if !create_water_event(plant.id)
-        failed_plantaroos.push(plant)
+    plants.each do |plant|
+      if create_water_event(plant.id.to_s).save
+        success_plants.push(plant)
+      else
+        failed_plants.push(plant)
       end
     end
 
-    if !failed_plantaroos.empty?
-      puts "VIOLENT EEEEEENDS" #IN FUTURE TELL USER ABOUT THESE FAILED PLANTS
+    if !success_plants.empty?
+        response = { 'plant_id': 0}
+        render json: response, status: :ok
     end
   end
 
 
 
   private
-
-  #   def water_all_params
-  #   params.require('/water_all').permit(:user_id)
-  # end
 
   def water_event_params
     params.require(:water_event).permit(:plant_id, :water_date)

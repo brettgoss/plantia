@@ -3,7 +3,7 @@
 
 $(document).on("ajax:success", "form", function(status, data, xhr){
    $(`.message${data.plant_id}`).text("Plant Watered!");
-   $(`.message${data.plant_id}`).show().delay(5000).fadeOut();
+   $(`.message${data.plant_id}`).show().delay(1000).fadeOut();
 
    console.log('status');
    console.log('data', data.plant_id);
