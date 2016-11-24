@@ -14,6 +14,7 @@ class PlantsController < ApplicationController
     logger.error "Here we are!"
     @plant = Plant.find params[:id]
     @plantlog = Plantlog.new
+    @plantlogs = Plantlog.all
     if @plant.user != User.find(current_user.id)
       redirect_to '/'# make this show an error.
     end
@@ -30,14 +31,14 @@ class PlantsController < ApplicationController
   end
 
   def update
-  @plant = Plant.find(params[:id])
+    @plant = Plant.find(params[:id])
 
-  if @plant.update(plant_params)
-    redirect_to @plant
-  else
-    render 'edit'
+    if @plant.update(plant_params)
+      redirect_to @plant
+    else
+      render 'edit'
+    end
   end
-end
 
   def edit
     @plant = Plant.find(params[:id])

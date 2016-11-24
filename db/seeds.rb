@@ -92,3 +92,12 @@ Plant.create!({
   water_freq: 7,
   user_id: 4
 })
+
+Plantlog.create!({
+  logtime: 2016-04-05,
+  title:"Pruning",
+  logtext: "Pruned Kaa. Looking so fresh and clean",
+  plant_id: 6
+  })
+
+puts " One Single Plant log created!"
