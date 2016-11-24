@@ -2,14 +2,10 @@
 
 
   <h1>See And Create Plants!</h1>
-  <div class="12 columns" id="new_plant_button">
+  <div class="message0"></div>
+  <div class="two columns" id="action-buttons">
     <%= link_to '+ New Plant', new_plant_path, class: 'button' %>
-  </div>
-  <div>
-     <%= button_to 'Water All', '/waterall', method: 'post', remote: true %>
-
-     <div class="message0"></div>
-
+    <%= button_to 'Water All', '/waterall', method: 'post', remote: true %>
   </div>
 
 
