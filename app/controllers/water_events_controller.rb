@@ -23,7 +23,7 @@ class WaterEventsController < ApplicationController
 
     plant_hash = { plant_id: plant_id}
     e = WaterEvent.new(plant_hash)
-    e.water_date = Time.now.utc
+    e.water_date = Time.current
     e
   end
 
