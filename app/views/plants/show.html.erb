@@ -50,21 +50,21 @@
 <label for="plant-log">Plant Log </label>
 <h2>Add a log:</h2>
 <form>
-<%= form_for([@plant, @plant.plantlogs.build]) do |f| %>
+<%= form_for([@plantlog, url:{action: "create"}]) do |log| %>
   <p>
-    <%= f.label :logtime %><br>
-    <%= f.date_field :logtime %>
+    <%= log.label :logtime %><br>
+    <%= log.date_field :logtime %>
   </p>
   <p>
-    <%= f.label :title %><br>
-    <%= f.text_area :title %>
+    <%= log.label :title %><br>
+    <%= log.text_area :title %>
   </p>
   <p>
-    <%= f.label :logtext %><br>
-    <%= f.text_area :logtext %>
+    <%= log.label :logtext %><br>
+    <%= log.text_area :logtext %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= log.submit 'Create Plantlog' %>
   </p>
 <% end %>
  </form>
@@ -72,16 +72,16 @@
  <h2>Log History </h2>
 <% @plant.plantlogs.each do |log| %>
   <p>
-    <strong>log date:</strong>
+    <!-- <strong>log date:</strong> -->
     <%= log.logtime %>
   </p>
   <p>
-    <strong>Title:</strong>
+    <!-- <strong>Title:</strong> -->
     <%= log.title %>
   </p>
 
   <p>
-    <strong>Comment:</strong>
+    <!-- <strong>Comment:</strong> -->
     <%= log.logtext %>
   </p>
 <% end %>

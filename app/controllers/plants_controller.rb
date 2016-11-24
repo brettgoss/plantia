@@ -11,7 +11,9 @@ class PlantsController < ApplicationController
   end
 
   def show
+    logger.error "Here we are!"
     @plant = Plant.find params[:id]
+    @plantlog = Plantlog.new
     if @plant.user != User.find(current_user.id)
       redirect_to '/'# make this show an error.
     end
