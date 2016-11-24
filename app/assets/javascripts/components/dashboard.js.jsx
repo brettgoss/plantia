@@ -8,13 +8,19 @@ var Dashboard = React.createClass({
     }
   },
 
+  handleSubmit: function() {
+    $.ajax({
+      url: '/waterall',
+      type: "POST"
+    })
+  },
   render: function() {
     console.log('Dashboard Loaded')
     return (
       <div>
         {/* Water All and See All Buttons above cards */}
         <div id="button-all">
-          <button className="button">Water All</button>
+          <button className="button" onClick={this.handleSubmit}>Water All</button>
           <a className="button" href="/plants">See All</a>
         </div>
 
