@@ -12,15 +12,20 @@
  *
  *= require normalize-rails
  *= require skeleton
+ *= require font-awesome
  *= require_tree .
  *= require_self
  */
+
 a {
   text-decoration: none;
   color: #008319;
 }
 a:hover {
   color: black;
+}
+body {
+  margin-top: 8em;
 }
 /*div,span,p {
   border: 1px solid black;

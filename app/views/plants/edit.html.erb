@@ -1,39 +1,65 @@
 <div class="container">
 
-  <header class="page-header">
-    <h1>Editing Plant</h1>
-  </header>
-  <div>
+<div class="row">
+    <div class="u-pull-right">
+      <%= link_to "Back", @plant %>
+    </div>
 
-    <%= form_for :plant, url: plant_path(@plant), method: :patch do |f| %>
+  <div class="six columns">
+    <header class="page-header">
+      <h1>Edit Plant</h1>
+    </header>
+  </div>
 
-      <%= link_to 'Cancel', @plant, class: 'button' %>
-      <%= f.submit 'Save Edits', class: 'button' %>
+  <div class="row">                
+    <div class="six columns">
+      <%= form_for :plant, url: plant_path(@plant), method: :patch do |f| %>
 
-     <% if @plant.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@plant.errors.count, "error") %> prohibited this plant from being saved:
-        </h2>
-        <ul>
-          <% @plant.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
+      <% if @plant.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@plant.errors.count, "error") %> prohibited this plant from being saved:
+          </h2>
+          <ul>
+            <% @plant.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
       <% end %>
-      <%= f.label :nickname %>
-      <%= f.text_field :nickname, class: 'form-control' %>
 
-      <%= f.label :common_name %>
-      <%= f.text_area :common_name, class: 'form-control' %>
+      <div class="row">
+        <div class="six columns">
+          <%= f.label 'Plant Name' %>
+          <%= f.text_field :nickname, class: 'form-control' %>
+        </div>
 
-      <%= f.label :light %>
-      <%= f.text_area :light, class: 'form-control' %>
+        <div class="six columns">
+          <%= f.label 'Plant Type' %>
+          <%= f.text_field :common_name, class: 'form-control' %>
+        </div>
+      </div>
 
-      <%= f.label :water_freq %>
-      <%= f.number_field :water_freq, class: 'form-control' %>
+      <br>
+      <br>
 
-    <% end %>
+      <div class="row">
+        <div class="six columns">
+          <%= f.label 'Light requirements' %>
+          <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'u-full-width' %>
+        </div>
+        <div class="six columns" id="water_every">
+          <%= f.label 'Water Requirements' %>
+          Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "?"  %> days
+        </div>
+      </div>
+
+      <br>
+      <br>
+
+      <%= f.submit 'Save Edits', class: 'button' %>
+      <%= link_to 'Cancel', @plant, class: 'button' %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 <tr>
   <td>
-    <%= button_to 'Water', water_events_path, method: 'post', remote: true, params: {water_event: {plant_id: plant.id}} %>
+    <%= button_to 'Water', water_events_path, method: 'post', remote: true, params: { plant_id: plant.id } %>
+    <div class="message<%= plant.id %>"></div>
   </td>
   <td>
     <%= link_to plant do %>
@@ -15,6 +16,6 @@
     <p><%= plant.days_till_water %> days till next water
   </td>
   <td>
-    <%= button_to 'Destroy', plant_path(plant.id), method: :delete, data: { confirm: "Are you sure?" } %>
+    <%= link_to fa_icon('trash'), plant_path(plant.id), class: 'button', method: :delete, data: { confirm: "Wait, are you sure this plant is dead?" } %>
   </td>
 </tr>

@@ -3,33 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#Each_plant {
-
-
+#plant_water_freq {
+    width: 4em;
+    border: 0;
+    border-bottom: 2px solid #000000;
+    border-radius: 0;
+    height: 10px
 }
-
-// .plants {
-//     display:         flex;
-//     flex-direction:  row;
-//     flex-wrap: wrap ;
-// }
-
-
-//     .plant {
-//       //flex:      1;
-//       max-width: 260px;
-//       // so that footer within can be positioned absolutely
-//       position:  relative;
-
-//       border:        1px solid #ccc;
-//       border-radius: 5px;
-//       padding:       15px;
-//       padding-bottom: 80px;
-//       margin-top:    20px;
-//       margin:        10px;
-
-//     }
-
-//   #page-header{}
-
-
+#action-buttons {
+  .message0 {
+    padding-top: 55px;
+    position: absolute;
+    display: block;
+  }
+}

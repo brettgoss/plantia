@@ -1,7 +1,14 @@
 <div class="container main-container">
   <div class="row">
     <div class="six columns">
-      <aside><div id="landing-summary">Plants and things.</div></aside>
+      <aside>
+        <div id="landing-summary">
+          <div class="landing-header">Let us help you, help plants.</div>
+          <p>We are plant lovers just like you!</p>
+          <p>We want you to know that you don’t have to be blessed with a green thumb to keep houseplants alive and thriving.</p>
+          <p>Let Plantia keep track of your watering schedule and notify you when your green babies need some love.</p>
+        </div>
+      </aside>
     </div>
     <div class="six columns">
       <% if !current_user %>
@@ -21,11 +28,13 @@
         <% end %>
       <% else %>
         <aside>
-          <div id="welcome-message">Welcome, <%= current_user.name %></div>
-          <p>
-            Head to your <%= link_to 'dashboard', dashboard_index_path %> to take a look at the status of your plants.
-            Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
-          </p>
+          <div id="landing-welcome">
+            <div class="landing-header">Welcome, <%= current_user.name %>.</div>
+            <p>
+              Head to your <%= link_to 'dashboard', dashboard_index_path %> to take a look at the status of your plants.
+              Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
+            </p>
+          </div>
         </aside>
       <% end %>
     </div>

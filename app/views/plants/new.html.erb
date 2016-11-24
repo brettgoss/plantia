@@ -1,51 +1,60 @@
 <div class="container">
+  <div class="six columns">
+    <header class="page-header">
+      <h1>New Plant</h1>
+       <%= link_to 'Back', :plants, class: 'button' %>
+    </header>
+  </div>  
 
-  <header class="page-header">
-    <h1>New Plant</h1>
-  </header>
-
-  <div>
-    <%= button_to 'Back to my plants', [:plants] %>
-  </div>
 
   <div class="row">
-    <div class="col-sm-6 col-sm-offset-1">
-        <%= form_for @plant, url: plants_path do |form| %>
+    <div class="six columns">
+      <%= form_for @plant, url: plants_path do |f| %>
 
-          <% if form.object.errors.any? %>
-            <div class="alert alert-danger">
-              <strong>The following errors prevented saving:</strong>
-              <ul>
-                <% form.object.errors.full_messages.each do |error| %>
-                  <li><%= error %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-
-          <div class="form-group">
-            <%= form.label :nickname %>
-            <%= form.text_field :nickname, class: 'form-control' %>
+        <% if f.object.errors.any? %>
+          <div>
+            <strong>The following errors prevented saving:</strong>
+            <ul>
+              <% f.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
           </div>
-
-          <div class="form-group">
-            <%= form.label :common_name %>
-            <%= form.text_area :common_name, class: 'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :light %>
-            <%= form.text_area :light, class: 'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <%= form.label :water_freq %>
-            <%= form.number_field :water_freq, class: 'form-control' %>
-          </div>
-
-          <%= form.submit 'Create Plant', class: 'btn btn-primary' %>
         <% end %>
+
+        <div class="row">
+          <div class="six columns">
+            <%= f.label 'Plant Name' %>
+            <%= f.text_field :nickname, class: 'form-control' %>
+          </div>
+
+          <div class="six columns">
+            <%= f.label 'Plant Type' %>
+            <%= f.text_field :common_name, class: 'form-control' %>
+          </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+          <div class="six columns">
+            <%= f.label 'Light requirments' %>
+            <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
+          </div>
+
+          <div class="six columns" id="water_every">
+            <%= f.label 'Water requirments' %>
+            Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "?"  %> days
+          </div>
+        </div>
+
+        <br>
+        <br>
+        
+        <%= f.submit 'Create Plant', class: 'btn btn-primary' %>
+      <% end %>
+
     </div>
   </div>
-
 </div>

@@ -6,6 +6,8 @@
   left: 0;
   background: $secondary-color;
   height: $nav-height;
+  position: fixed;
+  z-index: 999;
   margin-bottom: 50px;
   box-shadow: 0px 2px 5px #888888;
 
