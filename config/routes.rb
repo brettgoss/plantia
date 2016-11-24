@@ -23,4 +23,3 @@ Rails.application.routes.draw do
   post '/waterall' => 'water_events#water_all'
 
 end
-
