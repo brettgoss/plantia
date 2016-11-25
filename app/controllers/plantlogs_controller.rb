@@ -21,6 +21,7 @@ class PlantlogsController < ApplicationController
     @plantlog = @plant.plantlogs.find(params[:id])
     @plantlog.destroy
     redirect_to plant_path(@plant), notice: 'Plant deleted!'
+
   end
 
   private

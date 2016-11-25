@@ -1,48 +1,36 @@
-var Dashboard = React.createClass({
+class Dashboard extends React.Component {
 
   // Sets the state from the props being passed down from the dashboard controller.
-  getInitialState: function() {
-    return {
-      plants: this.props.plants,
-      water: this.props.water
+  constructor(props) {
+    super(props)
+    this.state = {
+      waterinfo: ''
     }
-  },
+    // console.log('dashboard', this.state.water)
+  }
 
-  handleSubmit: function() {
-    $.ajax({
-      url: '/waterall',
-      type: "POST"
-    }).then(function(){
-      $(".message0").text("All your plants have been watered!");
-      $(".message0").show().delay(1000).fadeOut();
-    });
-  },
+  render() {
+    console.log('Dashboard Rendered')
 
-  render: function() {
-    console.log('Dashboard Loaded')
     return (
-      <div>
-        {/* Water All and See All Buttons above cards */}
-        <div id="button-all">
-          <div className="message0"></div>
-          <button className="button" onClick={this.handleSubmit}>Water All</button>
-          <a className="button" href="/plants">See All</a>
-        </div>
-
         <div className="wrapper">
-        {
-          this.state.plants.map((value, index) => {
-            var waterinfo = []
-            this.props.water.map((item, i) => {
-              if (item.plant_id == value.id) {
-                waterinfo.push(item)
-              }
+          {
+            this.props.plants.map((value, index) => {
+              console.log('Mapping Plants')
+              this.props.water.map((item, i) => {
+                if (item.plant_id == value.id) {
+                  console.log('Mapping Water Events')
+                  this.state.waterinfo = item
+                }
+              })
+              return <Card key={value.id} data={value} water={ this.state.waterinfo } />
             })
-            return <Card data={value} key={value.id} water={ waterinfo[waterinfo.length - 1] || '0' }/>
-          })
-        }
-        </div>
+          }
+
       </div>
     )
   }
-});
+  componentDidMount() {
+    console.log("Dashboard mounted")
+  }
+};

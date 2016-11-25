@@ -16,6 +16,6 @@ class Plant < ApplicationRecord
     return 0 unless latest_water
     days_since_last_water = latest_water.water_date.to_date - Date.today
     (water_freq - days_since_last_water).to_i
+  # If days_since_last water = 0 send text.
   end
-
 end
