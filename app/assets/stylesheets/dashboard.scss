@@ -5,12 +5,12 @@
 
 // React Dashboard CSS
 // Cards have their own stylesheet in cards.scss
-#dashboard {
+.dashboard {
   // border: 1px solid #6da773;
   margin: 150px 0;
   height: 100%;
   overflow: scroll;
-  background: #fff;
+  // background: #fff;
 
   a {
     text-decoration: none;

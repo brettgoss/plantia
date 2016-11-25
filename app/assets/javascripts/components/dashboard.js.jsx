@@ -1,48 +1,47 @@
-var Dashboard = React.createClass({
-
+class Dashboard extends React.Component {
+  componentDidMount() {
+    console.log("Dashboard mounted")
+  }
   // Sets the state from the props being passed down from the dashboard controller.
-  getInitialState: function() {
-    return {
+  constructor(props) {
+    super(props)
+    this.onWaterEvent = this.onWaterEvent.bind(this)
+    this.state = {
       plants: this.props.plants,
-      water: this.props.water
+      water: this.props.water,
+      waterinfo: ''
     }
-  },
+    console.log('dashboard', this.state.water)
+  }
+  onWaterEvent(){
+    console.log("Updated")
+    alert("Updated")
+    return ({
+      waterinfo: 'Updated'
+    })
+  }
 
-  handleSubmit: function() {
-    $.ajax({
-      url: '/waterall',
-      type: "POST"
-    }).then(function(){
-      $(".message0").text("All your plants have been watered!");
-      $(".message0").show().delay(1000).fadeOut();
-    });
-  },
 
-  render: function() {
-    console.log('Dashboard Loaded')
+  render() {
+    console.log('Dashboard Rendered')
+
     return (
-      <div>
-        {/* Water All and See All Buttons above cards */}
-        <div id="button-all">
-          <div className="message0"></div>
-          <button className="button" onClick={this.handleSubmit}>Water All</button>
-          <a className="button" href="/plants">See All</a>
-        </div>
-
         <div className="wrapper">
-        {
-          this.state.plants.map((value, index) => {
-            var waterinfo = []
-            this.props.water.map((item, i) => {
-              if (item.plant_id == value.id) {
-                waterinfo.push(item)
-              }
+          {
+            this.state.plants.map((value, index) => {
+              console.log('Mapping Plants')
+              this.state.water.map((item, i) => {
+                console.log('Mapping Water Events')
+
+                if (item.plant_id == value.id) {
+                  this.state.waterinfo = item
+                }
+              })
+              return <Card key={value.id} data={value} water={ this.state.waterinfo } />
             })
-            return <Card data={value} key={value.id} water={ waterinfo[waterinfo.length - 1] || '0' }/>
-          })
-        }
-        </div>
+          }
+
       </div>
     )
   }
-});
+};
