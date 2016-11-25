@@ -1,26 +1,13 @@
 class Dashboard extends React.Component {
-  componentDidMount() {
-    console.log("Dashboard mounted")
-  }
+
   // Sets the state from the props being passed down from the dashboard controller.
   constructor(props) {
     super(props)
-    this.onWaterEvent = this.onWaterEvent.bind(this)
     this.state = {
-      plants: this.props.plants,
-      water: this.props.water,
       waterinfo: ''
     }
-    console.log('dashboard', this.state.water)
+    // console.log('dashboard', this.state.water)
   }
-  onWaterEvent(){
-    console.log("Updated")
-    alert("Updated")
-    return ({
-      waterinfo: 'Updated'
-    })
-  }
-
 
   render() {
     console.log('Dashboard Rendered')
@@ -28,12 +15,11 @@ class Dashboard extends React.Component {
     return (
         <div className="wrapper">
           {
-            this.state.plants.map((value, index) => {
+            this.props.plants.map((value, index) => {
               console.log('Mapping Plants')
-              this.state.water.map((item, i) => {
-                console.log('Mapping Water Events')
-
+              this.props.water.map((item, i) => {
                 if (item.plant_id == value.id) {
+                  console.log('Mapping Water Events')
                   this.state.waterinfo = item
                 }
               })
@@ -43,5 +29,8 @@ class Dashboard extends React.Component {
 
       </div>
     )
+  }
+  componentDidMount() {
+    console.log("Dashboard mounted")
   }
 };
