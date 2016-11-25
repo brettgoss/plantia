@@ -1,0 +1,17 @@
+<p>
+  <strong>Date: </strong>
+  <%= plantlog.logtime %>
+</p>
+<p>
+  <strong>Title: </strong>
+  <%= plantlog.title %>
+</p>
+
+<p>
+  <strong>Entry: </strong>
+  <%= plantlog.logtext %>
+</p>
+<p>
+  <%= link_to fa_icon('trash'), [plantlog.plant, plantlog], class: 'button', method: :delete,
+       data: { confirm: 'Are you sure?' } %>
+</p>

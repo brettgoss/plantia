@@ -14,9 +14,10 @@ class WaterEventsController < ApplicationController
   end
 
   def destroy
-    e = WaterEvent.find(params[:id])
-    e.destroy if e
-    head :no_content
+    @water_event = WaterEvent.find(params[:id])
+    # @water_event = WaterEvent.find params[:id]
+    @water_event.destroy
+    redirect_to plant_path(@water_event.plant)
   end
 
   def create_water_event(plant_id)
@@ -49,10 +50,6 @@ class WaterEventsController < ApplicationController
 
 
   private
-
-  #   def water_all_params
-  #   params.require('/water_all').permit(:user_id)
-  # end
 
   def water_event_params
     params.require(:water_event).permit(:plant_id, :water_date)

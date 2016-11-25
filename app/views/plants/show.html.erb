@@ -1,8 +1,8 @@
 <div class="container">
 
   <div class="row">
-    <div class="u-pull-right">
-      <%= link_to "Back", :back %> | <%= link_to 'Edit', edit_plant_path(@plant) %>
+    <div class="show-buttons">
+      <%= link_to "Back", :back %> <%= link_to 'Edit', edit_plant_path(@plant) %>
     </div>
 
 
@@ -17,81 +17,54 @@
   </div>
 
 
-  <div class="row">
-
-    <div class="four columns">
-    </div>
-
-    <div class="four columns">
-      <table class="u-full-width">
-        <thead>
-          <tr>
-            <th>Light Requirements</th>
-            <th>Water</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @plant.light%></td>
-            <td>Every <%= @plant.water_freq %> days</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="four columns">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Light Requirements</th>
+          <th>Water</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @plant.light%></td>
+          <td>Every <%= @plant.water_freq %> days</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="row">
+
+
+<!-- WaterEvents -->
     <div class="three columns">
       <div>Water Events</div>
       <% @plant.water_events.each do |e| %>
-      <div>
-        <time class="timestring"><%= e.water_date %></time>
+      <div class="row">
+        <div>
+          <time class="timestring"><%= e.water_date %></time>
+        </div>
+        <div>
+          <%= link_to fa_icon('trash'), water_event_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
+        </div>
       </div>
       <% end %>
       <br>
     </div>
 
+    <!-- Plantlog -->
     <div class= "twelve columns">
-<label for="plant-log"><h4><strong>Plant Log</strong></h4></label>
-<%= form_for [@plant, @plantlog] do |log| %>
-<div class= "four columns">
-  <p>
-    <%= log.label "Date" %>
-    <%= log.date_field :logtime %>
+      <label for="plant-log"><h4>Plant Log</h4></label>
+        <%= render 'plantlogs/form' %>
 
-    <%= log.label "Title" %>
-    <%= log.text_area :title %>
-
-    <%= log.label "Entry" %>
-    <%= log.text_area :logtext %>
-  </p>
-  <p>
-    <%= log.submit 'Create Plantlog' %>
-  </p>
-<% end %>
-</div>
- <h2>Log History </h2>
-<% @plant.plantlogs.each do |log| %>
-  <p>
-    <strong>Date: </strong>
-    <%= log.logtime %>
-  </p>
-  <p>
-    <strong>Title: </strong>
-    <%= log.title %>
-  </p>
-
-  <p>
-    <strong>Entry: </strong>
-    <%= log.logtext %>
-  </p>
-<% end %>
-        <!-- Old Styling For Plant log -->
-        <!--<em><small><textarea class="u-full-width" placeholder= "E.g. 03.04.2015 <%= @plant.nickname%> experienced ideal conditions such as ..." id="exampleMessage"></textarea></em></small> -->
-
+        <h2>Log History </h2>
+        <%= render @plant.plantlogs %>
 
     </div>
   </div>
 </div>
+
+<!-- script to render water event times according to client's system time -->
+
 <script>
 (function() {
   'use strict';
