@@ -1,27 +1,34 @@
 class App extends React.Component {
-  componentDidMount() {
-    console.log("App mounted")
-  }
+
   // Sets the state from the props being passed down from the dashboard controller.
   constructor(props) {
     super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEvents = this.handleEvents.bind(this)
     this.state = {
       plants: this.props.plants,
-      water: this.props.water,
+      water: this.props.water
     }
-    // console.log(this.state)
   }
 
+  handleEvents(water){
+    console.log('Event', this.props.water)
+    console.log('Event2', water)
+
+    this.setState({water: water});
+  }
 
   handleSubmit() {
     $.ajax({
       url: '/waterall',
       type: "POST"
-    }).then(function(){
+    }).done((water) => {
       $(".message0").text("All your plants have been watered!");
       $(".message0").show().delay(1000).fadeOut();
+      // console.log('Ajax', water)
+      this.handleEvents(water)
     });
-    this.setState({water: this.water})
   }
 
 
@@ -30,14 +37,12 @@ class App extends React.Component {
 
     return (
       <div>
-        <div id="button-all">
-          <div className="message0"></div>
-          <button className="button" onClick={this.handleSubmit}>Water All</button>
-          <a className="button" href="/plants">See All</a>
-        </div>
-
+        <Buttons handleSubmit={this.handleSubmit} />
         <Dashboard plants={this.state.plants} water={this.state.water} />
       </div>
     )
+  }
+  componentDidMount() {
+    console.log("App mounted")
   }
 };

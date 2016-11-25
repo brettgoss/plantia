@@ -1,26 +1,22 @@
 class Card extends React.Component {
-  componentDidMount() {
-    console.log("Card mounted")
-  }
   // Sets the state with the props being passed down from the dashboard. Not currently in use.
   constructor(props) {
     super(props)
-    console.log('card', this.props)
+    // console.log('card', this.props)
 
   }
 
   render() {
     console.log('Card rendered')
-
     var event;
+
     if (this.props.data.id == this.props.water.plant_id) {
       event = (
         <div className="plant-details">
-          <div>{ moment(this.props.water.water_date).format('h:mm:ssa - MMM D, Y').toString() }</div>
+          <div>{ moment(this.props.water.water_date).format('h:mma - MMM D, Y').toString() }</div>
         </div>
       )
     }
-
     return (
         <div key={this.props.data.index} className="card">
         {/* Plant card header */}
@@ -41,5 +37,8 @@ class Card extends React.Component {
         </a>
       </div>
     )
+  }
+  componentDidMount() {
+    console.log("Card mounted")
   }
 }
