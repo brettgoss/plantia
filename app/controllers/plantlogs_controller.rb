@@ -12,9 +12,16 @@ class PlantlogsController < ApplicationController
       if @plantlog.save!
       redirect_to @plant
     else
-      redirect_to '/' #This should probably throw an error?
+     redirect_to plant_path(@plant)
     end
-    # redirect_to plant_path(@plant)
+  end
+
+  def destroy
+    @plant = Plant.find(params[:plant_id])
+    @plantlog = @plant.plantlogs.find(params[:id])
+    @plantlog.destroy
+    redirect_to plant_path(@plant), notice: 'Plant deleted!'
+
   end
 
   private
@@ -22,4 +29,3 @@ class PlantlogsController < ApplicationController
       params.require(:plantlog).permit(:logtime, :title, :logtext, :plant_id)
     end
 end
-
