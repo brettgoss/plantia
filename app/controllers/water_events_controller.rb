@@ -38,10 +38,11 @@ class WaterEventsController < ApplicationController
       else
         failed_plants.push(plant)
       end
+
     end
 
     if !success_plants.empty?
-        response = { 'plant_id': 0}
+        response = WaterEvent.where(plant_id: plants.ids)
         render json: response, status: :ok
     end
   end
