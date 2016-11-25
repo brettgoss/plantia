@@ -2,9 +2,9 @@
 // All this logic will automatically be available in application.js.
 
 $(document).on("ajax:success", "form", function(status, data, xhr){
-  if (data.plant_id === 0) {
-    $('.message' + data.plant_id).text("All your plants have been watered!");
-    $('.message' + data.plant_id).show().delay(1000).fadeOut();
+  if (data.length > 1) {
+    $('.message0').text("All your plants have been watered!");
+    $('.message0').show().delay(1000).fadeOut();
   }
   else {
     $('.message' + data.plant_id).text("Plant Watered!");
@@ -12,5 +12,5 @@ $(document).on("ajax:success", "form", function(status, data, xhr){
   }
 
    console.log('status');
-   console.log('data', data.plant_id);
+   console.log('data', data);
 });
