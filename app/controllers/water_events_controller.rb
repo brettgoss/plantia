@@ -2,14 +2,14 @@ class WaterEventsController < ApplicationController
 
   def create
     plant_id = params[:plant_id]
-
     e = create_water_event(plant_id)
-    puts e
+
     if e.save
-      puts "Saved!", plant_id
-      render json: e, status: :ok
+      plants = current_user.plants.all
+      response = WaterEvent.where(plant_id: plants.ids)
+      render json: response, status: :ok
     else
-      render json: e.errors, status: :unprocessable_entity
+      render json: response.errors, status: :unprocessable_entity
     end
   end
 

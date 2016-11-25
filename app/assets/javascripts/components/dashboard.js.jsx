@@ -3,6 +3,7 @@ class Dashboard extends React.Component {
   // Sets the state from the props being passed down from the dashboard controller.
   constructor(props) {
     super(props)
+    this.waterOne = this.props.waterOne
     this.state = {
       waterinfo: ''
     }
@@ -23,7 +24,13 @@ class Dashboard extends React.Component {
                   this.state.waterinfo = item
                 }
               })
-              return <Card key={value.id} data={value} water={ this.state.waterinfo } />
+              return (
+              <Card
+                waterOne={this.waterOne}
+                key={value.id}
+                data={value}
+                water={ this.state.waterinfo } />
+              )
             })
           }
 
