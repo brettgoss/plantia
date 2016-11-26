@@ -18,7 +18,7 @@ A web app where users can store houseplant care information and track watering s
  - [SASS](https://rubygems.org/gems/sass-rails)
  - [Bcrypt](https://rubygems.org/gems/bcrypt)
  - [Rspec](https://rubygems.org/gems/rspec)
-
+ - [Capybara](https://github.com/teamcapybara/capybara)
 
 
 - [PostgreSQL](https://rubygems.org/gems/pg)

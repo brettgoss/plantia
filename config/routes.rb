@@ -13,9 +13,13 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: [:index]
 
-  resources :plants
+  resources :plants do
+    resources :plantlogs, only: [:create, :destroy]
+  end
 
   resources :water_events, only: [:create, :destroy]
 
+
   post '/waterall' => 'water_events#water_all'
+
 end
