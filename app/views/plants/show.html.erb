@@ -7,6 +7,7 @@
   </div> -->
 
   <div class="row">
+
     <div id="plantinfo" class="six columns">
       <h1>
         <strong><%= @plant.nickname%></strong>
@@ -30,7 +31,7 @@
       </tbody>
     </table>
       <%= link_to 'Edit Plant' , edit_plant_path(@plant), class: 'button' %>
-
+      </div>
     <!-- Plantlog form -->
   <div class= "six columns">
     <h3>Plant Log</h3>
@@ -41,6 +42,8 @@
 
 
 <!-- WaterEvents -->
+  <div class="row">
+  <div class= "six columns">
     <h3>Watering History</h3>
     <div id="waterhistorybox">
     <div id="water-events">
@@ -56,6 +59,7 @@
 
 
 <!-- Plantlog history -->
+<div class= "six columns">
     <h3>Log History </h3>
     <%= render @plant.plantlogs %>
 <!-- ENDPlantlog History -->
