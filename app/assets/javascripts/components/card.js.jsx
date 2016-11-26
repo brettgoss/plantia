@@ -1,20 +1,18 @@
 class Card extends React.Component {
+
   // Sets the state with the props being passed down from the dashboard. Not currently in use.
   constructor(props) {
     super(props)
     this.waterOne = this.props.waterOne
     this.handleSubmit = this.handleSubmit.bind(this)
-    // console.log('card', this.props)
-
   }
   handleSubmit(event){
     let plantId = event.target.id
     this.props.waterOne(plantId)
-    // alert(plantId)
   }
 
   render() {
-    console.log('Card rendered', this.props)
+    console.log('Card rendered')
     var event;
 
     if (this.props.data.id == this.props.water.plant_id) {
@@ -25,7 +23,7 @@ class Card extends React.Component {
       )
     }
     return (
-        <div key={this.props.data.index} className="card">
+      <div key={this.props.data.index} className="card">
         {/* Plant card header */}
         <a href={"/plants/" + this.props.data.id}>
           <header className="plant-header">
@@ -43,14 +41,14 @@ class Card extends React.Component {
             {event}
             <div className="plant-details">Water every {this.props.data.water_freq} days</div>
           </div>
+          {/* Plant Water Button */}
         </a>
         <input
-          className="card-button"
-          type="button"
           id={this.props.data.id}
+          type="button"
           value={"Water"}
+          className="card-button"
           onClick={this.handleSubmit} />
-          {/*<%= button_to 'Water', water_events_path, method: 'post', remote: true, params: { plant_id: plant.id } %>*/}
       </div>
     )
   }

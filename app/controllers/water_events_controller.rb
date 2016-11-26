@@ -24,6 +24,9 @@ class WaterEventsController < ApplicationController
 
     plant_hash = { plant_id: plant_id}
     e = WaterEvent.new(plant_hash)
+    @plant = Plant.find(plant_id)
+    @plant.updated_at = Time.current
+    @plant.save
     e.water_date = Time.current
     e
   end

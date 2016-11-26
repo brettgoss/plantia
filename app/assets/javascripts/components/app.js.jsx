@@ -31,7 +31,6 @@ class App extends React.Component {
       type: "POST",
       data: {plant_id: plantId}
     }).done((water) => {
-      console.log(water)
       console.log('Plant ' + water.plant_id + ' successfully watered')
       $(".message0").text("Plant Watered");
       $(".message0").show().delay(1000).fadeOut();
@@ -45,7 +44,7 @@ class App extends React.Component {
 
 
   render() {
-    console.log('App Rendered', this.state.water)
+    console.log('App Rendered')
 
     return (
       <div>
