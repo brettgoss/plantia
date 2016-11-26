@@ -1,17 +1,17 @@
-<p>
-  <strong>Date: </strong>
-  <%= plantlog.logtime %>
-</p>
-<p>
-  <strong>Title: </strong>
+<div id="plantlogbox">
+<div id="logtitle-logtime">
+<h5>
   <%= plantlog.title %>
-</p>
-
+</h5>
+<h6>
+  <%= plantlog.logtime %>
+</h6>
+</div>
+<div id="history-logtext">
 <p>
-  <strong>Entry: </strong>
   <%= plantlog.logtext %>
 </p>
-<p>
+</div>
   <%= link_to fa_icon('trash'), [plantlog.plant, plantlog], class: 'button', method: :delete,
        data: { confirm: 'Are you sure?' } %>
-</p>
+</div>
