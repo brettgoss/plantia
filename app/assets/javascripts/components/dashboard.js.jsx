@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
               })
               return (
               <Card
-                key={this.state.waterEvents.water_date}
+                key={value.id}
                 waterOne={this.waterOne}
                 data={value}
                 water={this.state.waterEvents} />
