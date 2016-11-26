@@ -5,8 +5,7 @@
         <div id="landing-summary">
           <div class="landing-header">Let us help you, help plants.</div>
           <p>We are plant lovers just like you!</p>
-          <p>We want you to know that you don’t have to be blessed with a green thumb to keep houseplants alive and thriving.</p>
-          <p>Let Plantia keep track of your watering schedule and notify you when your green babies need some love.</p>
+          <p>You don’t have to be blessed with a green thumb to keep houseplants alive and thriving. Let Plantia keep track of your houseplants and their watering schedules.</p>
         </div>
       </aside>
     </div>
@@ -15,6 +14,16 @@
         <h2>Signup!</h2>
 
         <%= form_for :user, url: '/users' do |f| %>
+          <% if f.object.errors.any? %>
+            <div>
+              <strong>The following errors prevented saving:</strong>
+              <ul>
+                <% f.object.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
           <%= f.label :name %>
           <%= f.text_field :name, class: "u-full-width" %>
