@@ -5,30 +5,41 @@ class App extends React.Component {
     super(props)
 
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleEvents = this.handleEvents.bind(this)
+    this.waterAll = this.waterAll.bind(this)
+    this.waterOne = this.waterOne.bind(this)
+
     this.state = {
       plants: this.props.plants,
       water: this.props.water
     }
   }
 
-  handleEvents(water){
-    console.log('Event', this.props.water)
-    console.log('Event2', water)
-
-    this.setState({water: water});
-  }
-
-  handleSubmit() {
+  waterAll(){
     $.ajax({
       url: '/waterall',
       type: "POST"
     }).done((water) => {
       $(".message0").text("All your plants have been watered!");
       $(".message0").show().delay(1000).fadeOut();
-      // console.log('Ajax', water)
-      this.handleEvents(water)
+      this.setState({water: water});
     });
+  }
+  waterOne(plantId){
+    console.log('Plant ' + plantId + ' attempting to water')
+    $.ajax({
+      url: '/water_events',
+      type: "POST",
+      data: {plant_id: plantId}
+    }).done((water) => {
+      console.log('Plant ' + water.plant_id + ' successfully watered')
+      $(".message0").text("Plant Watered");
+      $(".message0").show().delay(1000).fadeOut();
+      this.setState({water: water});
+    });
+  }
+
+  handleSubmit() {
+    this.waterAll()
   }
 
 
@@ -38,7 +49,10 @@ class App extends React.Component {
     return (
       <div>
         <Buttons handleSubmit={this.handleSubmit} />
-        <Dashboard plants={this.state.plants} water={this.state.water} />
+        <Dashboard
+          waterOne={this.waterOne}
+          plants={this.state.plants}
+          water={this.state.water} />
       </div>
     )
   }

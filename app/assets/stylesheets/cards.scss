@@ -1,45 +1,67 @@
 // Dashboard Card CSS
+@import 'vars';
+
 .card {
+  position: relative;
   background: white;
   margin: 2em 1.2em;
   width: 15em;
   height: 20em;
   box-shadow: 0px 2px 5px #888888;
-}
 
+  .plant-header {
+    background: #81C784;
+    padding: 0em;
+    display: flex;
+    align-content: flex-start;
+
+    .plant-image {
+      margin: 0.7em;
+      height: 50px;
+    }
+
+    .plant-head {
+      margin: 10px 2px;
+      flex-wrap: wrap;
+
+      .plant-nickname {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .plant-common {
+        color: #fff;
+      }
+    }
+  }
+  .plant-content {
+    margin: 1em;
+
+    .card-info{
+      text-decoration: underline;
+      font-weight: 600;
+    }
+  }
+  .card-button {
+    width: inherit;
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    color: white;
+    background-color: #5c91d0;
+    border: none;
+    border-radius: 0;
+  }
+  .card-button:hover {
+    color: $secondary-color;
+  }
+  .card-button:focus {
+    color: white;
+  }
+}
 .card:hover {
   box-shadow: 0px 3px 8px #424242;
   cursor: pointer;
   text-decoration: none;
-}
-
-.plant-header {
-  background: #81C784;
-  padding: 0em;
-  display: flex;
-  align-content: flex-start;
-
-  .plant-image {
-    margin: 0.7em;
-    height: 50px;
-  }
-
-  .plant-head {
-    margin: 10px 2px;
-    flex-wrap: wrap;
-
-    .plant-nickname {
-      font-size: 1.2em;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .plant-common {
-      color: #fff;
-    }
-  }
-}
-.plant-content {
-  margin: 1em;
-
 }
