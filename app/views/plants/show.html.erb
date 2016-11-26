@@ -1,28 +1,25 @@
-<div class="container">
+<div id="plantshowpage" class="container">
+
+<!--   <div class="row">
+  <div id="back-button">
+      <%= link_to "Back", :back, class: 'button' %>
+    </div>
+  </div> -->
 
   <div class="row">
-    <div class="show-buttons">
-      <%= link_to "Back", :back %> <%= link_to 'Edit', edit_plant_path(@plant) %>
-    </div>
-
-
-    <div class="four columns">
+    <div id="plantinfo" class="six columns">
       <h1>
         <strong><%= @plant.nickname%></strong>
       </h1>
       <h5>
         <em><%= @plant.common_name%></em>
       </h5>
-    </div>
-  </div>
 
-
-  <div class="four columns">
-    <table class="u-full-width">
+    <table>
       <thead>
         <tr>
           <th>Light Requirements</th>
-          <th>Water</th>
+          <th>Water Requirements</th>
         </tr>
       </thead>
       <tbody>
@@ -32,35 +29,36 @@
         </tr>
       </tbody>
     </table>
-  </div>
+      <%= link_to 'Edit Plant' , edit_plant_path(@plant), class: 'button' %>
+
+    <!-- Plantlog form -->
+  <div class= "six columns">
+    <h3>Plant Log</h3>
+    <h5>Create a new entry</h5>
+    <%= render 'plantlogs/form' %>
+    </div>
+<!--     ENDPlantlog form -->
 
 
 <!-- WaterEvents -->
-
-    <div class="three columns">
-      <div>Water Events</div>
-      <% @plant.water_events.each do |e| %>
-      <div class="row">
-        <div>
-          <time class="timestring"><%= e.water_date %></time>
-        </div>
-        <div>
-          <%= link_to fa_icon('trash'), water_event_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
-        </div>
-      </div>
-      <% end %>
-      <br>
+    <h3>Watering History</h3>
+    <div id="waterhistorybox">
+    <div id="water-events">
+        <% @plant.water_events.order("water_date desc").each do |e| %>
+        <time class="timestring"><%= e.water_date %></time>
+        <%= link_to fa_icon('trash'), water_event_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
+        <% end %>
     </div>
-
-    <!-- Plantlog -->
-    <div class= "twelve columns">
-      <label for="plant-log"><h4>Plant Log</h4></label>
-        <%= render 'plantlogs/form' %>
-
-        <h2>Log History </h2>
-        <%= render @plant.plantlogs %>
-
     </div>
+  </div>
+
+<!--     ENDWatervents -->
+
+
+<!-- Plantlog history -->
+    <h3>Log History </h3>
+    <%= render @plant.plantlogs %>
+<!-- ENDPlantlog History -->
   </div>
 </div>
 

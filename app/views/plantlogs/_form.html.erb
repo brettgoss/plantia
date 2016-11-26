@@ -1,17 +1,16 @@
 <%= form_for [@plant, @plantlog] do |log| %>
-  <div class= "four columns">
-    <p>
+    <div id="date-title">
       <%= log.label "Date" %>
       <%= log.date_field :logtime %>
 
       <%= log.label "Title" %>
       <%= log.text_field :title %>
-
+    </div>
+    <div id="logtext-label">
       <%= log.label "Entry" %>
+    </div>
       <%= log.text_area :logtext %>
-    </p>
-    <p>
+    <div ID="logform-submit">
       <%= log.submit 'Create Plantlog' %>
-    </p>
-  </div>
+    </div>
 <% end %>
