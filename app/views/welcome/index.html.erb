@@ -12,13 +12,12 @@
     <div class="six columns">
       <% if !current_user %>
         <h2>Signup!</h2>
-
         <%= form_for :user, url: '/users' do |f| %>
-          <% if f.object.errors.any? %>
+          <% if @user.errors.any? %>
             <div>
               <strong>The following errors prevented saving:</strong>
               <ul>
-                <% f.object.errors.full_messages.each do |error| %>
+                <% @user.errors.full_messages.each do |error| %>
                   <li><%= error %></li>
                 <% end %>
               </ul>
