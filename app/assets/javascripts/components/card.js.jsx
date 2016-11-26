@@ -37,12 +37,15 @@ class Card extends React.Component {
           </header>
           {/* Plant card body */}
           <div className="plant-content">
+            <div className="card-info">Light Requirements:</div>
             <div className="plant-details">{this.props.data.light}</div>
+            <div className="card-info">Last Watered:</div>
             {event}
             <div className="plant-details">Water every {this.props.data.water_freq} days</div>
           </div>
         </a>
         <input
+          className="card-button"
           type="button"
           id={this.props.data.id}
           value={"Water"}
