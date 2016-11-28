@@ -1,13 +1,13 @@
 <nav id="navbar">
   <span class="row">
     <div class="six columns">
-      <span id="brand">
-        <a href="/">Plantia</a>
-      </span>
+      <div id="brand">
+        <a href="/"><img id="logo" src="/Plantialogo.png">Plantia</a>
+      </div>
       <% if current_user %>
       <span id="URLS">
-        <%= link_to 'dashboard', dashboard_index_url %>
-        <%= link_to 'plants', plants_url %>
+        <%= link_to 'Dashboard', dashboard_index_url %>
+        <%= link_to 'My Plants', plants_url %>
       </span>
       <% end %>
     </div>
@@ -18,7 +18,7 @@
           <span class="userfunc u-pull-right"><%= current_user.name %> | <%= link_to "Logout", logout_path %></span>
         </div>
       <% else %>
-      <span class="userfunc u-pull-right">
+      <span class="login u-pull-right">
         <%= form_for :sessions, url: '/login' do |f| %>
           <%= f.text_field :email, placeholder: "email", class: "input" %>
           <%= f.password_field :password, placeholder: "password", class: "input" %>
