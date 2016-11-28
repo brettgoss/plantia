@@ -1,5 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+// Handles the response from the server and creates confirmation message in DOM if success
 
 $(document).on("ajax:success", "form", function(status, data, xhr){
   if (data.length > 1) {
