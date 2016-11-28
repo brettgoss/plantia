@@ -9,7 +9,10 @@
       <%= link_to '+ New Plant', new_plant_path, class: 'button' %>
     </div>
     <div class="three columns">
-Here
+     <!-- form for with one field -->
+    <%= form_for 'Phone Number' url: user_path(@user), method: :patch %>
+
+
 
     </div>
     <div class="message0"></div>

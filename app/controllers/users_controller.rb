@@ -16,6 +16,19 @@ class UsersController < ApplicationController
     else
       render '/welcome/index'
     end
+  def update
+    @user  = user.find(params[:id])
+
+    if @user.update(params[:phone_number])
+      redirect_to '/plants'
+    else
+      render 'edit'
+    end
+  end
+
+  def edit
+    @user= User.find(params[:id])
+  end
   end
 
 
