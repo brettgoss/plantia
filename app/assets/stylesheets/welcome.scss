@@ -9,31 +9,40 @@
 //   color: $primary-color;
 //   font-size: 500%;
 // }
-
-#sign-up {
-  border: 1px solid black;
-  float: right;
-  margin-right: 50px;
+body.welcome {
+  background-image: url(/plants-1150014_1920.jpg);
+  background-position: 78% 27%;
+  color: rgba(238, 238, 238, 0.87);
 }
 
 .main-container {
-  margin-top: 7em;
-  display: flex;
-  justify-content: space-around;
+  margin-top: 10em;
+  input.button{
+    color:rgba(238, 238, 238, 0.87);
+  }
 
   .landing-header {
     font-size: 2em;
-    font-style: italic;
     font-weight: 200;
   }
-  #landing-summary p {
-    font-style: italic;
-    margin-top: 0.5em;
-    margin-bottom: 0;
+  #landing-summary {
+      margin-top: 5em;
+    p {
+      margin-top: 0.5em;
+      margin-bottom: 0;
+    }
+    h6 {
+      font-style: italic;
+    }
   }
-  #landing-welcome p {
-  }
-  .six-columns {
-    margin: auto;
+  #landing-welcome {
+      margin-top: 5em;
+    p {
+      margin-top: 0.5em;
+      margin-bottom: 0;
+    }
+    h6 {
+      font-style: italic;
+    }
   }
 }

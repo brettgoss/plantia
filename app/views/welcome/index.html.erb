@@ -1,20 +1,29 @@
+<body class="welcome">
 <div class="container main-container">
   <div class="row">
     <div class="six columns">
       <aside>
         <div id="landing-summary">
           <div class="landing-header">Let us help you, help plants.</div>
-          <p>We are plant lovers just like you!</p>
-          <p>We want you to know that you don’t have to be blessed with a green thumb to keep houseplants alive and thriving.</p>
-          <p>Let Plantia keep track of your watering schedule and notify you when your green babies need some love.</p>
+          <h6>We are plant lovers just like you!</h6>
+          <p>You don’t have to be blessed with a green thumb to keep houseplants alive and thriving. Let Plantia keep track of your houseplants and their watering schedules.</p>
         </div>
       </aside>
     </div>
     <div class="six columns">
       <% if !current_user %>
         <h2>Signup!</h2>
-
-        <%= form_for :user, url: '/users' do |f| %>
+        <%= form_for @user, url: users_path do |f| %>
+          <% if @user.errors.any? %>
+            <div>
+              <strong>The following errors prevented saving:</strong>
+              <ul>
+                <% @user.errors.full_messages.each do |error| %>
+                  <li><%= error %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
           <%= f.label :name %>
           <%= f.text_field :name, class: "u-full-width" %>
@@ -31,7 +40,7 @@
           <div id="landing-welcome">
             <div class="landing-header">Welcome, <%= current_user.name %>.</div>
             <p>
-              Head to your <%= link_to 'dashboard', dashboard_index_path %> to take a look at the status of your plants.
+              Head to your <%= link_to 'Dashboard', dashboard_index_path %> to take a look at the status of your plants.
               Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
             </p>
           </div>
@@ -40,3 +49,4 @@
     </div>
   </div>
 </div>
+</body>
