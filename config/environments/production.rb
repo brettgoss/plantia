@@ -75,6 +75,19 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
+  # Sendgrid
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'linleyjfaulkner@gmail.com',
+    :password => 'thisis4plantia',
+    :domain => 'plantia.io',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+
+
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
