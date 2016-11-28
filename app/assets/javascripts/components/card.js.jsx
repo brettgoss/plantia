@@ -1,40 +1,44 @@
 class Card extends React.Component {
 
-  // Sets the state with the props being passed down from the dashboard. Not currently in use.
+  // Receives the props being passed down from the Dashboard component.
   constructor(props) {
     super(props)
+
     this.waterOne = this.props.waterOne
     this.daysTillWater = this.daysTillWater.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
+  // Triggered by the water button onClick, then passes data to the App component
   handleSubmit(event){
     let plantId = event.target.id
     this.props.waterOne(plantId)
   }
-  daysTillWater(waterEvent, waterFreq) {
 
+  // Calculation for how many days until the plant needs to be watered
+  // based on the provided water frequency and the most recent waterEvent
+  daysTillWater(waterEvent, waterFreq) {
     let num = waterEvent;
     let now = moment();
-
     let hours = moment.duration(now.diff(num)).asHours();
     let freq = moment.duration(waterFreq, 'days').asHours();
     let diff = moment(freq) - hours;
-
     return Math.floor(diff);
   }
 
   render() {
-    console.log('Card rendered')
-    var waterEvent;
+    console.log('Card Rendered')
 
+    // Build a formatted water event wrapped in a div.
+    let waterEvent;
     if (this.props.data.id == this.props.water.plant_id) {
-      var rawEvent = this.props.water.water_date
       waterEvent = (
         <div className="plant-details">
-          <div>{moment(rawEvent).format('h:mma - MMM D, Y')}</div>
+          <div>{moment(this.props.water.water_date).format('h:mma - MMM D, Y')}</div>
         </div>
       )
     }
+
     return (
       <div key={this.props.data.index} className="card">
         {/* Plant card header */}
@@ -53,10 +57,10 @@ class Card extends React.Component {
             <div className="card-info">Last Watered:</div>
             {waterEvent}
             <div className="plant-details">Needs watering every {this.props.data.water_freq} days</div>
-            <div className="plant-details">Water in {this.daysTillWater(rawEvent, this.props.data.water_freq)} hours</div>
+            <div className="plant-details">Water in {this.daysTillWater(this.props.water.water_date, this.props.data.water_freq)} hours</div>
           </div>
-          {/* Plant Water Button */}
         </a>
+        {/* Plant Water Button */}
         <input
           id={this.props.data.id}
           type="button"
@@ -66,7 +70,8 @@ class Card extends React.Component {
       </div>
     )
   }
+
   componentDidMount() {
-    console.log("Card mounted")
+    console.log('Card Mounted')
   }
 }
