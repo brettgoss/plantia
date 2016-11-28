@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      UserNotifier.send_signup_email(@user).deliver
+      ApplicationMailer.send_signup_email(@user).deliver
       redirect_to '/dashboard' #redirectooo to dashboard in future
     else
       render '/welcome/index'
