@@ -16,10 +16,12 @@ class UsersController < ApplicationController
     else
       render '/welcome/index'
     end
-  def update
-    @user  = user.find(params[:id])
+  end
 
-    if @user.update(params[:phone_number])
+  def update
+    @user  = User.find(current_user.id)
+
+    if @user.update(user_params)
       redirect_to '/plants'
     else
       render 'edit'
@@ -27,14 +29,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user= User.find(params[:id])
+    @user= User.find(current_user.id)
   end
-  end
+end
 
 
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone_number)
   end
-end

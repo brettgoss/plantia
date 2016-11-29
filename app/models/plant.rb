@@ -18,4 +18,15 @@ class Plant < ApplicationRecord
     (water_freq - days_since_last_water).to_i
   # If days_since_last water = 0 send text.
   end
+
+  def water!
+    # mark the current (most recent) water event as "done"
+    # create the next water event (+ water_freq days from now, "done" = false)
+  end
+
+  def self.needs_water
+    # return all Plants needing watering
+    # (do a query)
+  end
+
 end

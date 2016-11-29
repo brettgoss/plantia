@@ -1,7 +1,6 @@
-class TwilioController < ApplicationController
-  skip_before_action :verify_authenticity_token
+class TwilioHelper
 
-def send_text(phone_number, alert_message)
+  def send_text(phone_number, alert_message)
     twilio_number = ENV['TWILIO_NUMBER']
     client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
     phone_number = User.phone_number
@@ -23,9 +22,4 @@ def send_text(phone_number, alert_message)
     )
   end
 
-# @message = @client.messages.create(
-#       from: twilio_number,
-#       to:   phone_number,
-#       body: alert_message,
-#       )
-# end
+end

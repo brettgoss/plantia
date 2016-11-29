@@ -10,7 +10,13 @@
     </div>
     <div class="three columns">
      <!-- form for with one field -->
-    <%= form_for 'Phone Number' url: user_path(@user), method: :patch %>
+    <%= form_for :user, url: users_path, method: :put do |f| %>
+    <%= f.label 'Phone number'%>
+    <%= f.text_field :phone_number, class: 'form-control'%>
+      <%= f.submit 'Submit', class: 'button' %>
+
+    <% end %>
+
 
 
 
