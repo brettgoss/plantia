@@ -11,15 +11,15 @@
     </header>
   </div>
 
-  <div class="row">                
+  <div class="row">
     <div class="six columns">
       <%= form_for :plant, url: plant_path(@plant), method: :patch do |f| %>
 
       <% if @plant.errors.any? %>
         <div id="error_explanation">
-          <h2>
+          <h6>
             <%= pluralize(@plant.errors.count, "error") %> prohibited this plant from being saved:
-          </h2>
+          </h6>
           <ul>
             <% @plant.errors.full_messages.each do |msg| %>
               <li><%= msg %></li>

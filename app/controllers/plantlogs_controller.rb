@@ -5,14 +5,14 @@ class PlantlogsController < ApplicationController
   end
 
   def create
-    logger.error "In plantlog controller"
     @plant = Plant.find(params[:plant_id])
     @plantlog = @plant.plantlogs.new(plantlog_params)
 
-      if @plantlog.save!
+      if @plantlog.save
       redirect_to @plant
     else
-     redirect_to plant_path(@plant)
+      render plant_path(@plant)
+     # redirect_to plant_path(@plant)
     end
   end
 
