@@ -21,16 +21,11 @@ a {
   text-decoration: none;
   color: #1B5E20;
 }
+
 a:hover {
   color: #81C784;
 }
+
 body {
   margin-top: 8em;
-  /*background: #eee;*/
 }
-/*.button {
-  background: #fff;
-}*/
-/*div,span,p {
-  border: 1px solid black;
-}*/
