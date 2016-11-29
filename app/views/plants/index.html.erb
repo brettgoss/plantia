@@ -12,9 +12,9 @@
      <!-- form for with one field -->
     <%= form_for :user, url: users_path, method: :put do |f| %>
     <%= f.label 'Phone number'%>
-    <%= f.text_field :phone_number, class: 'form-control'%>
+    <%= f.text_field @user.phone_number:phone_number, class: 'form-control'%>
       <%= f.submit 'Submit', class: 'button' %>
-
+<input type="text" name="client[name]" value="Acme" />
     <% end %>
 
 

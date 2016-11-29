@@ -21,10 +21,11 @@ class UsersController < ApplicationController
   def update
     @user  = User.find(current_user.id)
 
-    if @user.update(user_params)
+
+    if @user.update(params[:user_phone_number])
       redirect_to '/plants'
     else
-      render 'edit'
+      puts " No BUENO"
     end
   end
 
@@ -37,5 +38,5 @@ end
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone_number)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
