@@ -2,19 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// Plant Show All page CSS
-#action-buttons {
-  .message0 {
-    padding-top: 55px;
-    position: absolute;
-    display: block;
-  }
-}
-
 
 // Plant Show ID page CSS
 // Water Events
-#waterhistorybox {
+#water_historybox {
   float: left;
   padding: 20px 25px;
   color: #555;
@@ -24,7 +15,7 @@
   margin-bottom: 50px;
   overflow-y: scroll;
 
-  #water-events {
+  #water_events {
     height: 20em;
     width: 100%;
     left: 0;
@@ -39,6 +30,60 @@
       font-size: 15px;
       color: red;
       opacity: 0.73;
+    }
+  }
+}
+
+//Plants Index page
+
+#action_buttons {
+    input {
+      color: #0076ff;
+    }
+}
+  table {
+  a.button{
+    line-height: 34px;
+    font-size: 20px;
+    color: red;
+    opacity: 0.73;
+  }
+}
+//Plants New/edit
+#plant_form_page {
+  padding-top: 2em;
+
+  a.button {
+    float: right;
+    margin-top: 2em;
+  }
+
+  label {
+  font-weight: 300;
+  font-size: 1.5em;
+  }
+
+  #plant_form {
+    margin: 30px 100px;
+    padding: 38px 0px;
+    border-radius: 4px;
+    box-shadow: 2px 3px 8px 1px #888888;
+
+    .row {
+      margin-top: 2em;
+      margin-left: 10em;
+    }
+    .form_submit {
+      margin-left: 47em;
+      margin-top: 2em;
+    }
+  }
+
+  #water_freq {
+    #plant_water_freq {
+    width: 60px;
+    margin-left: 5px;
+    margin-right: 5px;
     }
   }
 }
