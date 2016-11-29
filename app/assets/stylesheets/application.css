@@ -26,7 +26,13 @@ a:hover {
   color: #81C784;
 }
 
+.button {
+  box-shadow: 2px 1px 3px 0px #888;
+  border:none;
+}
+
 body {
   margin-top: 8em;
   font-family: 'Ubuntu', sans-serif;
+  /*font-family: 'Lato', sans-serif;*/
 }
