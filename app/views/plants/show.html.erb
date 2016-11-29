@@ -41,8 +41,8 @@
     <!-- WaterEvents -->
     <div class= "six columns">
       <h3>Watering History</h3>
-      <div id="waterhistorybox">
-        <div id="water-events">
+      <div id="water_historybox">
+        <div id="water_events">
           <% @plant.water_events.order("water_date desc").each do |e| %>
           <div>
             <time class="timestring"><%= e.water_date %></time>

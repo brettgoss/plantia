@@ -3,46 +3,40 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "vars";
 
-// #logo {
-//   margin-top: 100px;
-//   text-align: center;
-//   color: $primary-color;
-//   font-size: 500%;
-// }
-body.welcome {
-  background-image: url(/plants-1150014_1920.jpg);
-  background-position: 78% 27%;
-  color: rgba(238, 238, 238, 0.87);
+.welcome {
+  background-image: url(/Stocksy_txp1cae9c878GG100_Medium_470637.jpg);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #333;
 }
 
 .main-container {
   margin-top: 10em;
-  input.button{
-    color:rgba(238, 238, 238, 0.87);
+
+  input.button {
+    color: #333;
+    opacity: 0.87;
   }
 
   .landing-header {
     font-size: 2em;
     font-weight: 200;
   }
-  #landing-summary {
-      margin-top: 5em;
-    p {
-      margin-top: 0.5em;
-      margin-bottom: 0;
-    }
-    h6 {
-      font-style: italic;
-    }
-  }
+
+  #landing-summary,
   #landing-welcome {
-      margin-top: 5em;
-    p {
-      margin-top: 0.5em;
-      margin-bottom: 0;
-    }
-    h6 {
-      font-style: italic;
-    }
+    margin-top: 5em;
+    color: #333;
   }
+
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+
+  h6 {
+    font-style: italic;
+  }
+
 }
