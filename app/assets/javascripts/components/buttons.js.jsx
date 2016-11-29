@@ -1,4 +1,6 @@
 class Buttons extends React.Component {
+
+  // Receives the props being passed down from the App component.
   constructor(props) {
     super(props)
   }
@@ -14,7 +16,8 @@ class Buttons extends React.Component {
         </div>
     )
   }
+
   componentDidMount() {
-    console.log("Buttons mounted")
+    console.log("Buttons Mounted")
   }
 };
