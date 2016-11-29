@@ -6,7 +6,7 @@
       </div>
       <% if current_user %>
       <span id="URLS">
-        <%= link_to 'Dashboard', dashboard_index_url %>
+        <%= link_to 'Dashboard', dashboard_index_url, 'data-turbolinks': 'false' %>
         <%= link_to 'My Plants', plants_url %>
       </span>
       <% end %>

@@ -1,12 +1,12 @@
 <%= form_for [@plant, @plantlog] do |f| %>
-  <div id="date-title">
+  <div id="date_title">
     <%= f.label "Date" %>
     <%= f.date_field :logtime, :value => Time.current.strftime('%Y-%m-%d') %>
 
     <%= f.label "Title" %>
     <%= f.text_field :title %>
   </div>
-  <div id="logtext-label">
+  <div id="logtext_label">
     <%= f.label "Entry" %>
   </div>
     <%= f.text_area :logtext %>
