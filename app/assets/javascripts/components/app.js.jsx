@@ -14,6 +14,7 @@ class App extends React.Component {
     }
   }
 
+  // Function for watering all plants
   waterAll(){
     $.ajax({
       url: '/waterall',
@@ -24,28 +25,29 @@ class App extends React.Component {
       this.setState({water: water});
     });
   }
+
+  // Function for watering individual plants
   waterOne(plantId){
-    console.log('Plant ' + plantId + ' attempting to water')
     $.ajax({
       url: '/water_events',
       type: "POST",
       data: {plant_id: plantId}
     }).done((water) => {
-      console.log('Plant ' + water.plant_id + ' successfully watered')
       $(".message0").text("Plant Watered");
       $(".message0").show().delay(1000).fadeOut();
       this.setState({water: water});
     });
   }
 
+  // Todo:
+  // Move waterOne call into this function and implement a way to differentiate
+  // between function calls
   handleSubmit() {
     this.waterAll()
   }
 
-
   render() {
     console.log('App Rendered')
-
     return (
       <div>
         <Buttons handleSubmit={this.handleSubmit} />
@@ -56,7 +58,8 @@ class App extends React.Component {
       </div>
     )
   }
+
   componentDidMount() {
-    console.log("App mounted")
+    console.log("App Mounted")
   }
 };

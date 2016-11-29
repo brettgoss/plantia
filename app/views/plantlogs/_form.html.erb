@@ -1,16 +1,16 @@
-<%= form_for [@plant, @plantlog] do |log| %>
-    <div id="date-title">
-      <%= log.label "Date" %>
-      <%= log.date_field :logtime %>
+<%= form_for [@plant, @plantlog] do |f| %>
+  <div id="date-title">
+    <%= f.label "Date" %>
+    <%= f.date_field :logtime, :value => Time.current.strftime('%Y-%m-%d') %>
 
-      <%= log.label "Title" %>
-      <%= log.text_field :title %>
-    </div>
-    <div id="logtext-label">
-      <%= log.label "Entry" %>
-    </div>
-      <%= log.text_area :logtext %>
-    <div ID="logform-submit">
-      <%= log.submit 'Create Plantlog' %>
-    </div>
+    <%= f.label "Title" %>
+    <%= f.text_field :title %>
+  </div>
+  <div id="logtext-label">
+    <%= f.label "Entry" %>
+  </div>
+    <%= f.text_area :logtext %>
+  <div ID="logform-submit">
+    <%= f.submit 'Create Plantlog' %>
+  </div>
 <% end %>
