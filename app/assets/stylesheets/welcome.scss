@@ -4,8 +4,10 @@
 @import "vars";
 
 .welcome {
-  background-image: url(/plants-1150014_1920.jpg);
-  background-position: 78% 27%;
+  background-image: url(/Stocksy_txp1cae9c878GG100_Medium_470637.jpg);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
   color: #eee;
 }
 
@@ -25,6 +27,7 @@
   #landing-summary,
   #landing-welcome {
     margin-top: 5em;
+    color: #000000;
   }
 
   p {
