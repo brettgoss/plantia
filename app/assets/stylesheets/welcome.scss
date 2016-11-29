@@ -16,8 +16,15 @@
   margin-top: 10em;
 
   input.button {
-    color: #333;
+    color: #ffffff;
+    opacity: 0.7;
+    background-color: $primary-color;
+  }
+
+  input.button:hover {
+    color: #ffffff;
     opacity: 0.87;
+    background-color: $primary-color;
   }
 
   .landing-header {
@@ -25,10 +32,11 @@
     font-weight: 200;
   }
 
-  #landing-summary,
+  #landing-summary {
+    margin-top: 5em
+  }
+
   #landing-welcome {
-    margin-top: 5em;
-    color: #333;
   }
 
   p {
@@ -38,6 +46,13 @@
 
   h6 {
     font-style: italic;
+  }
+
+  #signup-usermsg {
+    border-radius: 13px;
+    padding: 16px;
+    box-shadow: 1px 2px 7px 0px #555;
+    background-color: rgba(245, 245, 245, 0.74);
   }
 
 }
