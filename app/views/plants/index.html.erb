@@ -4,24 +4,18 @@
   <div class="row" id="action-buttons">
     <div class="three columns">
       <%= button_to 'Water All', '/waterall', method: 'post', remote: true %>
+      <div class="message0"></div>
     </div>
     <div class="three columns">
       <%= link_to '+ New Plant', new_plant_path, class: 'button' %>
     </div>
-    <div class="three columns">
-     <!-- form for with one field -->
-    <%= form_for :user, url: users_path, method: :put do |f| %>
-    <%= f.label 'Phone number'%>
-    <%= f.text_field :phone_number, class: 'form-control'%>
-      <%= f.submit 'Submit', class: 'button' %>
-
-    <% end %>
-
-
-
-
+    <div class="four columns">
+      <%= form_for :user, url: users_path, method: 'post', remote: true do |f| %>
+        <%= f.label 'Phone number'%>
+        <%= f.text_field :phone_number, class: 'form-control' %>
+        <%= f.submit 'Submit', class: 'button' %>
+      <% end %>
     </div>
-    <div class="message0"></div>
   </div>
 
   <div class="panel panel-default plants">

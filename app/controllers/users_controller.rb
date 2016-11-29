@@ -14,18 +14,21 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user  = User.find(current_user.id)
+    # Gets current user and saves as instance variable
+    @user = User.find(current_user.id)
 
-    if @user.update(params[:phone_number])
+    # Attempts to update user's phone number with new value from form
+    if @user.update_column(:phone_number, params[:user][:phone_number])
       redirect_to '/plants'
     else
-      puts " No BUENO"
+      # Show error or something.
+      redirect_to '/plants'
     end
   end
 
-  def edit
-    @user= User.find(current_user.id)
-  end
+  # def edit
+  #   @user= User.find(current_user.id)
+  # end
 end
 
 
