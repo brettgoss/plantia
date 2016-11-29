@@ -8,14 +8,14 @@
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
-  color: #eee;
+  color: #333;
 }
 
 .main-container {
   margin-top: 10em;
 
   input.button {
-    color: #eee;
+    color: #333;
     opacity: 0.87;
   }
 
@@ -27,7 +27,7 @@
   #landing-summary,
   #landing-welcome {
     margin-top: 5em;
-    color: #000000;
+    color: #333;
   }
 
   p {
@@ -38,4 +38,5 @@
   h6 {
     font-style: italic;
   }
+
 }
