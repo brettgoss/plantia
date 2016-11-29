@@ -4,7 +4,7 @@
       <h1>New Plant</h1>
        <%= link_to 'Back', :plants, class: 'button' %>
     </header>
-  </div>  
+  </div>
 
 
   <div class="row">
@@ -13,7 +13,7 @@
 
         <% if f.object.errors.any? %>
           <div>
-            <strong>The following errors prevented saving:</strong>
+            The following errors prevented saving:
             <ul>
               <% f.object.errors.full_messages.each do |error| %>
                 <li><%= error %></li>
@@ -51,7 +51,7 @@
 
         <br>
         <br>
-        
+
         <%= f.submit 'Create Plant', class: 'btn btn-primary' %>
       <% end %>
 

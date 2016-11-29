@@ -1,5 +1,6 @@
 class Dashboard extends React.Component {
 
+  // Receives the props being passed down from the App component.
   constructor(props) {
     super(props)
     this.waterOne = this.props.waterOne
@@ -10,21 +11,19 @@ class Dashboard extends React.Component {
 
   render() {
     console.log('Dashboard Rendered')
-    var newArr = _.sortBy(this.props.plants, 'updated_at', function(n) {
+    let sortedArr = _.sortBy(this.props.plants, 'updated_at', function(n) {
       return n;
-    });
+    })
     return (
         <div className="wrapper">
           {
-            newArr.map((value, index) => {
-              console.log('Mapping Plants')
-
+            sortedArr.map((value, index) => {
               this.props.water.map((item, i) => {
                 if (item.plant_id == value.id) {
-                  // console.log('Mapping Water Events')
                   this.state.waterEvents = item
                 }
               })
+
               return (
               <Card
                 key={value.id}
@@ -38,7 +37,8 @@ class Dashboard extends React.Component {
       </div>
     )
   }
+
   componentDidMount() {
-    console.log("Dashboard mounted")
+    console.log("Dashboard Mounted")
   }
 };
