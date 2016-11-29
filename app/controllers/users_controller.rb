@@ -16,8 +16,7 @@ class UsersController < ApplicationController
   def update
     @user  = User.find(current_user.id)
 
-
-    if @user.update(params[:user_phone_number])
+    if @user.update(params[:phone_number])
       redirect_to '/plants'
     else
       puts " No BUENO"
@@ -33,5 +32,5 @@ end
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :phone_number)
   end
