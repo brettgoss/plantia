@@ -6,7 +6,13 @@ class Plant < ApplicationRecord
   validates :nickname, presence: true
   validates :common_name, presence: true
   validates :light, presence: true
-  validates :water_freq, presence: true
+  validates :water_freq, presence: true,
+                           numericality: {
+                            only_integer: true,
+                            less_than_or_equal_to: 365,
+                            greater_than_or_equal_to: 0,
+                          }
+
 
   # Returns an integer number of days until the plant needs to
   # be watered again. If water date has passed then returns negative
