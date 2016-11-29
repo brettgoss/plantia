@@ -49,4 +49,41 @@
     opacity: 0.73;
   }
 }
+//Plants New/edit
+#plant_form_page {
+  padding-top: 2em;
 
+  a.button {
+    float: right;
+    margin-top: 2em;
+  }
+
+  label {
+  font-weight: 300;
+  font-size: 1.5em;
+  }
+
+  #plant_form {
+    margin: 30px 100px;
+    padding: 38px 0px;
+    border-radius: 4px;
+    box-shadow: 2px 3px 8px 1px #888888;
+
+    .row {
+      margin-top: 2em;
+      margin-left: 10em;
+    }
+    .form_submit {
+      margin-left: 47em;
+      margin-top: 2em;
+    }
+  }
+
+  #water_freq {
+    #plant_water_freq {
+    width: 60px;
+    margin-left: 5px;
+    margin-right: 5px;
+    }
+  }
+}
