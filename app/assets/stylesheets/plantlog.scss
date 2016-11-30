@@ -17,8 +17,9 @@
 }
 
 #plantlog_logtime {
-  padding-left: 2px;
+  padding-left: 3px;
   border-radius: 4px;
+  border: 1px solid #D1D1D1;
 }
 
 #logtext_label {
@@ -28,6 +29,13 @@
 #plantlog_logtext {
   width: 30em;
 }
+
+#logform_submit {
+  .button {
+    border: none;
+  }
+}
+
 //end of form for plantlog
 
 //plantlog history
