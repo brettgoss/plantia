@@ -4,11 +4,15 @@
     <div class="six columns">
         <div id="landing-summary">
           <div class="landing-header">Helping you, help plants.</div>
-          <h6>We are plant lovers just like you!</h6>
           <p>You don’t have to be blessed with a green thumb to keep houseplants alive and thriving. Let Plantia keep track of your houseplants and their watering schedules.</p>
         </div>
     </div>
-    <div class="six columns" id="signup-usermsg">
+
+    <div class="one column">
+    <p></p>
+    </div>
+
+    <div class="five columns" id="signup-usermsg">
       <% if !current_user %>
         <h2>Signup!</h2>
         <%= form_for @user, url: users_path do |f| %>
