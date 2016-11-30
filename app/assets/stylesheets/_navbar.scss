@@ -45,9 +45,10 @@
   position: relative;
   display: inline-block;
   font-size: 20px;
-  padding: 1px;
+  padding: 5px;
 
   a {
+    padding: 15px;
     color: #fff;
   }
   a:hover {
@@ -61,11 +62,10 @@
 
 }
 .userfunc {
-  line-height: 2.4em;
-  font-size: 11.1em;
+  line-height: 3.5em;
   margin-right: 40px;
   color: #333;
-  font-size: 25px;
+  font-size: 23px;
   a {
     color: #fff;
   }

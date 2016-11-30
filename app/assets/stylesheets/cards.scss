@@ -9,7 +9,6 @@
   margin: 2em 1.2em;
   width: 15em;
   height: 20em;
-  // box-shadow: 0px 2px 5px #888888;
   transition: 200ms ease-in-out;
   box-shadow: 0px 3px 10px #bbb;
 
@@ -46,7 +45,6 @@
     margin: 1em;
 
     .card-info{
-      // text-decoration: underline;
       font-weight: 600;
     }
   }
@@ -70,7 +68,6 @@
 .card:hover {
   transform: translateY(-3px);
   box-shadow: 0px 5px 13px #888;
-  // box-shadow: 0px 3px 8px #424242;
   cursor: pointer;
   text-decoration: none;
 }
