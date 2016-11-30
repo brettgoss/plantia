@@ -27,8 +27,15 @@ a:hover {
 }
 
 .button {
-  box-shadow: 2px 1px 3px 0px #888;
-  border:none;
+  transition: 200ms ease-in-out;
+  box-shadow: 0px 3px 10px #bbb;
+  border: none;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 5px 13px #888;
+
 }
 
 body {

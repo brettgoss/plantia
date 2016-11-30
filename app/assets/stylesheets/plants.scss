@@ -11,9 +11,9 @@
   color: #555;
   background-color: transparent;
   border-radius: 4px;
-  border: 1px solid #bbb;
+  // border: 1px solid #bbb;
   margin-bottom: 50px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   #water_events {
     height: 20em;
@@ -73,9 +73,10 @@
       margin-top: 2em;
       margin-left: 10em;
     }
-    .form_submit {
+    .button {
       margin-left: 47em;
       margin-top: 2em;
+      border: none;
     }
   }
 
