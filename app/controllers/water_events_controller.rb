@@ -41,7 +41,8 @@ class WaterEventsController < ApplicationController
     @plant = Plant.find(plant_id)
     @plant.updated_at = Time.current
     @plant.save
-    e.water_date = Time.current
+    # Should be today plus water freq
+    e.water_date = @plant.water_freq.days.from_now
     e
   end
 
