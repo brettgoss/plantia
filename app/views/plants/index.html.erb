@@ -1,10 +1,7 @@
 <div class="container">
 
-  <h1>See And Create Plants!</h1>
+  <h1>All Plants</h1>
   <div class="row" id="action-buttons">
-    <div class="three columns">
-      <%= button_to 'Water All', '/waterall', method: 'post', remote: true %>
-    </div>
     <div class="three columns">
       <%= link_to '+ New Plant', new_plant_path, class: 'button' %>
     </div>
@@ -15,7 +12,6 @@
 
     <table class="u-full-width">
         <tr>
-          <th>Water Me</th>
           <th>Plant</th>
           <th>Light Needs</th>
           <th>Water Needs</th>

@@ -1,9 +1,5 @@
 <tr>
   <td>
-    <%= button_to 'Water', water_events_path, method: 'post', remote: true, params: { plant_id: plant.id } %>
-    <div class="message<%= plant.id %>"></div>
-  </td>
-  <td>
     <%= link_to plant do %>
       <h5><%= plant.nickname %></h5>
     <% end %>
