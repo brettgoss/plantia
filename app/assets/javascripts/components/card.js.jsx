@@ -52,12 +52,12 @@ class Card extends React.Component {
           </header>
           {/* Plant card body */}
           <div className="plant-content">
-            <div className="card-info">Light Requirements:</div>
+            <div className="plant-details">{this.daysTillWater(this.props.water.water_date, this.props.data.water_freq)} hours till next water</div>
+            <div className="card-info">Needs</div>
             <div className="plant-details">{this.props.data.light}</div>
-            <div className="card-info">Last Watered:</div>
+            <div className="plant-details">Water every {this.props.data.water_freq} days</div>
+            <div className="card-info">Last Watered</div>
             {waterEvent}
-            <div className="plant-details">Needs watering every {this.props.data.water_freq} days</div>
-            <div className="plant-details">Water in {this.daysTillWater(this.props.water.water_date, this.props.data.water_freq)} hours</div>
           </div>
         </a>
         {/* Plant Water Button */}
