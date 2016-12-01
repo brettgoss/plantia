@@ -58,7 +58,7 @@ class Card extends React.Component {
           </header>
           {/* Plant card body */}
           <div className="plant-content">
-            <div className="card-info">Light Requirements:</div>
+            <div className="card-info">Needs</div>
             <div className="plant-details">{this.props.data.light}</div>
             <div className="card-info">Last Watered</div>
             {lastWaterEvent}
