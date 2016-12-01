@@ -11,8 +11,8 @@ class PlantsController < ApplicationController
   end
 
   def show
-    logger.error "Here we are!"
     @plant = Plant.find params[:id]
+    @past_events = WaterEvent.where(plant_id: @plant.id)
     @plantlog = Plantlog.new
     @plantlogs = Plantlog.all
     if @plant.user != User.find(current_user.id)
@@ -24,7 +24,7 @@ class PlantsController < ApplicationController
   	@plant = Plant.new(plant_params)
     @plant.user = current_user
     if @plant.save
-      
+
       @event = WaterEvent.new({plant_id: @plant.id})
       @event.water_date = @plant.water_freq.days.from_now
       @event.save
@@ -54,18 +54,6 @@ class PlantsController < ApplicationController
     @plant.destroy
     redirect_to [:plants], notice: 'Plant deleted!'
   end
-
-#this is now being handled by water controller
-  # def water_event
-  #   @event = WaterEvent.new
-  #   @plant = Plant.find params[:id]
-  #   @event.plant = @plant
-  #   if @event.save
-  #     redirect_to [:plants], notice: 'Plant Watered'
-  #   else
-  #     render :plants
-  #   end
-  # end
 
 private
   def plant_params
