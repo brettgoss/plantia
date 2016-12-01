@@ -29,7 +29,7 @@ class Card extends React.Component {
     let num = waterEvent;
     let now = moment();
     let hours = moment.duration(now.diff(num)).asHours();
-    return Math.floor(0.1 - hours);
+    return Math.floor(0.1-hours);
   }
 
   render() {
@@ -39,14 +39,21 @@ class Card extends React.Component {
     let lastWaterEvent;
     if (this.props.data.id == this.props.water.plant_id) {
       lastWaterEvent = (
-        <div className="plant-details">
-          <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
-        </div>
+        <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
       )
+    }
+    if (moment(this.props.water.water_date) < moment().add(23, 'hours')){
+      cardColour = '#fedb63';
+    }
+    if (moment(this.props.water.water_date) < moment()) {
+      cardColour = '#ff4b4b';
+    }
+    if (moment(this.props.water.water_date) > moment().add(24, 'hours')){
+      cardColour = '#fff';
     }
 
     return (
-      <div key={this.props.data.index} className="card">
+      <div key={this.props.data.index} className="card" style={{backgroundColor: cardColour}}>
         {/* Plant card header */}
         <a href={"/plants/" + this.props.data.id}>
           <header className="plant-header">
@@ -60,7 +67,7 @@ class Card extends React.Component {
           <div className="plant-content">
             <h5 className="plant-details">Water in {this.waterNext(this.props.water.water_date)} hours</h5>
             <div className="card-info">Last Watered</div>
-            {lastWaterEvent}
+              <div className="plant-details">{lastWaterEvent}</div>
             <div className="card-info">Needs</div>
               <div className="plant-details">Watering every {this.props.data.water_freq} days</div>
               <div className="plant-details">{this.props.data.light}</div>
