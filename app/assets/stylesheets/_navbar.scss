@@ -4,7 +4,7 @@
   top: 0;
   right: 0;
   left: 0;
-  background: $accent-color;
+  background: $primary-color;
   height: $nav-height;
   position: fixed;
   z-index: 999;
@@ -25,11 +25,10 @@
   }
 }
 
-
 #brand {
   display: inline-block;
   font-size: 2.2em;
-  padding: 5px 15px;
+  padding: 11px 15px;
 #logo {
     height: auto;
     width: 50px;
@@ -45,31 +44,34 @@
   position: relative;
   display: inline-block;
   font-size: 20px;
-  padding: 1px;
+  // padding: 5px;
 
   a {
+    border-radius: 3px;
+    padding: 10px 15px;
     color: #fff;
   }
   a:hover {
-    color: $primary-color;
+    background-color: $accent-color
   }
 }
-.login {
-  line-height: 3.5em;
-  font-size: 1.1em;
-  margin-right: 20px;
 
+.login {
+  line-height: 4.6em;
+  font-size: 1em;
+  margin-right: 20px;
 }
+
 .userfunc {
-  line-height: 2.4em;
-  font-size: 11.1em;
+  line-height: 3.5em;
   margin-right: 40px;
   color: #333;
-  font-size: 25px;
+  font-size: 23px;
   a {
     color: #fff;
   }
   a:hover {
-    color: $primary-color;
+    color: #fff;
+    background-color: $accent-color
   }
 }

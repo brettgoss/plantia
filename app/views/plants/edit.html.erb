@@ -1,13 +1,4 @@
 <div class="container" id="plant_form_page">
-  <div class="row">
-    <div class="six columns">
-      <h1>Edit Plant</h1>
-    </div>
-    <div class="six columns">
-      <%= link_to "Back", @plant, class: 'button' %>
-    </div>
-  </div>
-
   <%= form_for :plant, url: plant_path(@plant), method: :patch do |f| %>
 
     <% if @plant.errors.any? %>
@@ -44,7 +35,14 @@
           Water every <%= f.number_field :water_freq, class: 'form-control', placeholder: "?"  %> days
         </div>
       </div>
-      <%= f.submit 'Save Edits', class: 'form_submit' %>
+      <div class="row">
+        <div class="six columns">
+          <%= link_to "Back", @plant, class: 'button' %>
+        </div>
+        <div class="six columns">
+          <%= f.submit 'Save Edits', class: 'button' %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

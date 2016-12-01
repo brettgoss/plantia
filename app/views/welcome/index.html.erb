@@ -2,15 +2,17 @@
 <div class="container main-container">
   <div class="row">
     <div class="six columns">
-      <aside>
         <div id="landing-summary">
-          <div class="landing-header">Let us help you, help plants.</div>
-          <h6>We are plant lovers just like you!</h6>
+          <div class="landing-header">Helping you, help plants.</div>
           <p>You don’t have to be blessed with a green thumb to keep houseplants alive and thriving. Let Plantia keep track of your houseplants and their watering schedules.</p>
         </div>
-      </aside>
     </div>
-    <div class="six columns">
+
+    <div class="one column">
+    <p></p>
+    </div>
+
+    <div class="five columns" id="signup-usermsg">
       <% if !current_user %>
         <h2>Signup!</h2>
         <%= form_for @user, url: users_path do |f| %>
@@ -36,15 +38,13 @@
           <%= f.submit "Submit", class: "button" %>
         <% end %>
       <% else %>
-        <aside>
           <div id="landing-welcome">
             <div class="landing-header">Welcome, <%= current_user.name %>.</div>
             <p>
               Head to your <%= link_to 'Dashboard', dashboard_index_path %> to take a look at the status of your plants.
-              Or pop on over to <%= link_to 'All Plants', plants_path %> to view a list of all your current plants.
+              Or pop on over to <%= link_to 'My Plants', plants_path %> to view a list of all your current plants.
             </p>
           </div>
-        </aside>
       <% end %>
     </div>
   </div>

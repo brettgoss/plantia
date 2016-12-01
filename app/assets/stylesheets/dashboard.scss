@@ -9,14 +9,10 @@
   margin: 150px 0;
   height: 100%;
   overflow: scroll;
+  background-color: #f2f5f4;
 
   a {
     text-decoration: none;
-    color: black;
-  }
-
-  a:hover {
-    color: black;
   }
 
   .message0 {
@@ -49,7 +45,6 @@
     a, button {
       margin: 2em;
       width: 12em;
-      color: black;
     }
   }
 }
