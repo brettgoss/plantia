@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
     @plants = @user.plants.all
     @water_events = []
     @plants.each do |p|
-      event = WaterEvent.where(plant_id: p.id).order(water_date: :desc).limit(1).first
+      event = WaterEvent.where(plant_id: p.id, watered: false).first
       @water_events << event
     end
   end

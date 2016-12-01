@@ -47,7 +47,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('App Rendered')
+    console.log('App Rendered', this.props.water)
     return (
       <div>
         <Buttons handleSubmit={this.handleSubmit} />
