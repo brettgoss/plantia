@@ -1,13 +1,4 @@
 <div class="container" id="plant_form_page">
-  <div class="row">
-    <div class="six columns">
-      <h1>Add a New Plant</h1>
-  </div>
-    <div class="six columns u-pull-right">
-      <%= link_to 'Back', :plants, class: 'button' %>
-    </div>
-  </div>
-
   <%= form_for @plant, url: plants_path do |f| %>
 
     <% if f.object.errors.any? %>
@@ -21,6 +12,15 @@
       </div>
     <% end %>
     <div id="plant_form">
+      <div class="row">
+        <div class="six columns">
+         <h1>Create Plant</h1>
+      </div>
+      <div class="six columns">
+        <%= link_to 'Back', :plants, class: 'button' %>
+      </div>
+    </div>
+      
       <div class="row">
         <div class="five columns">
           <%= f.label 'Plant Name' %>
