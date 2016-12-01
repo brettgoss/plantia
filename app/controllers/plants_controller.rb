@@ -22,8 +22,13 @@ class PlantsController < ApplicationController
 
   def create
   	@plant = Plant.new(plant_params)
-  	@plant.user = current_user
-  	if @plant.save
+    @plant.user = current_user
+    if @plant.save
+      
+      @event = WaterEvent.new({plant_id: @plant.id})
+      @event.water_date = @plant.water_freq.days.from_now
+      @event.save
+
       redirect_to [:plants], notice: 'Plant created!'
     else
       render :new

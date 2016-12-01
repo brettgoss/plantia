@@ -93,6 +93,43 @@ Plant.create!({
   user_id: 4
 })
 
+puts "Creating Water Events"
+
+WaterEvent.create!({
+  plant_id: 1,
+  water_date: Time.current
+})
+
+WaterEvent.create!({
+  plant_id: 2,
+  water_date: Time.current
+})
+
+WaterEvent.create!({
+  plant_id: 3,
+  water_date: Time.current
+})
+
+WaterEvent.create!({
+  plant_id: 4,
+  water_date: Time.current
+})
+
+WaterEvent.create!({
+  plant_id: 5,
+  water_date: Time.current
+})
+
+WaterEvent.create!({
+  plant_id: 6,
+  water_date: Time.current
+})
+
+WaterEvent.create!({
+  plant_id: 7,
+  water_date: Time.current
+})
+
 Plantlog.create!({
   logtime: "2016-04-05",
   title:"Pruning",
