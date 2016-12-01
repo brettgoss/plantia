@@ -19,10 +19,14 @@
   .message0 {
     position: absolute;
     display: block;
-    left: 4em;
+    top: 90px;
     font-size: 2em;
-    line-height: 3em;
+    line-height: 1.5em;
     font-weight: 300;
+    background-color: rgba(#2a8bff,.63);
+    padding: 0 20px;
+    border-radius: 4px;
+    color: white;
   }
 
   .wrapper {

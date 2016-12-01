@@ -21,7 +21,7 @@ class App extends React.Component {
       type: "POST"
     }).done((water) => {
       $(".message0").text("All your plants have been watered!");
-      $(".message0").show().delay(1000).fadeOut();
+      $(".message0").show().delay(1500).fadeOut();
       this.setState({water: water});
     });
   }
