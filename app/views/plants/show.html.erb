@@ -43,9 +43,9 @@
       <h3>Watering History</h3>
       <div id="water_historybox">
         <div id="water_events">
-          <% @plant.water_events.order("water_date desc").each do |e| %>
+          <% @past_events.order("water_date desc").each do |e| %>
           <div>
-            <time class="timestring"><%= e.water_date %></time>
+            <time class="timestring"><%= e.created_at %></time>
             <%= link_to fa_icon('trash'), water_event_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
           </div>
           <% end %>
