@@ -8,7 +8,6 @@ class Plant < ApplicationRecord
   validates :light, presence: true
   validates :water_freq, presence: true,
                            numericality: {
-                            only_integer: true,
                             less_than_or_equal_to: 365,
                             greater_than_or_equal_to: 0,
                           }
