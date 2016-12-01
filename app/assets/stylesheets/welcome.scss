@@ -4,16 +4,17 @@
 @import "vars";
 
 .welcome {
+  margin-top: 6em;
   background-image: url(/Stocksy_txp1cae9c878GG100_Medium_470637.jpg);
-  background-position: top;
-  background-position: 63% 22%;
+  background-size: cover;
+  background-position: 45% 45%;
   background-repeat: no-repeat;
   color: #333;
 }
 
 
 .main-container {
-  margin-top: 10em;
+  // margin-top: 3em;
 
   input.button {
     color: #ffffff;
@@ -28,12 +29,14 @@
   }
 
   .landing-header {
-    font-size: 2.8em;
+    font-size: 2.2em;
     font-weight: 200;
   }
 
   #landing-summary {
-    margin-top: 5em
+    margin-top: 1em;
+    margin-left: 1em;
+
   }
 
   #landing-welcome {
@@ -42,7 +45,7 @@
   p {
     margin-top: 0.5em;
     margin-bottom: 0;
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: 200;
   }
 
@@ -54,7 +57,9 @@
     border-radius: 13px;
     padding: 16px;
     box-shadow: 1px 2px 7px 0px #555;
-    background-color: rgba(245, 245, 245, 0.74);
+    background-color: rgba(#f5f5f5,.74);
+    margin-bottom: 20em;
+    margin-left: 8em;
   }
 
 }

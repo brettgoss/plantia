@@ -33,8 +33,8 @@ class App extends React.Component {
       type: "POST",
       data: {plant_id: plantId}
     }).done((water) => {
-      $(".message0").text("Plant Watered");
-      $(".message0").show().delay(1000).fadeOut();
+      $(".message0").text("Plant Watered!");
+      $(".message0").show().delay(1500).fadeOut();
       this.setState({water: water});
     });
   }

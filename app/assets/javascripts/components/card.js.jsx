@@ -58,12 +58,12 @@ class Card extends React.Component {
           </header>
           {/* Plant card body */}
           <div className="plant-content">
-            <div className="card-info">Needs</div>
-            <div className="plant-details">{this.props.data.light}</div>
+            <h5 className="plant-details">Water in {this.waterNext(this.props.water.water_date)} hours</h5>
             <div className="card-info">Last Watered</div>
             {lastWaterEvent}
-            <div className="plant-details">Needs watering every {this.props.data.water_freq} days</div>
-            <div className="plant-details">Water in {this.waterNext(this.props.water.water_date)} hours</div>
+            <div className="card-info">Needs</div>
+              <div className="plant-details">Watering every {this.props.data.water_freq} days</div>
+              <div className="plant-details">{this.props.data.light}</div>
           </div>
         </a>
         {/* Plant Water Button */}

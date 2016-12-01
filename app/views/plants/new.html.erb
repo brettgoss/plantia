@@ -17,7 +17,7 @@
          <h1>Create Plant</h1>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="five columns">
           <%= f.label 'Plant Name' %>
@@ -31,7 +31,7 @@
       <div class="row">
         <div class="five columns">
           <%= f.label 'Light Needs' %>
-          <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
+          <%= f.select :light, ['Direct Sunlight','Indirect Sunlight', 'Shady', 'Darkness'], class: 'form-control' %>
         </div>
         <div class="five columns" id="water_freq">
           <%= f.label 'Water Needs' %>
@@ -40,7 +40,7 @@
       </div>
       <div class="row">
         <div class="five columns">
-         <%= link_to 'Back', :plants, class: 'button' %>
+         <%= link_to 'Back', :back, class: 'button' %>
         </div>
         <div class="five columns">
         <%= f.submit 'Create Plant', class:'button' %>
