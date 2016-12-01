@@ -29,7 +29,7 @@ class PlantsController < ApplicationController
       @event.water_date = @plant.water_freq.days.from_now
       @event.save
 
-      redirect_to [:plants], notice: 'Plant created!'
+      redirect_to dashboard_index_url, notice: 'Plant created!'
     else
       render :new
     end
