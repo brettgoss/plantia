@@ -9,7 +9,6 @@
   </td>
   <td>
     Water every <%= plant.water_freq %> days
-    <p><%= plant.days_till_water %> days till next water
   </td>
   <td>
     <%= link_to fa_icon('trash'), plant_path(plant.id), class: 'button', method: :delete, data: { confirm: "Wait, are you sure this plant is dead?" } %>
