@@ -59,6 +59,7 @@ class WaterEventsController < ApplicationController
     redirect_to plant_path(@water_event.plant)
   end
 
+Rails.logger.debug Plant.needs_water
 
 private
   def water_event_params

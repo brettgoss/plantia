@@ -4,9 +4,7 @@ class TwilioHelper
     twilio_number = ENV['TWILIO_NUMBER']
     client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
     phone_number = User.phone_number
-    # Trying to call on the specific plant belongs to the user that needs to be watered.
-    # Trying to include plant nickname and commonname in sms.
-    #Maybe try a blanket text first ex: Hey one of your plants needs watering please check Plantia.
+    # Trying to call on the users who have plants that need watering.
     alert_message = <<MSG
                     [This is a test] ALERT!
                     One or more of your green babies needs some love.

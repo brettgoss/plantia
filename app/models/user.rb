@@ -17,3 +17,8 @@ class User < ActiveRecord::Base
     end
   end
 end
+
+def has_thristyplant
+userlist = [Plant.needswater].map {|plantid| if plantid.user_id == user.id do return user  }
+# or .collect return associated user. list of users thats has thirsty plants
+end
