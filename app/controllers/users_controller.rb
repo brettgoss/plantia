@@ -15,15 +15,11 @@ class UsersController < ApplicationController
 
   def update
     # Gets current user and saves as instance variable
-    @user = User.find(current_user.id)
 
+    current_user.phone_number = user_params[:phone_number]
     # Attempts to update user's phone number with new value from form
-    if @user.update_column(:phone_number, params[:user][:phone_number])
-      redirect_to '/plants'
-    else
-      # Show error or something.
-      redirect_to '/plants'
-    end
+    current_user.save!
+    redirect_to '/plants'
   end
 
   # def edit
