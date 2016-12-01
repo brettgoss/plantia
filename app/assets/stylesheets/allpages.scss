@@ -11,7 +11,6 @@ a:hover {
 
 .button {
   color: #ffffff;
-  opacity: 0.70;
   background-color: $primary-color;
   transition: 200ms ease-in-out;
   box-shadow: 0px 3px 10px #bbb;
@@ -20,8 +19,7 @@ a:hover {
 
 .button:hover {
   color: #ffffff;
-  opacity: 0.90;
-  background-color: $primary-color;
+  background-color: $accent-color;
   transform: translateY(-2px);
   box-shadow: 0px 5px 13px #888;
 
