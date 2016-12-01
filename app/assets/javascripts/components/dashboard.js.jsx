@@ -42,18 +42,18 @@ class Dashboard extends React.Component {
       return (
           <div className="wrapper">
             {
-              sortedArr.map((value, index) => {
-                this.props.water.map((item, i) => {
-                  if (item.plant_id == value.id) {
-                    this.state.waterEvents = item
+              this.props.plants.map((plant, index) => {
+                this.props.water.map((waterEvent, i) => {
+                  if (waterEvent.plant_id == plant.id) {
+                    this.state.waterEvents = waterEvent
                   }
                 })
 
                 return (
                 <Card
-                  key={value.id}
+                  key={plant.id}
                   waterOne={this.waterOne}
-                  data={value}
+                  data={plant}
                   water={this.state.waterEvents} />
                 )
               })

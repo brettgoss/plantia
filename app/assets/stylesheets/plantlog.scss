@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //plantlog form
+@import "vars";
 #date_title {
   display: inline-flex;
   label {
@@ -17,8 +18,9 @@
 }
 
 #plantlog_logtime {
-  padding-left: 2px;
+  padding-left: 3px;
   border-radius: 4px;
+  border: 1px solid #D1D1D1;
 }
 
 #logtext_label {
@@ -28,6 +30,15 @@
 #plantlog_logtext {
   width: 30em;
 }
+
+#logform_submit {
+  .button {
+   color: #fff;
+    background-color: $primary-color;
+    border: none;
+  }
+}
+
 //end of form for plantlog
 
 //plantlog history
@@ -42,6 +53,7 @@
 
   a.button {
     color: red;
+    background-color: #fff;
     float: right;
     margin: -28px -10px;
     padding: 0 10px;

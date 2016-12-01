@@ -6,8 +6,8 @@ class WaterEventsController < ApplicationController
     e = create_water_event(plant_id)
 
     if e.save
-      plants = current_user.plants.all
-      response = WaterEvent.where(plant_id: plants.ids)
+      @plants = current_user.plants.all
+      response = WaterEvent.where(plant_id: @plants.ids, watered: false)
       render json: response, status: :ok
     else
       render json: response.errors, status: :unprocessable_entity
@@ -29,20 +29,28 @@ class WaterEventsController < ApplicationController
     end
 
     if !success_plants.empty?
-      response = WaterEvent.where(plant_id: @plants.ids)
+      response = WaterEvent.where(plant_id: @plants.ids, watered: false)
       render json: response, status: :ok
     end
   end
 
   # Attempt to create new water event
   def create_water_event(plant_id)
+    @last_event = WaterEvent.where(plant_id: plant_id).order(water_date: :desc).limit(1).first
+    @last_event.watered = true
+    @last_event.save
+
     plant_hash = { plant_id: plant_id}
-    e = WaterEvent.new(plant_hash)
+    event = WaterEvent.new(plant_hash)
+
     @plant = Plant.find(plant_id)
-    @plant.updated_at = Time.current
+    # @plant.updated_at = Time.current
     @plant.save
-    e.water_date = Time.current
-    e
+
+    # Should be today plus water freq
+    event.water_date = @plant.water_freq.days.from_now
+    puts event.inspect
+    event
   end
 
   # Handles deletion of a water event

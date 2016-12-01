@@ -57,7 +57,7 @@
     <!-- Plantlog history -->
     <div class= "six columns">
       <h3>Log History </h3>
-      <%= render @plant.plantlogs %>
+      <%= render @plant.plantlogs.order("logtime desc") %>
     </div>
     <!-- ENDPlantlog History -->
 

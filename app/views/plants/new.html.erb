@@ -1,13 +1,4 @@
 <div class="container" id="plant_form_page">
-  <div class="row">
-    <div class="six columns">
-      <h1>Add a New Plant</h1>
-  </div>
-    <div class="six columns u-pull-right">
-      <%= link_to 'Back', :plants, class: 'button' %>
-    </div>
-  </div>
-
   <%= form_for @plant, url: plants_path do |f| %>
 
     <% if f.object.errors.any? %>
@@ -22,6 +13,12 @@
     <% end %>
     <div id="plant_form">
       <div class="row">
+        <div class="six columns">
+         <h1>Create Plant</h1>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="five columns">
           <%= f.label 'Plant Name' %>
           <%= f.text_field :nickname, class: 'form-control' %>
@@ -34,14 +31,21 @@
       <div class="row">
         <div class="five columns">
           <%= f.label 'Light Needs' %>
-          <%= f.select :light, ['Direct','Indirect', 'Low Light', 'Shady'], class: 'form-control' %>
+          <%= f.select :light, ['Direct Sunlight','Indirect Sunlight', 'Shady', 'Darkness'], class: 'form-control' %>
         </div>
         <div class="five columns" id="water_freq">
           <%= f.label 'Water Needs' %>
           Water every<%= f.number_field :water_freq, class: 'form-control', placeholder: "?"  %> days
         </div>
       </div>
-      <%= f.submit 'Create Plant', class:'button' %>
+      <div class="row">
+        <div class="five columns">
+         <%= link_to 'Back', :back, class: 'button' %>
+        </div>
+        <div class="five columns">
+        <%= f.submit 'Create Plant', class:'button' %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
