@@ -49,7 +49,6 @@ class WaterEventsController < ApplicationController
 
     # Should be today plus water freq
     event.water_date = @plant.water_freq.days.from_now
-    puts event.inspect
     event
   end
 
