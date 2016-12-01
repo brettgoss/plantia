@@ -61,15 +61,27 @@
     border: none;
     border-radius: 0;
   }
-  .card-button:hover {
-    color: $accent-color;
+  .card-button.card-button-good {
+    background-color: #5c91d0;
   }
-  .card-button:focus {
-    color: white;
+
+  .card-button.card-button-trouble {
+    background-color: yellow;
   }
+
+  .card-button.card-button-bad {
+    background-color: #f33434;
+  }
+
+  // .card-button:hover {
+  //   background-color: rgba()
+  // }
+  // .card-button:focus {
+  //   color: white;
+  // }
 }
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: 0px 5px 13px #888;
   cursor: pointer;
   text-decoration: none;
