@@ -55,6 +55,7 @@ class PlantsController < ApplicationController
     redirect_to [:plants], notice: 'Plant deleted!'
   end
 
+
 private
   def plant_params
     params.require(:plant).permit(
