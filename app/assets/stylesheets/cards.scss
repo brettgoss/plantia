@@ -61,6 +61,11 @@
     border: none;
     border-radius: 0;
   }
+
+  .card-button:focus {
+    color:white;
+  }
+
   .card-button.card-button-good {
     background-color: #2a8bff;
   }
