@@ -6,37 +6,55 @@
 .welcome {
   background-image: url(/Stocksy_txp1cae9c878GG100_Medium_470637.jpg);
   background-position: top;
-  background-size: cover;
+  background-position: 63% 22%;
   background-repeat: no-repeat;
   color: #333;
 }
+
 
 .main-container {
   margin-top: 10em;
 
   input.button {
-    color: #333;
+    color: #ffffff;
+    opacity: 0.7;
+    background-color: $primary-color;
+  }
+
+  input.button:hover {
+    color: #ffffff;
     opacity: 0.87;
+    background-color: $primary-color;
   }
 
   .landing-header {
-    font-size: 2em;
+    font-size: 2.8em;
     font-weight: 200;
   }
 
-  #landing-summary,
+  #landing-summary {
+    margin-top: 5em
+  }
+
   #landing-welcome {
-    margin-top: 5em;
-    color: #333;
   }
 
   p {
     margin-top: 0.5em;
     margin-bottom: 0;
+    font-size: 1.4em;
+    font-weight: 200;
   }
 
   h6 {
     font-style: italic;
+  }
+
+  #signup-usermsg {
+    border-radius: 13px;
+    padding: 16px;
+    box-shadow: 1px 2px 7px 0px #555;
+    background-color: rgba(245, 245, 245, 0.74);
   }
 
 }
