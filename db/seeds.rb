@@ -9,154 +9,134 @@
 
 # raise "Development seeds only (for now)!" unless Rails.env.development?
 
-# puts "Creating Users With Phonenumbers"
+puts "Creating Users With Phonenumbers"
 
-# User.create!({
-#   name: "Aileen",
-#   email: "aileen@fake.com",
-#   password: "aileen",
-#   phone_number:"2508821582",
-#   })
-
-# User.create!({
-#   name: "Brett",
-#   email: "brett@fake.com",
-#   password: "brett",
-#   phone_number:"2506864617",
-#   })
-
-# User.create!({
-#   name: "Kim",
-#   email: "kim@fake.com",
-#   password: "kimmy",
-#   phone_number:"2508854259",
-#   })
-
-# User.create!({
-#   name: "Linley",
-#   email: "linley@fake.com",
-#   password: "linley",
-#   phone_number:"2508935747",
-#   })
-puts "create phone test adam"
 User.create!({
-  name: "Adam",
-  email: "adamy@fake.com",
-  password: "heart",
-  phone_number:"2508852216",
+  name: "Aileen",
+   email: "aileen@fake.com",
+   password: "aileen",
+   phone_number:"2508821582",
+   })
+
+ User.create!({
+  name: "Brett",
+   email: "brett@fake.com",
+   password: "brett",
+   phone_number:"2506864617",
   })
 
-# puts "phonenumbers inserted!"
-# puts "Seeding Plants!(LOL!!)"
+ User.create!({
+   name: "Kim",
+   email: "kim@fake.com",
+   password: "kimmy",
+  phone_number:"2508854259",
+   })
+
+ User.create!({
+   name: "Linley",
+   email: "linley@fake.com",
+   password: "linley",
+   phone_number:"2508935747",
+  })
+puts "create phone test adam"
+
+
+ puts "phonenumbers inserted!"
+ puts "Seeding Plants!(LOL!!)"
 
 
 
-# Plant.create!({
-#   nickname:  "Mittens",
-#   common_name: "Venus Flytrap",
-#   light: "Direct Sunlight",
-#   water_freq: 4,
-#   user_id: 1
-# })
+ Plant.create!({
+   nickname:  "Mittens",
+   common_name: "Venus Flytrap",
+   light: "Direct Sunlight",
+   water_freq: 4,
+   user_id: 1
+ })
 
-# Plant.create!({
-#   nickname:  "Fernie Sanders",
-#   common_name: "Maiden Hair Fern",
-#   light: "Indirect Sunlight",
-#   water_freq: 1,
-#   user_id: 1
-# })
+ Plant.create!({
+  nickname:  "Fernie Sanders",
+   common_name: "Maiden Hair Fern",
+   light: "Indirect Sunlight",
+   water_freq: 1,
+    user_id: 1
+ })
 
-# Plant.create!({
-#   nickname:  "Sparky",
-#   common_name: "Succulent",
-#   light: "Direct Sunlight",
-#   water_freq: 5,
-#   user_id: 1
-# })
 
-# Plant.create!({
-#   nickname:  "Finnegan",
-#   common_name: "Norfolk Pine",
-#   light: "Indirect Sunlight",
-#   water_freq: 7,
-#   user_id: 1
-# })
 
-# Plant.create!({
-#   nickname:  "Frankie",
-#   common_name: "Ficus",
-#   light: "Direct Sunlight",
-#   water_freq: 7,
-#   user_id: 2
-# })
-
-# Plant.create!({
-#   nickname:  "Kaa",
-#   common_name: "Snake Plant",
-#   light: "Direct Sunlight",
-#   water_freq: 14,
-#   user_id: 3
-# })
-
-# Plant.create!({
-#   nickname:  "Linley jr.",
-#   common_name: "Aloe",
-#   light: "Indirect Sunlight",
-#   water_freq: 7,
-#   user_id: 4
-# })
-puts " and his plant"
 Plant.create!({
-  nickname:  "Snivy Chive",
-  common_name: "Chives",
-  light: "Indirect Sunlight",
-  water_freq: 3,
-  user_id: 1
-})
+  nickname:  "Finnegan",
+   common_name: "Norfolk Pine",
+   light: "Indirect Sunlight",
+   water_freq: 7,
+   user_id: 1
+ })
 
-# puts "Creating Water Events"
+ Plant.create!({
+   nickname:  "Frankie",
+   common_name: "Ficus",
+   light: "Direct Sunlight",
+   water_freq: 7,
+   user_id: 2
+ })
 
-# WaterEvent.create!({
-#   plant_id: 1,
-#   water_date: Time.current
-# })
+ Plant.create!({
+   nickname:  "Kaa",
+   common_name: "Snake Plant",
+   light: "Direct Sunlight",
+   water_freq: 14,
+   user_id: 3
+ })
 
-# WaterEvent.create!({
-#   plant_id: 2,
-#   water_date: Time.current
-# })
+ Plant.create!({
+   nickname:  "Linley jr.",
+   common_name: "Aloe",
+   light: "Indirect Sunlight",
+   water_freq: 7,
+   user_id: 4
+ })
+puts " and his plant"
 
-# WaterEvent.create!({
-#   plant_id: 3,
-#   water_date: Time.current
-# })
 
-# WaterEvent.create!({
-#   plant_id: 4,
-#   water_date: Time.current
-# })
+ puts "Creating Water Events"
 
-# WaterEvent.create!({
-#   plant_id: 5,
-#   water_date: Time.current
-# })
+ WaterEvent.create!({
+   plant_id: 1,
+   water_date: Time.current
+ })
 
-# WaterEvent.create!({
-#   plant_id: 6,
-#   water_date: Time.current
-# })
+ WaterEvent.create!({
+   plant_id: 2,
+   water_date: Time.current
+ })
 
-# WaterEvent.create!({
-#   plant_id: 7,
-#   water_date: Time.current
-# })
-puts "and his plants water event"
+ WaterEvent.create!({
+   plant_id: 3,
+   water_date: Time.current
+ })
 
-WaterEvent.create!({
-  plant_id: 1,
-  water_date: Time.current
-})
+ WaterEvent.create!({
+   plant_id: 4,
+   water_date: Time.current
+ })
+
+ WaterEvent.create!({
+   plant_id: 5,
+   water_date: Time.current
+ })
+
+ WaterEvent.create!({
+   plant_id: 6,
+   water_date: Time.current
+ })
+
+ WaterEvent.create!({
+   plant_id: 7,
+   water_date: Time.current
+ })
+
+
+
 
 
 # Plantlog.create!({
