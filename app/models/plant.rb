@@ -21,8 +21,8 @@ class Plant < ApplicationRecord
   end
 
 
-  def self.needs_water
-   return Plant.where("water_event.watered = 'false'")
-  end
+  # def self.needs_water
+  #  return Plant.where("water_event.watered = 'false'")
+  # end
 end
 
