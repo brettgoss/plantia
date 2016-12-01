@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20161130034228) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-    t.string   "phone_number"
   end
 
   create_table "water_events", force: :cascade do |t|
