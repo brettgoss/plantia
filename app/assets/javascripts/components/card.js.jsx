@@ -60,7 +60,7 @@ class Card extends React.Component {
           <div className="plant-content">
             <div className="card-info">Light Requirements:</div>
             <div className="plant-details">{this.props.data.light}</div>
-            <div className="card-info">Last Watered:</div>
+            <div className="card-info">Last Watered</div>
             {lastWaterEvent}
             <div className="plant-details">Needs watering every {this.props.data.water_freq} days</div>
             <div className="plant-details">Water in {this.waterNext(this.props.water.water_date)} hours</div>
