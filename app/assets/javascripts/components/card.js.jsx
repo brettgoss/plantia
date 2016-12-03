@@ -37,39 +37,43 @@ class Card extends React.Component {
 
     // Build a formatted water event wrapped in a div.
     let lastWaterEvent;
-    let time = this.waterNext(this.props.water.water_date)
+    let message;
+    let time = this.waterNext(this.props.water.water_date);
     if (this.props.data.id == this.props.water.plant_id) {
       lastWaterEvent = (
         <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
       )
     }
     if (moment(this.props.water.water_date) < moment().add(23, 'hours')){
-      cardColour = '#fedb63';
+      cardColour = 'trouble';
     }
     if (moment(this.props.water.water_date) < moment()){
-      cardColour = '#ff4b4b';
+      cardColour = 'bad';
     }
     if (moment(this.props.water.water_date) > moment().add(24, 'hours')){
-      cardColour = '#fff';
+      cardColour = 'good';
     }
     if (time < 24){
       scale = 'hours';
-      countdown = time
-      console.log(time)
-      // {time}
+      countdown = time;
+      message = `Water in ${countdown} ${scale}`
     }
     if (time === 24){
       scale = 'day';
-      countdown = Math.floor(time / 24)
-      // {time} * 24
+      countdown = Math.floor(time / 24);
+      message = `Water in ${countdown} ${scale}`
     }
     if (time > 24){
       scale = 'days';
-      countdown = Math.floor(time / 24)
+      countdown = Math.floor(time / 24);
+      message = `Water in ${countdown} ${scale}`
+    }
+    if (time < 1){
+      message = `Your plant is thirsty!`
     }
 
     return (
-      <div key={this.props.data.index} className="card" style={{backgroundColor: cardColour}}>
+      <div key={this.props.data.index} className="card" >
         {/* Plant card header */}
         <a href={"/plants/" + this.props.data.id}>
           <header className="plant-header">
@@ -81,7 +85,7 @@ class Card extends React.Component {
           </header>
           {/* Plant card body */}
           <div className="plant-content">
-            <h5 className="plant-details">Water in {countdown} {scale}</h5>
+            <h5 className="plant-details">{message}</h5>
             <div className="card-info">Last Watered</div>
               <div className="plant-details">{lastWaterEvent}</div>
             <div className="card-info">Needs</div>
@@ -94,7 +98,7 @@ class Card extends React.Component {
           id={this.props.data.id}
           type="button"
           value={"Water"}
-          className="card-button"
+          className={"card-button card-button-"+cardColour}
           onClick={this.handleSubmit} />
       </div>
     )

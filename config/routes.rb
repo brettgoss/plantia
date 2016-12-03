@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # receive the form and create a user in our database using the data given to us by the user.
     get '/welcome' => 'users#new'
     post '/users' => 'users#create'
+    put '/users' => 'users#update'
 
   resources :dashboard, only: [:index]
 

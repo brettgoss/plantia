@@ -61,15 +61,40 @@
     border: none;
     border-radius: 0;
   }
-  .card-button:hover {
-    color: $accent-color;
-  }
+
   .card-button:focus {
-    color: white;
+    color:white;
+  }
+
+  .card-button.card-button-good {
+    background-color: #2a8bff;
+  }
+
+  .card-button.card-button-trouble {
+    background-color: #f9d523;
+  }
+
+  .card-button.card-button-bad {
+    background-color: #f33434;
+  }
+
+    .card-button.card-button-good:hover {
+    background-color: rgba(#2a8bff, 0.8);
+    color: #fff
+  }
+
+  .card-button.card-button-trouble:hover {
+    background-color: rgba(#f9d523, 0.8);
+    color: #fff
+  }
+
+  .card-button.card-button-bad:hover {
+    background-color: rgba(#f33434, 0.8);
+    color: #fff
   }
 }
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   box-shadow: 0px 5px 13px #888;
   cursor: pointer;
   text-decoration: none;

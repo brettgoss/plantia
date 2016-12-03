@@ -67,11 +67,13 @@
 }
 
 .userfunc {
-  line-height: 2.5em;
+  line-height: 3em;
   margin-right: 30px;
   color: #333;
   font-size: 23px;
   a {
+    border-radius: 3px;
+    padding: 10px 15px;
     color: #fff;
   }
   a:hover {

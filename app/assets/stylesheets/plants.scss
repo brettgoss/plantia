@@ -4,6 +4,7 @@
 @import "vars";
 
 // Plant Show ID page CSS
+
 // Water Events
 #water_historybox {
   float: left;
@@ -36,9 +37,25 @@
 
 //Plants Index page
 
-#action_buttons {
+#action-buttons {
     input {
       color: #0076ff;
+    }
+    .button {
+      color: #ffffff;
+      background-color: $primary-color;
+      transition: 200ms ease-in-out;
+      box-shadow: 0px 3px 10px #bbb;
+      border: none;
+
+    }
+
+    .button:hover {
+      color: #ffffff;
+      background-color: $accent-color;
+      transform: translateY(-2px);
+      box-shadow: 0px 5px 13px #888;
+
     }
 }
   table {
@@ -57,6 +74,10 @@
 
 }
 //Plants New/edit
+.plant_form_body {
+  background-color: #f2f5f4;
+}
+
 #plant_form_page {
   padding-top: .5em;
 
@@ -71,10 +92,11 @@
   }
 
   #plant_form {
+    background-color: #fff;
     margin: 30px 100px;
     padding: 38px 0px;
     border-radius: 4px;
-    box-shadow: 2px 3px 8px 1px #888888;
+    box-shadow: 0px 3px 13px #555;
 
     .row {
       margin-top: 2em;
