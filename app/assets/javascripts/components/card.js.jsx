@@ -38,6 +38,7 @@ class Card extends React.Component {
     // Build a formatted water event wrapped in a div.
     let lastWaterEvent;
     let message;
+    let cardColour = 'good';
     let time = this.waterNext(this.props.water.water_date);
     if (this.props.data.id == this.props.water.plant_id) {
       lastWaterEvent = (
