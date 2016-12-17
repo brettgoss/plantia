@@ -1,6 +1,20 @@
+<div>
+  <h6>This page is a bit of a work in progress.</h6>
+</div>
 <div class="container">
-  <div>
-    <div>Hello, <%= @user.name %></div>
+  <div class="six columns">
+    <div><h3>Hello, <%= @user.name %>.</h3></div>
     <div>You have <%= @plants.count %> plants.</div>
   </div>
+
+  <div class="six columns">
+    <p>If you would like to opt in to text reminders, please enter your phone number here.</p>
+    <p>You'll receive a text reminder once any of your plants are two days overdue for watering.</p>
+    <%= form_for :user, url: users_path, method: 'put', remote: true do |f| %>
+      <%= f.label 'Phone number'%>
+      <%= f.text_field :phone_number, class: 'form-control' %>
+      <%= f.submit 'Submit', class: 'button' %>
+    <% end %>
+  </div>
+
 </div>
