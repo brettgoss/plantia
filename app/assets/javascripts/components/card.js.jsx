@@ -29,7 +29,7 @@ class Card extends React.Component {
     let num = waterEvent;
     let now = moment();
     let hours = moment.duration(now.diff(num)).asHours();
-    return Math.floor(0.1-hours);
+    return Math.floor(1-hours);
   }
 
   render() {
@@ -45,31 +45,30 @@ class Card extends React.Component {
         <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
       )
     }
-    if (moment(this.props.water.water_date) < moment().add(23, 'hours')){
-      cardColour = 'trouble';
-    }
-    if (moment(this.props.water.water_date) < moment()){
-      cardColour = 'bad';
-    }
-    if (moment(this.props.water.water_date) > moment().add(24, 'hours')){
-      cardColour = 'good';
-    }
+    // If less than one day away, display in hours
     if (time < 24){
+      cardColour = 'trouble';
       scale = 'hours';
       countdown = time;
       message = `Water in ${countdown} ${scale}`
     }
-    if (time === 24){
+    // if exactly one day, display in singular day
+    if (time >= 24){
+      cardColour = 'good';
       scale = 'day';
       countdown = Math.floor(time / 24);
       message = `Water in ${countdown} ${scale}`
     }
-    if (time > 24){
+    // if more than one day, display in days
+    if (time >= 48){
+      cardColour = 'good';
       scale = 'days';
       countdown = Math.floor(time / 24);
       message = `Water in ${countdown} ${scale}`
     }
+    // if overdue, don't display scale or countdown
     if (time < 1){
+      cardColour = 'bad';
       message = `Your plant is thirsty!`
     }
 
