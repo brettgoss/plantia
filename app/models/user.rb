@@ -13,21 +13,18 @@ class User < ActiveRecord::Base
     if user
       if user.authenticate(password)
         user
-
       end
     end
   end
-  def self.has_thristyplant
-    list =  User.where(
+
+  def self.has_thristy_plant
+    list = User.where(
       id: Plant.select('user_id').where(
         id: WaterEvent.select('plant_id').where(
           watered: false
         )
       )
     )
-# Rails.logger.debug list
+  end
 end
-end
-
-
 # or .collect return associated user. list of users thats has thirsty plants
