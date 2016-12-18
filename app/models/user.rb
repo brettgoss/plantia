@@ -21,10 +21,13 @@ class User < ActiveRecord::Base
     list = User.where(
       id: Plant.select('user_id').where(
         id: WaterEvent.select('plant_id').where(
-          watered: false
+          "watered = ? AND water_date < ?",
+          true, (2.days.ago)
         )
       )
     )
+    puts list.inspect
+    list
   end
 end
 # or .collect return associated user. list of users thats has thirsty plants
