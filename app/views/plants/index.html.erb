@@ -5,13 +5,6 @@
     <div class="six columns">
       <%= link_to '+ New Plant', new_plant_path, class: 'button' %>
     </div>
-    <div class="six columns">
-      <%= form_for :user, url: users_path, method: 'put', remote: true do |f| %>
-        <%= f.label 'Phone number'%>
-        <%= f.text_field :phone_number, class: 'form-control' %>
-        <%= f.submit 'Submit', class: 'button' %>
-      <% end %>
-    </div>
   </div>
 
   <div class="panel panel-default plants">
@@ -24,7 +17,7 @@
           <th>Remove</th>
         </tr>
       <tbody>
-          <%= render @plants %>
+        <%= render @plants %>
       </tbody>
     </table>
 

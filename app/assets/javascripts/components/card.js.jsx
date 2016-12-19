@@ -22,6 +22,7 @@ class Card extends React.Component {
     let num = moment(waterEvent);
     let freq = moment.duration(waterFreq, 'days').asHours();
     let result = moment(num).subtract(freq, 'hours').format('lll')
+    console.log(waterEvent)
     return result;
   }
 
@@ -39,11 +40,16 @@ class Card extends React.Component {
     let lastWaterEvent;
     let message;
     let cardColour = 'good';
+    let waterFrequency = `${this.props.data.water_freq} days`;
     let time = this.waterNext(this.props.water.water_date);
+
     if (this.props.data.id == this.props.water.plant_id) {
       lastWaterEvent = (
         <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
       )
+    }
+    if (this.props.data.water_freq === 1){
+      waterFrequency = "1 day";
     }
     // If less than one day away, display in hours
     if (time < 24){
@@ -89,7 +95,7 @@ class Card extends React.Component {
             <div className="card-info">Last Watered</div>
               <div className="plant-details">{lastWaterEvent}</div>
             <div className="card-info">Needs</div>
-              <div className="plant-details">Watering every {this.props.data.water_freq} {scale}</div>
+              <div className="plant-details">Watering every {waterFrequency}</div>
               <div className="plant-details">{this.props.data.light}</div>
           </div>
         </a>
