@@ -7,8 +7,8 @@
           <p>You don’t have to be blessed with a green thumb to keep houseplants alive and thriving. Let Plantia keep track of your houseplants and their watering schedules.</p>
         </div>
     </div>
-
-    <div class="five columns" id="signup-usermsg">
+    <div class="five columns">
+      <div id="signup-usermsg">
       <% if !current_user %>
         <h2>Signup!</h2>
         <%= form_for @user, url: users_path do |f| %>
@@ -42,6 +42,7 @@
           </p>
         </div>
       <% end %>
+      </div>
     </div>
   </div>
 </div>

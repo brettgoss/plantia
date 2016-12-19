@@ -14,14 +14,24 @@
   .input {
     height: 2.1em;
     font-size: 1em;
+
+    @media screen and (max-width: 640px) {
+      width: 39%;
+      margin: 0;
+    }
   }
   .button-default {
-    height: 3.3em;
-    line-height: 4px;
+    height: 2.9em;
+    line-height: 1.5em;
     padding: 8px;
     color: #616161;
     background-color: #fff;
     font-weight: lighter;
+  }
+
+  @media screen and (max-width: 640px) {
+    height: 90px;
+    line-height: 4px;
   }
 }
 
@@ -50,6 +60,11 @@
   font-size: 20px;
   top: 6px;
 
+  @media screen and (max-width: 640px) {
+    top: 6px;
+    margin-left: 60px;
+  }
+
   a {
     border-radius: 3px;
     padding: 10px 15px;
@@ -64,6 +79,15 @@
   line-height: 4.6em;
   font-size: 1em;
   margin-right: 20px;
+
+  @media screen and (max-width: 640px) {
+    line-height: 1em;
+    margin-left: 10px;
+    margin-top: -5px;
+    margin-right: 10px;
+    float: left;
+    // width: 100%;
+  }
 }
 
 .userfunc {
@@ -71,6 +95,7 @@
   margin-right: 30px;
   color: #333;
   font-size: 23px;
+
   a {
     border-radius: 3px;
     padding: 10px 15px;
@@ -79,5 +104,15 @@
   a:hover {
     color: #fff;
     background-color: $accent-color
+  }
+
+  @media screen and (max-width: 640px) {
+    font-size: 18px;
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    a {
+      padding: 0;
+    }
   }
 }
