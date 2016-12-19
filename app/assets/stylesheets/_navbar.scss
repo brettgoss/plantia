@@ -14,10 +14,15 @@
   .input {
     height: 2.1em;
     font-size: 1em;
+
+    @media screen and (max-width: 640px) {
+      width: 39%;
+      margin: 0;
+    }
   }
   .button-default {
-    height: 3.3em;
-    line-height: 4px;
+    height: 2.9em;
+    line-height: 1.5em;
     padding: 8px;
     color: #616161;
     background-color: #fff;
@@ -74,6 +79,15 @@
   line-height: 4.6em;
   font-size: 1em;
   margin-right: 20px;
+
+  @media screen and (max-width: 640px) {
+    line-height: 1em;
+    margin-left: 10px;
+    margin-top: -5px;
+    margin-right: 10px;
+    float: left;
+    // width: 100%;
+  }
 }
 
 .userfunc {
