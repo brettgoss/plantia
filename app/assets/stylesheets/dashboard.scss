@@ -12,6 +12,9 @@
   overflow: scroll;
   background-color: #f2f5f4;
 
+  @media screen and (max-width: 640px) {
+    margin: 3em 0;
+  }
   a {
     text-decoration: none;
   }
@@ -36,6 +39,9 @@
     align-content: space-around;
     flex-wrap: wrap;
     padding: 0;
+    @media screen and (max-width: 640px) {
+      margin: 0 0.5em;
+    }
   }
 
   #button-all {
@@ -72,6 +78,16 @@
       background-color: #2a8bff;
       transform: translateY(-2px);
       box-shadow: 0px 5px 13px #888;
+    }
+
+    @media screen and (max-width: 640px) {
+      top: 90px;
+      height: 60px;
+      a, button {
+        margin: 1em 0.5em;
+        width: 30%;
+        padding: 0px;
+      }
     }
   }
 }

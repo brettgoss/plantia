@@ -23,6 +23,11 @@
     background-color: #fff;
     font-weight: lighter;
   }
+
+  @media screen and (max-width: 640px) {
+    height: 90px;
+    line-height: 4px;
+  }
 }
 
 #brand {
@@ -50,6 +55,11 @@
   font-size: 20px;
   top: 6px;
 
+  @media screen and (max-width: 640px) {
+    top: 6px;
+    margin-left: 60px;
+  }
+
   a {
     border-radius: 3px;
     padding: 10px 15px;
@@ -71,6 +81,7 @@
   margin-right: 30px;
   color: #333;
   font-size: 23px;
+
   a {
     border-radius: 3px;
     padding: 10px 15px;
@@ -79,5 +90,15 @@
   a:hover {
     color: #fff;
     background-color: $accent-color
+  }
+
+  @media screen and (max-width: 640px) {
+    font-size: 18px;
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    a {
+      padding: 0;
+    }
   }
 }

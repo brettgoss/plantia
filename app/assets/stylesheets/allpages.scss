@@ -29,4 +29,7 @@ body {
   padding-top: ($nav-height + 15px);
   font-family: 'Ubuntu', sans-serif;
   /*font-family: 'Lato', sans-serif;*/
+  @media screen and (max-width: 640px) {
+    padding-top: ($nav-height + 40px);
+  }
 }
