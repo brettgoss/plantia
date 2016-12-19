@@ -1,19 +1,32 @@
 <div>
-  <h6>This page is a bit of a work in progress.</h6>
+  <p>
+    <h6>This page is a bit of a work in progress.
+    If there is any other information you would like to see on this page,
+    feel free to email us suggestions at
+    <%= mail_to "plantiapp@gmail.com", "plantiapp@gmail.com" ,subject: "Feature Suggestion:" %></h6>
+  </p>
 </div>
 <div class="container">
   <div class="six columns">
-    <div><h3>Hello, <%= @user.name %>.</h3></div>
-    <div>You have <%= @plants.count %> plants.</div>
+    <div id="user-info">
+      <div><h3>Hello, <%= @user.name %>.</h3></div>
+      <% if @plants.count === 1 %>
+        <div>You currently have <%= @plants.count %> plant.</div>
+      <% else %>
+        <div>You currently have <%= @plants.count %> plants.</div>
+      <% end %>
+    </div>
   </div>
 
   <div class="six columns">
-    <p>If you would like to opt in to text reminders, please enter your phone number here.</p>
+    <h4>Text Reminders:</h4>
+    <p>If you would like to opt-in to text reminders, please enter your phone number here.</p>
     <p>You'll receive a text reminder once any of your plants are two days overdue for watering.</p>
+    <p>If you would like to opt back out, delete your phone number and hit save.</p>
     <%= form_for :user, url: users_path, method: 'put', remote: true do |f| %>
       <%= f.label 'Phone number'%>
       <%= f.text_field :phone_number, class: 'form-control' %>
-      <%= f.submit 'Submit', class: 'button' %>
+      <%= f.submit 'Save', class: 'button' %>
     <% end %>
   </div>
 
