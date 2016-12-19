@@ -22,6 +22,7 @@ class Card extends React.Component {
     let num = moment(waterEvent);
     let freq = moment.duration(waterFreq, 'days').asHours();
     let result = moment(num).subtract(freq, 'hours').format('lll')
+    console.log(waterEvent)
     return result;
   }
 
@@ -29,7 +30,7 @@ class Card extends React.Component {
     let num = waterEvent;
     let now = moment();
     let hours = moment.duration(now.diff(num)).asHours();
-    return Math.floor(0.1-hours);
+    return Math.floor(1-hours);
   }
 
   render() {
@@ -39,37 +40,41 @@ class Card extends React.Component {
     let lastWaterEvent;
     let message;
     let cardColour = 'good';
+    let waterFrequency = `${this.props.data.water_freq} days`;
     let time = this.waterNext(this.props.water.water_date);
+
     if (this.props.data.id == this.props.water.plant_id) {
       lastWaterEvent = (
         <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
       )
     }
-    if (moment(this.props.water.water_date) < moment().add(23, 'hours')){
-      cardColour = 'trouble';
+    if (this.props.data.water_freq === 1){
+      waterFrequency = "1 day";
     }
-    if (moment(this.props.water.water_date) < moment()){
-      cardColour = 'bad';
-    }
-    if (moment(this.props.water.water_date) > moment().add(24, 'hours')){
-      cardColour = 'good';
-    }
+    // If less than one day away, display in hours
     if (time < 24){
+      cardColour = 'trouble';
       scale = 'hours';
       countdown = time;
       message = `Water in ${countdown} ${scale}`
     }
-    if (time === 24){
+    // if exactly one day, display in singular day
+    if (time >= 24){
+      cardColour = 'good';
       scale = 'day';
       countdown = Math.floor(time / 24);
       message = `Water in ${countdown} ${scale}`
     }
-    if (time > 24){
+    // if more than one day, display in days
+    if (time >= 48){
+      cardColour = 'good';
       scale = 'days';
       countdown = Math.floor(time / 24);
       message = `Water in ${countdown} ${scale}`
     }
+    // if overdue, don't display scale or countdown
     if (time < 1){
+      cardColour = 'bad';
       message = `Your plant is thirsty!`
     }
 
@@ -90,7 +95,7 @@ class Card extends React.Component {
             <div className="card-info">Last Watered</div>
               <div className="plant-details">{lastWaterEvent}</div>
             <div className="card-info">Needs</div>
-              <div className="plant-details">Watering every {this.props.data.water_freq} {scale}</div>
+              <div className="plant-details">Watering every {waterFrequency}</div>
               <div className="plant-details">{this.props.data.light}</div>
           </div>
         </a>

@@ -14,29 +14,25 @@ puts "Creating Users With Phonenumbers"
 User.create!({
   name: "Aileen",
   email: "aileen@fake.com",
-  password: "aileen",
-  phone_number:"2508821582",
+  password: "aileen"
   })
 
 User.create!({
   name: "Brett",
   email: "brett@fake.com",
-  password: "brett",
-  phone_number:"2506864617",
+  password: "brett"
   })
 
 User.create!({
   name: "Kim",
   email: "kim@fake.com",
-  password: "kimmy",
-  phone_number:"2508854259",
+  password: "kimmy"
   })
 
 User.create!({
   name: "Linley",
   email: "linley@fake.com",
-  password: "linley",
-  phone_number:"2508935747",
+  password: "linley"
   })
 
 

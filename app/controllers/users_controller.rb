@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
 
+  # User Page
+  def index
+    @user = current_user
+    @plants = @user.plants.all
+  end
+
   # Signup Logic
   def create
     @user = User.new(user_params)
