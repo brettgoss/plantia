@@ -1,8 +1,7 @@
-<div id="plantshowpage" class="container">
-
+<div class="container">
   <div class="row">
-  <!-- Plant info -->
-    <div id="plantinfo" class="six columns">
+    <!-- Plant info -->
+    <div class="six columns">
         <h1>
           <strong><%= @plant.nickname%></strong>
         </h1>
@@ -25,31 +24,39 @@
       </table>
         <%= link_to 'Edit Plant' , edit_plant_path(@plant), class: 'button' %>
     </div>
-  <!-- END plantinfo -->
-
-  <!-- Plantlog form -->
-    <div class= "six columns">
+    <!-- Plantlog form -->
+    <div class="six columns">
       <h3>Plant Log</h3>
       <h5>Create a new entry</h5>
-      <%= render 'plantlogs/form' %>
+      <%= form_for [@plant, @plantlog] do |f| %>
+        <div id="log_date">
+          <%= f.label "Date" %>
+          <%= f.date_field :logtime, :value => Time.current.strftime('%Y-%m-%d') %>
+        </div>
+        <div id="log_title">
+          <%= f.label "Title" %>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <%= f.label "Entry" %>
+        </div>
+          <%= f.text_area :logtext %>
+        <div id="log_submit">
+          <%= f.submit 'Create Plantlog', class: 'button'%>
+        </div>
+      <% end %>
     </div>
   </div>
-<!-- END Plantlog form -->
-
-
   <div class="row">
-    <!-- WaterEvents -->
-    <div class= "six columns">
+    <div class="six columns">
       <h3>Watering History</h3>
-      <div id="water_historybox">
-        <div id="water_events">
-          <% @past_events.order("water_date desc").each do |e| %>
-          <div>
-            <time class="timestring"><%= e.created_at %></time>
-            <%= link_to fa_icon('trash'), water_event_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
-          </div>
-          <% end %>
+      <div id="water_events">
+        <% @past_events.order("water_date desc").each do |e| %>
+        <div>
+          <time class="timestring"><%= e.created_at %></time>
+          <%= link_to fa_icon('trash'), water_event_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
         </div>
+        <% end %>
       </div>
     </div>
     <!--  ENDWatervents -->
@@ -62,18 +69,14 @@
     <!-- ENDPlantlog History -->
 
   </div>
-
 </div>
-<!-- script to render water event times according to client's system time -->
-
 <script>
-(function() {
-  'use strict';
-
-  $(document).ready(function() {
-    $('.timestring').each(function() {
-      this.textContent = moment(this.textContent, 'YYYY-MM-DD hh:mm:ss ZZ').format('lll');
+  (function() {
+    "use strict";
+    $(document).ready(function() {
+      $('.timestring').each(function() {
+        this.textContent = moment(this.textContent, 'YYYY-MM-DD hh:mm:ss ZZ').format('lll');
+      });
     });
-  });
-})();
+  })();
 </script>
