@@ -30,4 +30,33 @@
     <% end %>
   </div>
 
+
+  <h2>Push Simple</h2>
+
+  <p>
+    <strong>Objective</strong>: Simple example of the Web Push API through Service Worker. Send notifications to users even when the page is not open.
+  </p>
+
+  <div class="callout">
+    <div id="push-simple-app">
+      <a class="send-notification-button btn waves-effect waves-light">Send notification</a>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
+  $('#push-simple-app .send-notification-button').on('click', (e) => {
+    console.log('pushed!')
+    navigator.serviceWorker.ready
+      .then((serviceWorkerRegistration) => {
+        serviceWorkerRegistration.pushManager.getSubscription()
+          .then((subscription) => {
+            $.post('/push', {
+              subscription: subscription.toJSON(),
+              message: 'You clicked a button!'
+            });
+          });
+      });
+  });  
+  </script>
 </div>
