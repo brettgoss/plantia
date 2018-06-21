@@ -5,7 +5,7 @@
 
 .welcome {
   margin-top: 6em;
-  background-image: url(/Stocksy_txp1cae9c878GG100_Medium_470637.jpg);
+  background-image: url(/splash.jpg);
   background-size: cover;
   background-position: 45% 45%;
   background-repeat: no-repeat;
@@ -42,9 +42,6 @@
     @media screen and (max-width: 640px) {
       margin: 10px;
     }
-  }
-
-  #landing-welcome {
   }
 
   p {
