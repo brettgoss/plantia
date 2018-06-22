@@ -59,6 +59,19 @@ function onFetch(event) {
   );
 }
 
+function onPush(event) {
+  console.log("received a push:", event.data.text());
+  let title = (event.data && event.data.text()) || "Message from Plantia";
+  let body = (event.data.text()) || "Your plant needs watering!";
+  let tag = `push-notification-plantia-${Date.now()}`;
+  let icon = '/logo.png';
+
+  event.waitUntil(
+    self.registration.showNotification(title, { body, icon, tag })
+  )
+}
+
 self.addEventListener('install', onInstall);
 self.addEventListener('activate', onActivate);
 self.addEventListener('fetch', onFetch);
+self.addEventListener("push", onPush);
