@@ -63,7 +63,7 @@ function onPush(event) {
   console.log("received a push:", event.data.text());
   let title = (event.data && event.data.text()) || "Message from Plantia";
   let body = (event.data.text()) || "Your plant needs watering!";
-  let tag = `push-notification-plantia-${Date.now()}`;
+  let tag = "push-notification-plantia";
   let icon = '/logo.png';
 
   event.waitUntil(
