@@ -16,4 +16,32 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require serviceworker-companion
 //= require_tree .
+//= stub "serviceworker.js"
+
+if ('serviceWorker' in navigator) {
+  console.log('Service Worker is supported');
+  navigator.serviceWorker.register('/serviceworker.js')
+    .then(function (registration) {
+      console.log('Successfully registered!', ':)', registration);
+      navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+        serviceWorkerRegistration.pushManager
+          .subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: window.vapidPublicKey
+          });
+      })
+    }).catch(function (error) {
+      console.log('Registration failed', ':(', error);
+    });
+}
+
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/serviceworker.js')
+    .then(function (reg) {
+      console.log('Service worker change, registered the service worker');
+    });
+} else { // Otherwise, no push notifications :(
+  console.error('Service workers are not supported in this browser');
+}

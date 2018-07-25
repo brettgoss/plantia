@@ -24,5 +24,8 @@ Rails.application.routes.draw do
 
 
   post '/waterall' => 'water_events#water_all'
+  post '/subscribe' => 'subscriptions#create'
+  delete '/unsubscribe' => 'subscriptions#destroy'
+  post '/push' => 'push_notifications#create'
 
 end
