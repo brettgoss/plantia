@@ -65,4 +65,4 @@ jobs:
           command: bundle exec rspec --color --require spec_helper --format progress $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
       # Save test results for timing analysis
       - store_test_results:
-          path: test_results
+          path: test-results
