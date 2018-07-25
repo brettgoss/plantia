@@ -63,7 +63,7 @@ function onPush(event) {
   console.log("received a push:", event.data.text());
   let title = (event.data && event.data.text()) || "Message from Plantia";
   let body = (event.data.text()) || "Your plant needs watering!";
-  let tag = "push-notification-plantia";
+  let tag = "push-notification-plantia" + Date.now();
   let icon = '/logo.png';
 
   event.waitUntil(
@@ -71,7 +71,18 @@ function onPush(event) {
   )
 }
 
+function onNotificationClick (event) {
+  console.log('[Service Worker] Notification click Received.');
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('/dashboard')
+  );
+};
+
 self.addEventListener('install', onInstall);
 self.addEventListener('activate', onActivate);
 self.addEventListener('fetch', onFetch);
 self.addEventListener("push", onPush);
+self.addEventListener('notificationclick', onNotificationClick);

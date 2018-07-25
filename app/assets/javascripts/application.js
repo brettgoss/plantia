@@ -24,7 +24,7 @@ if ('serviceWorker' in navigator) {
   console.log('Service Worker is supported');
   navigator.serviceWorker.register('/serviceworker.js')
     .then(function (registration) {
-      console.log('Successfully registered!', ':^)', registration);
+      console.log('Successfully registered!', ':)', registration);
       navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
         serviceWorkerRegistration.pushManager
           .subscribe({
@@ -33,7 +33,7 @@ if ('serviceWorker' in navigator) {
           });
       })
     }).catch(function (error) {
-      console.log('Registration failed', ':^(', error);
+      console.log('Registration failed', ':(', error);
     });
 }
 
@@ -42,8 +42,6 @@ if (navigator.serviceWorker) {
     .then(function (reg) {
       console.log('Service worker change, registered the service worker');
     });
-}
-// Otherwise, no push notifications :(
-else {
-  console.error('Service worker is not supported in this browser');
+} else { // Otherwise, no push notifications :(
+  console.error('Service workers are not supported in this browser');
 }
