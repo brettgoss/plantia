@@ -38,6 +38,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'twilio-ruby'
 # help with .env stuff
 gem 'dotenv-rails'
+# Service Workers
+gem 'serviceworker-rails'
+# Push notifications
+gem 'webpush'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
