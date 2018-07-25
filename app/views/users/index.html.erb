@@ -30,15 +30,13 @@
         Eventually this will be used to trigger plant watering notifications.
       </p>
 
-      <div id="push-simple-app" class="button">
-        <a class="send-notification-button btn waves-effect waves-light">Send notification</a>
-      </div>
+      <button id="push-simple-app" class="button">Send notification</button>
     </div>
   </div>
 
   <script type="text/javascript">
     window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
-    $('#push-simple-app .send-notification-button').on('click', (e) => {
+    $('#push-simple-app').on('click', (e) => {
       console.log('pushed!')
       navigator.serviceWorker.ready
         .then((serviceWorkerRegistration) => {
