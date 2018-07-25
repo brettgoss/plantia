@@ -45,21 +45,6 @@ jobs:
           # This is a broad list of cache paths to include many possible development environments
           # You can probably delete some of these entries
           - vendor/bundle
-      # Only necessary if app uses webpacker or yarn in some other way
-      - restore_cache:
-          keys:
-            - plantia-yarn-{{ checksum "yarn.lock" }}
-            - plantia-yarn-
-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      # Store yarn / webpacker cache
-      - save_cache:
-          key: plantia-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
 
       - run:
           name: Wait for DB
