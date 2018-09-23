@@ -34,8 +34,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-# twilio's API to send texts
-gem 'twilio-ruby'
 # help with .env stuff
 gem 'dotenv-rails'
 # Service Workers
