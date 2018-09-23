@@ -14,11 +14,7 @@
     <div class="six columns">
       <div id="user-info">
         <div><h3>Hello, <%= @user.name %>.</h3></div>
-        <% if @plants.count === 1 %>
-          <div>You currently have <%= @plants.count %> plant.</div>
-        <% else %>
-          <div>You currently have <%= @plants.count %> plants.</div>
-        <% end %>
+        <div>You currently have <%= plant_count %>.</div>
       </div>
     </div>
 
@@ -26,7 +22,7 @@
       <h2>Push Simple</h2>
 
       <p>
-        <strong>Objective</strong>: Simple example of the Web Push API through Service Worker. Send notifications to users even when the page is not open.<br/>
+        <strong>Objective</strong>: Simple example of the Web Push API through Service Workers. Send notifications to users even when the page is not open.<br/>
         Eventually this will be used to trigger plant watering notifications.
       </p>
 

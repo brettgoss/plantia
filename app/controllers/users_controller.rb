@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
-
+  helper UsersHelper
   # User Page
   def index
     @user = current_user
