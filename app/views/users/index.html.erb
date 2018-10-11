@@ -14,11 +14,7 @@
     <div class="six columns">
       <div id="user-info">
         <div><h3>Hello, <%= @user.name %>.</h3></div>
-        <% if @plants.count === 1 %>
-          <div>You currently have <%= @plants.count %> plant.</div>
-        <% else %>
-          <div>You currently have <%= @plants.count %> plants.</div>
-        <% end %>
+        <div>You currently have <%= plant_count %>.</div>
       </div>
     </div>
 
@@ -26,7 +22,7 @@
       <h2>Push Simple</h2>
 
       <p>
-        <strong>Objective</strong>: Simple example of the Web Push API through Service Worker. Send notifications to users even when the page is not open.<br/>
+        <strong>Objective</strong>: Simple example of the Web Push API through Service Workers. Send notifications to users even when the page is not open.<br/>
         Eventually this will be used to trigger plant watering notifications.
       </p>
 
@@ -50,16 +46,4 @@
         });
     });
   </script>
-</div>
-
-<div hidden>
-  <h4>Text Reminders:</h4>
-  <p>If you would like to opt-in to text reminders, please enter your phone number here.</p>
-  <p>You'll receive a text reminder once any of your plants are two days overdue for watering.</p>
-  <p>If you would like to opt back out, delete your phone number and hit save.</p>
-  <%= form_for :user, url: users_path, method: 'put', remote: true do |f| %>
-    <%= f.label 'Phone number'%>
-    <%= f.text_field :phone_number, class: 'form-control' %>
-    <%= f.submit 'Save', class: 'button' %>
-  <% end %>
 </div>

@@ -1,15 +1,12 @@
 class DashboardController < ApplicationController
   before_action :authorize
-  helper_method :days_till_water
 
   def index
-    puts(current_user.id)
-    @user = User.find(current_user.id)
-    @plants = @user.plants.all
+    user = User.find(current_user.id)
     @water_events = []
+    @plants = user.plants.all
     @plants.each do |p|
-      event = WaterEvent.where(plant_id: p.id, watered: false).first
-      @water_events << event
+      @water_events << WaterEvent.where(plant_id: p.id, watered: false).first
     end
   end
 
