@@ -11,12 +11,5 @@ class Plant < ApplicationRecord
               less_than_or_equal_to: 365,
               greater_than_or_equal_to: 0,
             }
-
-  def days_till_water
-    latest_water = water_events.order(water_date: :desc).limit(1).first
-    return 0 unless latest_water
-    days_since_last_water = latest_water.water_date.to_date - Date.today
-    (water_freq - days_since_last_water).to_i
-  end
 end
 
