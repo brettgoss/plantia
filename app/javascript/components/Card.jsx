@@ -1,3 +1,5 @@
+const React = require('react');
+
 class Card extends React.Component {
 
   // Receives the props being passed down from the Dashboard component.
@@ -114,3 +116,5 @@ class Card extends React.Component {
     console.log('Card Mounted')
   }
 }
+
+module.exports = Card;

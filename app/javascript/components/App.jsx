@@ -1,3 +1,7 @@
+const React     = require('react');
+const Buttons   = require('./Buttons')
+const Dashboard = require('./Dashboard')
+
 class App extends React.Component {
 
   // Sets the state from the props being passed down from the dashboard controller.
@@ -63,3 +67,5 @@ class App extends React.Component {
     console.log("App Mounted")
   }
 };
+
+module.exports = App;

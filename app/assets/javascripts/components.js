@@ -4,4 +4,3 @@
 // Parent JavaScript and imports for the Dashboard components.
 //
 //= require moment
-//= require_tree ./components
