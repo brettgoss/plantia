@@ -25,6 +25,7 @@ gem 'coffee-rails', '~> 4.2'
 # gem 'therubyracer', platforms: :ruby
 gem 'momentjs-rails'
 # Use React for Rails
+gem 'webpacker'
 gem 'react-rails', '~> 2.4'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
