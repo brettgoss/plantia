@@ -1,6 +1,7 @@
 const React     = require('react');
 const api       = require('../utils/api');
 const Buttons   = require('./Buttons');
+const Message   = require('./Message');
 const Dashboard = require('./Dashboard');
 
 class App extends React.Component {
@@ -15,7 +16,8 @@ class App extends React.Component {
 
     this.state = {
       plants: this.props.plants,
-      water: this.props.water
+      water: this.props.water,
+      messageText: '',
     }
   }
 
@@ -23,10 +25,8 @@ class App extends React.Component {
   waterAll() {
     api.waterAllPlants()
       .then(function (waterEvents) {
-        $(".message").text("All your plants have been watered!");
-        $(".message").show().delay(1500).fadeOut();
-
-        this.setState({ water: waterEvents });
+        let messageText = "All your plants have been watered!";
+        this.setState({ water: waterEvents, messageText: messageText });
       }.bind(this))
   }
 
@@ -34,10 +34,8 @@ class App extends React.Component {
   waterOne(plantId) {
     api.waterOnePlant(plantId)
       .then(function (waterEvent) {
-        $(".message").text("Plant Watered!");
-        $(".message").show().delay(1500).fadeOut();
-
-        this.setState({ water: waterEvent });
+        let messageText = "Plant Watered!";
+        this.setState({ water: waterEvent, messageText: messageText });
       }.bind(this))
   }
 
@@ -52,7 +50,10 @@ class App extends React.Component {
     console.log('App Rendered')
     return (
       <div>
-        <Buttons handleSubmit={this.handleSubmit} />
+        <Buttons
+          handleSubmit={this.handleSubmit} />
+        <Message
+          messageText={this.state.messageText} />
         <Dashboard
           waterOne={this.waterOne}
           plants={this.state.plants}

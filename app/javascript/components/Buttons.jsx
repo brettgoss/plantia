@@ -12,7 +12,6 @@ class Buttons extends React.Component {
 
     return (
         <div id="button-all">
-          <div className="message"></div>
           <a className="button" href="/plants">See All</a>
           <button className="button" onClick={this.props.handleSubmit}>Water All</button>
           <a className="button" href="/plants/new">+ New Plant</a>
