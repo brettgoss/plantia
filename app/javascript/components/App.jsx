@@ -1,3 +1,8 @@
+const React     = require('react');
+const api       = require('../utils/api');
+const Buttons   = require('./Buttons');
+const Dashboard = require('./Dashboard');
+
 class App extends React.Component {
 
   // Sets the state from the props being passed down from the dashboard controller.
@@ -15,28 +20,25 @@ class App extends React.Component {
   }
 
   // Function for watering all plants
-  waterAll(){
-    $.ajax({
-      url: '/waterall',
-      type: "POST"
-    }).done((water) => {
-      $(".message0").text("All your plants have been watered!");
-      $(".message0").show().delay(1500).fadeOut();
-      this.setState({water: water});
-    });
+  waterAll() {
+    api.waterAllPlants()
+      .then(function (waterEvents) {
+        $(".message").text("All your plants have been watered!");
+        $(".message").show().delay(1500).fadeOut();
+
+        this.setState({ water: waterEvents });
+      }.bind(this))
   }
 
   // Function for watering individual plants
-  waterOne(plantId){
-    $.ajax({
-      url: '/water_events',
-      type: "POST",
-      data: {plant_id: plantId}
-    }).done((water) => {
-      $(".message0").text("Plant Watered!");
-      $(".message0").show().delay(1500).fadeOut();
-      this.setState({water: water});
-    });
+  waterOne(plantId) {
+    api.waterOnePlant(plantId)
+      .then(function (waterEvent) {
+        $(".message").text("Plant Watered!");
+        $(".message").show().delay(1500).fadeOut();
+
+        this.setState({ water: waterEvent });
+      }.bind(this))
   }
 
   // Todo:
@@ -63,3 +65,5 @@ class App extends React.Component {
     console.log("App Mounted")
   }
 };
+
+module.exports = App;

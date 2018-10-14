@@ -1,3 +1,5 @@
+const React = require('react');
+
 class Buttons extends React.Component {
 
   // Receives the props being passed down from the App component.
@@ -10,7 +12,7 @@ class Buttons extends React.Component {
 
     return (
         <div id="button-all">
-          <div className="message0"></div>
+          <div className="message"></div>
           <a className="button" href="/plants">See All</a>
           <button className="button" onClick={this.props.handleSubmit}>Water All</button>
           <a className="button" href="/plants/new">+ New Plant</a>
@@ -22,3 +24,5 @@ class Buttons extends React.Component {
     console.log("Buttons Mounted")
   }
 };
+
+module.exports = Buttons;

@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     @water_events = []
     @plants = user.plants.all
     @plants.each do |p|
-      @water_events << WaterEvent.where(plant_id: p.id, watered: false).first
+      @water_events << WaterEvent.where(plant_id: p.id).last
     end
   end
 
