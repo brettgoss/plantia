@@ -10,9 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.waterAll = this.waterAll.bind(this)
-    this.waterOne = this.waterOne.bind(this)
+    this.waterPlants = this.waterPlants.bind(this)
 
     this.state = {
       plants: this.props.plants,
@@ -21,29 +19,21 @@ class App extends React.Component {
     }
   }
 
-  // Function for watering all plants
-  waterAll() {
-    api.waterAllPlants()
-      .then(function (waterEvents) {
-        let messageText = "All your plants have been watered!";
-        this.setState({ waterEvents: waterEvents, messageText: messageText });
-      }.bind(this))
-  }
 
-  // Function for watering individual plants
-  waterOne(plantId) {
-    api.waterOnePlant(plantId)
-      .then(function (waterEvent) {
-        let messageText = "Plant Watered!";
-        this.setState({ waterEvents: waterEvent, messageText: messageText });
-      }.bind(this))
-  }
-
-  // Todo:
-  // Move waterOne call into this function and implement a way to differentiate
-  // between function calls
-  handleSubmit() {
-    this.waterAll()
+  waterPlants(plantId) {
+    if (plantId.length) {
+      api.waterOnePlant(plantId)
+        .then(function (waterEvent) {
+          let messageText = "Plant Watered!";
+          this.setState({ waterEvents: waterEvent, messageText: messageText });
+        }.bind(this))
+    } else {
+      api.waterAllPlants()
+        .then(function (waterEvents) {
+          let messageText = "All your plants have been watered!";
+          this.setState({ waterEvents: waterEvents, messageText: messageText });
+        }.bind(this))
+    }
   }
 
   render() {
@@ -51,13 +41,14 @@ class App extends React.Component {
     return (
       <div>
         <Buttons
-          handleSubmit={this.handleSubmit} />
+          waterPlants={this.waterPlants} />
         <Message
           messageText={this.state.messageText} />
         <Dashboard
-          waterOne={this.waterOne}
           plants={this.state.plants}
-          waterEvents={this.state.waterEvents} />
+          waterEvents={this.state.waterEvents}
+          waterPlant={this.waterPlants}
+        />
       </div>
     )
   }

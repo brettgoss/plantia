@@ -7,7 +7,6 @@ class Dashboard extends React.Component {
   constructor(props) {
     super(props)
 
-    this.waterOne = this.props.waterOne
     this.state = {
       waterEvent: ''
     }
@@ -52,11 +51,12 @@ class Dashboard extends React.Component {
                 })
 
                 return (
-                <Card
-                  key={plant.id}
-                  waterOne={this.waterOne}
-                  data={plant}
-                  waterEvent={this.state.waterEvent} />
+                  <Card
+                    key={plant.id}
+                    data={plant}
+                    waterEvent={this.state.waterEvent}
+                    waterPlant={this.props.waterPlant}
+                  />
                 )
               })
             }

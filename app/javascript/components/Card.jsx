@@ -6,7 +6,6 @@ class Card extends React.Component {
   constructor(props) {
     super(props)
 
-    this.waterOne = this.props.waterOne
     this.lastWatered = this.lastWatered.bind(this)
     this.waterNext = this.waterNext.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,7 +14,7 @@ class Card extends React.Component {
   // Triggered by the water button onClick, then passes data to the App component
   handleSubmit(event){
     let plantId = event.target.id
-    this.props.waterOne(plantId)
+    this.props.waterPlant(plantId)
   }
 
   // Calculation for how many days until the plant needs to be watered
