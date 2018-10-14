@@ -16,7 +16,7 @@ class App extends React.Component {
 
     this.state = {
       plants: this.props.plants,
-      water: this.props.water,
+      waterEvents: this.props.waterEvents,
       messageText: '',
     }
   }
@@ -26,7 +26,7 @@ class App extends React.Component {
     api.waterAllPlants()
       .then(function (waterEvents) {
         let messageText = "All your plants have been watered!";
-        this.setState({ water: waterEvents, messageText: messageText });
+        this.setState({ waterEvents: waterEvents, messageText: messageText });
       }.bind(this))
   }
 
@@ -35,7 +35,7 @@ class App extends React.Component {
     api.waterOnePlant(plantId)
       .then(function (waterEvent) {
         let messageText = "Plant Watered!";
-        this.setState({ water: waterEvent, messageText: messageText });
+        this.setState({ waterEvents: waterEvent, messageText: messageText });
       }.bind(this))
   }
 
@@ -57,7 +57,7 @@ class App extends React.Component {
         <Dashboard
           waterOne={this.waterOne}
           plants={this.state.plants}
-          water={this.state.water} />
+          waterEvents={this.state.waterEvents} />
       </div>
     )
   }

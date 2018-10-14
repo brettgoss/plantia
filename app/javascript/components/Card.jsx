@@ -43,11 +43,11 @@ class Card extends React.Component {
     let message;
     let cardColour = 'good';
     let waterFrequency = `${this.props.data.water_freq} days`;
-    let time = this.waterNext(this.props.water.water_date);
+    let time = this.waterNext(this.props.waterEvent.water_date);
 
-    if (this.props.data.id == this.props.water.plant_id) {
+    if (this.props.data.id == this.props.waterEvent.plant_id) {
       lastWaterEvent = (
-        <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
+        <div>{this.lastWatered(this.props.waterEvent.water_date, this.props.data.water_freq)}</div>
       )
     }
     if (this.props.data.water_freq === 1){
