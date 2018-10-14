@@ -5,25 +5,35 @@ axios.defaults.headers.common = {
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
 };
 
+function postWaterAll () {
+  return axios.post('/waterall')
+    .then(function (response) {
+      return response.data;
+    })
+}
+
+function postWaterOne (plantId) {
+    return axios.post('/water', {
+      plant_id: plantId,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+}
+
+function handleError (error) {
+  console.warn(error);
+  return null;
+}
+
 module.exports = {
 
-  postWaterAll: function() {
-    return axios.post('/waterall')
-      .then(function (response) {
-        return response.data;
-      }).catch(function (error) {
-        console.log(error)
-      })
+  waterAllPlants: function() {
+    return postWaterAll()
+      .catch(handleError);
   },
-
-  postWaterOne: function (plantId) {
-    return axios.post('/water_events', {
-        plant_id: plantId,
-      })
-      .then(function (response) {
-        return response.data;
-      }).catch(function (error) {
-        console.log(error)
-      })
+  waterOnePlant: function (plantId) {
+    return postWaterOne(plantId)
+      .catch(handleError);
   }
 }

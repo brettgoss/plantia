@@ -21,7 +21,7 @@ class App extends React.Component {
 
   // Function for watering all plants
   waterAll() {
-    api.postWaterAll()
+    api.waterAllPlants()
       .then(function (waterEvents) {
         $(".message").text("All your plants have been watered!");
         $(".message").show().delay(1500).fadeOut();
@@ -32,7 +32,7 @@ class App extends React.Component {
 
   // Function for watering individual plants
   waterOne(plantId) {
-    api.postWaterOne(plantId)
+    api.waterOnePlant(plantId)
       .then(function (waterEvent) {
         $(".message").text("Plant Watered!");
         $(".message").show().delay(1500).fadeOut();
