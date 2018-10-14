@@ -14,5 +14,16 @@ module.exports = {
       }).catch(function (error) {
         console.log(error)
       })
-  } 
+  },
+
+  postWaterOne: function (plantId) {
+    return axios.post('/water_events', {
+        plant_id: plantId,
+      })
+      .then(function (response) {
+        return response.data;
+      }).catch(function (error) {
+        console.log(error)
+      })
+  }
 }

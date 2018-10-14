@@ -20,31 +20,25 @@ class App extends React.Component {
   }
 
   // Function for watering all plants
-  waterAll(){
+  waterAll() {
     api.postWaterAll()
       .then(function (waterEvents) {
-        $(".message0").text("All your plants have been watered!");
-        $(".message0").show().delay(1500).fadeOut();
+        $(".message").text("All your plants have been watered!");
+        $(".message").show().delay(1500).fadeOut();
 
-        this.setState(function () {
-          return {
-            water: waterEvents
-          }
-        });
+        this.setState({ water: waterEvents });
       }.bind(this))
   }
 
   // Function for watering individual plants
-  waterOne(plantId){
-    $.ajax({
-      url: '/water_events',
-      type: "POST",
-      data: {plant_id: plantId}
-    }).done((water) => {
-      $(".message0").text("Plant Watered!");
-      $(".message0").show().delay(1500).fadeOut();
-      this.setState({water: water});
-    });
+  waterOne(plantId) {
+    api.postWaterOne(plantId)
+      .then(function (waterEvent) {
+        $(".message").text("Plant Watered!");
+        $(".message").show().delay(1500).fadeOut();
+
+        this.setState({ water: waterEvent });
+      }.bind(this))
   }
 
   // Todo:
