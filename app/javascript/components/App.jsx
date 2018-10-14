@@ -1,6 +1,7 @@
 const React     = require('react');
-const Buttons   = require('./Buttons')
-const Dashboard = require('./Dashboard')
+const api       = require('../utils/api');
+const Buttons   = require('./Buttons');
+const Dashboard = require('./Dashboard');
 
 class App extends React.Component {
 
@@ -20,14 +21,17 @@ class App extends React.Component {
 
   // Function for watering all plants
   waterAll(){
-    $.ajax({
-      url: '/waterall',
-      type: "POST"
-    }).done((water) => {
-      $(".message0").text("All your plants have been watered!");
-      $(".message0").show().delay(1500).fadeOut();
-      this.setState({water: water});
-    });
+    api.postWaterAll()
+      .then(function (waterEvents) {
+        $(".message0").text("All your plants have been watered!");
+        $(".message0").show().delay(1500).fadeOut();
+
+        this.setState(function () {
+          return {
+            water: waterEvents
+          }
+        });
+      }.bind(this))
   }
 
   // Function for watering individual plants
