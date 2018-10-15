@@ -2,8 +2,6 @@ const React = require('react');
 const Card  = require('./Card')
 
 class Dashboard extends React.Component {
-
-  // Receives the props being passed down from the App component.
   constructor(props) {
     super(props)
 
@@ -13,7 +11,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log('Dashboard Rendered')
     if (this.props.plants.length < 1){
       return (
         <div className="wrapper">
@@ -37,8 +34,7 @@ class Dashboard extends React.Component {
           </div>
         </div>
       )
-    }
-    else {
+    } else {
       return (
           <div className="wrapper">
             {
@@ -63,10 +59,6 @@ class Dashboard extends React.Component {
         </div>
       )
     }
-  }
-
-  componentDidMount() {
-    console.log("Dashboard Mounted")
   }
 };
 

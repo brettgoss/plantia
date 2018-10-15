@@ -35,8 +35,6 @@ class Card extends React.Component {
   }
 
   render() {
-    console.log('Card Rendered')
-
     // Build a formatted water event wrapped in a div.
     let lastWaterEvent;
     let message;
@@ -109,10 +107,6 @@ class Card extends React.Component {
           onClick={this.handleSubmit} />
       </div>
     )
-  }
-
-  componentDidMount() {
-    console.log('Card Mounted')
   }
 }
 
