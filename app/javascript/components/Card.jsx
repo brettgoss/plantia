@@ -6,7 +6,6 @@ class Card extends React.Component {
   constructor(props) {
     super(props)
 
-    this.waterOne = this.props.waterOne
     this.lastWatered = this.lastWatered.bind(this)
     this.waterNext = this.waterNext.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -15,7 +14,7 @@ class Card extends React.Component {
   // Triggered by the water button onClick, then passes data to the App component
   handleSubmit(event){
     let plantId = event.target.id
-    this.props.waterOne(plantId)
+    this.props.waterPlant(plantId)
   }
 
   // Calculation for how many days until the plant needs to be watered
@@ -36,18 +35,16 @@ class Card extends React.Component {
   }
 
   render() {
-    console.log('Card Rendered')
-
     // Build a formatted water event wrapped in a div.
     let lastWaterEvent;
     let message;
     let cardColour = 'good';
     let waterFrequency = `${this.props.data.water_freq} days`;
-    let time = this.waterNext(this.props.water.water_date);
+    let time = this.waterNext(this.props.waterEvent.water_date);
 
-    if (this.props.data.id == this.props.water.plant_id) {
+    if (this.props.data.id == this.props.waterEvent.plant_id) {
       lastWaterEvent = (
-        <div>{this.lastWatered(this.props.water.water_date, this.props.data.water_freq)}</div>
+        <div>{this.lastWatered(this.props.waterEvent.water_date, this.props.data.water_freq)}</div>
       )
     }
     if (this.props.data.water_freq === 1){
@@ -110,10 +107,6 @@ class Card extends React.Component {
           onClick={this.handleSubmit} />
       </div>
     )
-  }
-
-  componentDidMount() {
-    console.log('Card Mounted')
   }
 }
 

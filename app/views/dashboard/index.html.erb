@@ -1,6 +1,4 @@
 <body class="dashboard">
-  <!-- Lodash is used to order the cards by updated_at -->
-  <script src="https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js"></script>
   <%= javascript_pack_tag 'application' %>
-  <%= react_component "App", { plants: @plants, water: @water_events }, prerender: false %>
+  <%= react_component "App", { plants: @plants, waterEvents: @water_events }, prerender: false %>
 </body>

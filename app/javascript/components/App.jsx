@@ -1,68 +1,64 @@
 const React     = require('react');
 const api       = require('../utils/api');
-const Buttons   = require('./Buttons');
+const ButtonBar = require('./Buttons');
+const Message   = require('./Message');
 const Dashboard = require('./Dashboard');
 
 class App extends React.Component {
-
-  // Sets the state from the props being passed down from the dashboard controller.
   constructor(props) {
     super(props)
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.waterAll = this.waterAll.bind(this)
-    this.waterOne = this.waterOne.bind(this)
-
     this.state = {
       plants: this.props.plants,
-      water: this.props.water
+      waterEvents: this.props.waterEvents,
+      messageText: '',
+    }
+
+    this.handlePlantWatering = this.handlePlantWatering.bind(this)
+  }
+
+  waterPlants(plantId) {
+    if (plantId.length) {
+      return api.waterOnePlant(plantId)
+        .then((waterEvent) => {
+          return waterEvent;
+        })
+    } else {
+      return api.waterAllPlants()
+        .then((waterEvents) => {
+          return waterEvents;
+        })
     }
   }
 
-  // Function for watering all plants
-  waterAll() {
-    api.waterAllPlants()
-      .then(function (waterEvents) {
-        $(".message").text("All your plants have been watered!");
-        $(".message").show().delay(1500).fadeOut();
+  handlePlantWatering (plantId) {
+    let messageText = (plantId.length)
+      ? "Plant Watered!"
+      : "All your plants have been watered!"
 
-        this.setState({ water: waterEvents });
-      }.bind(this))
-  }
-
-  // Function for watering individual plants
-  waterOne(plantId) {
-    api.waterOnePlant(plantId)
-      .then(function (waterEvent) {
-        $(".message").text("Plant Watered!");
-        $(".message").show().delay(1500).fadeOut();
-
-        this.setState({ water: waterEvent });
-      }.bind(this))
-  }
-
-  // Todo:
-  // Move waterOne call into this function and implement a way to differentiate
-  // between function calls
-  handleSubmit() {
-    this.waterAll()
+    this.waterPlants(plantId)
+      .then((response) => {
+        this.setState({
+          waterEvents: response,
+          messageText: messageText,
+        })
+      })
   }
 
   render() {
-    console.log('App Rendered')
     return (
-      <div>
-        <Buttons handleSubmit={this.handleSubmit} />
+      <React.Fragment>
+        <ButtonBar
+          waterPlants={this.handlePlantWatering} />
+        <Message
+          messageText={this.state.messageText} />
         <Dashboard
-          waterOne={this.waterOne}
           plants={this.state.plants}
-          water={this.state.water} />
-      </div>
+          waterEvents={this.state.waterEvents}
+          waterPlant={this.handlePlantWatering}
+        />
+      </React.Fragment>
     )
-  }
-
-  componentDidMount() {
-    console.log("App Mounted")
   }
 };
 

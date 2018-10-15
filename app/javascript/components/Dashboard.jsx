@@ -2,21 +2,15 @@ const React = require('react');
 const Card  = require('./Card')
 
 class Dashboard extends React.Component {
-
-  // Receives the props being passed down from the App component.
   constructor(props) {
     super(props)
-    this.waterOne = this.props.waterOne
+
     this.state = {
-      waterEvents: ''
+      waterEvent: ''
     }
   }
 
   render() {
-    console.log('Dashboard Rendered')
-    let sortedArr = _.sortBy(this.props.plants, 'updated_at', function(n) {
-      return n;
-    })
     if (this.props.plants.length < 1){
       return (
         <div className="wrapper">
@@ -40,34 +34,31 @@ class Dashboard extends React.Component {
           </div>
         </div>
       )
-    }
-    else {
+    } else {
       return (
           <div className="wrapper">
             {
               this.props.plants.map((plant, index) => {
-                this.props.water.map((waterEvent, i) => {
+                this.props.waterEvents.map((waterEvent, i) => {
                   if (waterEvent.plant_id == plant.id) {
-                    this.state.waterEvents = waterEvent
+                    //TODO: Why are setting the state inside render?
+                    this.state.waterEvent = waterEvent
                   }
                 })
 
                 return (
-                <Card
-                  key={plant.id}
-                  waterOne={this.waterOne}
-                  data={plant}
-                  water={this.state.waterEvents} />
+                  <Card
+                    key={plant.id}
+                    data={plant}
+                    waterEvent={this.state.waterEvent}
+                    waterPlant={this.props.waterPlant}
+                  />
                 )
               })
             }
         </div>
       )
     }
-  }
-
-  componentDidMount() {
-    console.log("Dashboard Mounted")
   }
 };
 
