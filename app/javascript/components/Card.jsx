@@ -1,8 +1,6 @@
 const React = require('react');
 
 class Card extends React.Component {
-
-  // Receives the props being passed down from the Dashboard component.
   constructor(props) {
     super(props)
 
@@ -23,7 +21,6 @@ class Card extends React.Component {
     let num = moment(waterEvent);
     let freq = moment.duration(waterFreq, 'days').asHours();
     let result = moment(num).subtract(freq, 'hours').format('lll')
-    console.log(waterEvent)
     return result;
   }
 
@@ -35,16 +32,19 @@ class Card extends React.Component {
   }
 
   render() {
+    const waterDate = this.props.water_date;
+    const waterFreq = this.props.water_freq;
+
     // Build a formatted water event wrapped in a div.
     let lastWaterEvent;
     let message;
     let cardColour = 'good';
-    let waterFrequency = `${this.props.data.water_freq} days`;
-    let time = this.waterNext(this.props.waterEvent.water_date);
+    let waterFrequency = `${waterFreq} days`;
+    let time = this.waterNext(waterDate);
 
     if (this.props.data.id == this.props.waterEvent.plant_id) {
       lastWaterEvent = (
-        <div>{this.lastWatered(this.props.waterEvent.water_date, this.props.data.water_freq)}</div>
+        <div>{this.lastWatered(waterDate, waterFreq)}</div>
       )
     }
     if (this.props.data.water_freq === 1){
