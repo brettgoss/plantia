@@ -69,78 +69,44 @@ class Card extends React.Component {
   }
 
   render() {
-    const waterDate = this.props.water_date;
-    const waterFreq = this.props.water_freq;
+    const plant = this.props.plant;
+    const waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)[0]
+    const timeToNextWater = this.waterNext(waterEvent.water_date);
+    const { waterNextString, plantHealth, waterFrequency } = formatCardCountdown(plant.water_freq, timeToNextWater)
 
-    // Build a formatted water event wrapped in a div.
-    let lastWaterEvent;
-    let message;
-    let cardColour = 'good';
-    let waterFrequency = `${waterFreq} days`;
-    let time = this.waterNext(waterDate);
-
-    if (this.props.data.id == this.props.waterEvent.plant_id) {
+    if (plant.id == waterEvent.plant_id) {
       lastWaterEvent = (
-        <div>{this.lastWatered(waterDate, waterFreq)}</div>
+        <div>{this.lastWatered(waterEvent.water_date, plant.water_freq)}</div>
       )
-    }
-    if (this.props.data.water_freq === 1){
-      waterFrequency = "1 day";
-    }
-    // If less than one day away, display in hours
-    if (time < 24){
-      cardColour = 'trouble';
-      scale = 'hours';
-      countdown = time;
-      message = `Water in ${countdown} ${scale}`
-    }
-    // if exactly one day, display in singular day
-    if (time >= 24){
-      cardColour = 'good';
-      scale = 'day';
-      countdown = Math.floor(time / 24);
-      message = `Water in ${countdown} ${scale}`
-    }
-    // if more than one day, display in days
-    if (time >= 48){
-      cardColour = 'good';
-      scale = 'days';
-      countdown = Math.floor(time / 24);
-      message = `Water in ${countdown} ${scale}`
-    }
-    // if overdue, don't display scale or countdown
-    if (time < 1){
-      cardColour = 'bad';
-      message = `Your plant is thirsty!`
     }
 
     return (
-      <div key={this.props.data.index} className="card" >
+      <div key={plant.index} className="card" >
         {/* Plant card header */}
-        <a href={"/plants/" + this.props.data.id}>
+        <a href={"/plants/" + plant.id}>
           <header className="plant-header">
             <img className="plant-image" src="/favicon.ico"/>
             <div className="plant-head">
-              <div className="plant-nickname">{this.props.data.nickname}</div>
-              <div className="plant-common">{this.props.data.common_name}</div>
+              <div className="plant-nickname">{plant.nickname}</div>
+              <div className="plant-common">{plant.common_name}</div>
             </div>
           </header>
           {/* Plant card body */}
           <div className="plant-content">
-            <h5 className="plant-details">{message}</h5>
+            <h5 className="plant-details">{waterNextString}</h5>
             <div className="card-info">Last Watered</div>
               <div className="plant-details">{lastWaterEvent}</div>
             <div className="card-info">Needs</div>
               <div className="plant-details">Watering every {waterFrequency}</div>
-              <div className="plant-details">{this.props.data.light}</div>
+              <div className="plant-details">{plant.light}</div>
           </div>
         </a>
         {/* Plant Water Button */}
         <input
-          id={this.props.data.id}
+          id={plant.id}
           type="button"
           value={"Water"}
-          className={"card-button card-button-"+cardColour}
+          className={"card-button card-button-" + plantHealth}
           onClick={this.handleSubmit} />
       </div>
     )
