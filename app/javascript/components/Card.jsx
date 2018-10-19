@@ -1,5 +1,21 @@
 const React = require('react');
 
+// Calculation for how many days until the plant needs to be watered
+// based on the provided water frequency and the most recent waterEvent
+function lastWatered(waterEvent, waterFreq) {
+  let num = moment(waterEvent);
+  let freq = moment.duration(waterFreq, 'days').asHours();
+  let result = moment(num).subtract(freq, 'hours').format('lll')
+  return result;
+}
+
+function waterNext(waterEvent) {
+  let num = waterEvent;
+  let now = moment();
+  let hours = moment.duration(now.diff(num)).asHours();
+  return Math.floor(1 - hours);
+}
+
 // TODO: Break this into two functions
 function formatCardCountdown (waterFreq, timeToNextWater) {
   let waterNextString, plantHealth;
@@ -41,8 +57,6 @@ class Card extends React.Component {
   constructor(props) {
     super(props)
 
-    this.lastWatered  = this.lastWatered.bind(this)
-    this.waterNext    = this.waterNext.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -52,32 +66,14 @@ class Card extends React.Component {
     this.props.waterPlant(this.props.plant.id)
   }
 
-  // Calculation for how many days until the plant needs to be watered
-  // based on the provided water frequency and the most recent waterEvent
-  lastWatered(waterEvent, waterFreq) {
-    let num = moment(waterEvent);
-    let freq = moment.duration(waterFreq, 'days').asHours();
-    let result = moment(num).subtract(freq, 'hours').format('lll')
-    return result;
-  }
-
-  waterNext(waterEvent) {
-    let num = waterEvent;
-    let now = moment();
-    let hours = moment.duration(now.diff(num)).asHours();
-    return Math.floor(1-hours);
-  }
-
   render() {
     const plant = this.props.plant;
     const waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)[0]
-    const timeToNextWater = this.waterNext(waterEvent.water_date);
+    const timeToNextWater = waterNext(waterEvent.water_date);
     const { waterNextString, plantHealth, waterFrequency } = formatCardCountdown(plant.water_freq, timeToNextWater)
 
     if (plant.id == waterEvent.plant_id) {
-      lastWaterEvent = (
-        <div>{this.lastWatered(waterEvent.water_date, plant.water_freq)}</div>
-      )
+      lastWaterEvent = <div>{lastWatered(waterEvent.water_date, plant.water_freq)}</div>
     }
 
     return (
