@@ -4,6 +4,20 @@ const ButtonBar = require('./Buttons');
 const Message   = require('./Message');
 const Dashboard = require('./Dashboard');
 
+function waterPlants (plantId) {
+  if (plantId.length) {
+    return api.waterOnePlant(plantId)
+      .then((waterEvent) => {
+        return waterEvent;
+      })
+  } else {
+    return api.waterAllPlants()
+      .then((waterEvents) => {
+        return waterEvents;
+      })
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -17,26 +31,12 @@ class App extends React.Component {
     this.handlePlantWatering = this.handlePlantWatering.bind(this)
   }
 
-  waterPlants(plantId) {
-    if (plantId.length) {
-      return api.waterOnePlant(plantId)
-        .then((waterEvent) => {
-          return waterEvent;
-        })
-    } else {
-      return api.waterAllPlants()
-        .then((waterEvents) => {
-          return waterEvents;
-        })
-    }
-  }
-
   handlePlantWatering (plantId) {
     let messageText = (plantId.length)
       ? "Plant Watered!"
       : "All your plants have been watered!"
 
-    this.waterPlants(plantId)
+    waterPlants(plantId)
       .then((response) => {
         this.setState({
           waterEvents: response,
