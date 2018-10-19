@@ -5,7 +5,7 @@ const Message   = require('./Message');
 const Dashboard = require('./Dashboard');
 
 function waterPlants (plantId) {
-  if (plantId.length) {
+  if (plantId > 0) {
     return api.waterOnePlant(plantId)
       .then((waterEvent) => {
         return waterEvent;
@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   handlePlantWatering (plantId) {
-    let messageText = (plantId.length)
+    let messageText = (plantId > 0)
       ? "Plant Watered!"
       : "All your plants have been watered!"
 

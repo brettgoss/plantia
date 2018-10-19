@@ -1,18 +1,55 @@
 const React = require('react');
 
+// TODO: Break this into two functions
+function formatCardCountdown (waterFreq, timeToNextWater) {
+  let waterNextString, plantHealth;
+  let waterFrequency = (waterFreq === 1) ? "1 day" : `${waterFreq} days`;
+
+  if (timeToNextWater >= 48) {
+    // if more than one day, display in days
+    plantHealth = 'good';
+    countdown = Math.floor(timeToNextWater / 24);
+    waterNextString = `Water in ${countdown} days`
+  } else if (timeToNextWater >= 24) {
+    // if exactly one day, display in singular day
+    plantHealth = 'good';
+    countdown = Math.floor(timeToNextWater / 24);
+    waterNextString = `Water in ${countdown} day`
+  } else if (timeToNextWater > 1) {
+    // If less than one day away, display in hours
+    plantHealth = 'trouble';
+    countdown = timeToNextWater;
+    waterNextString = `Water in ${countdown} hours`
+  } else {
+    // if overdue, don't display scale or countdown
+    plantHealth = 'bad';
+    waterNextString = `Your plant is thirsty!`
+  }
+
+  return { waterNextString, plantHealth, waterFrequency };
+}
+
+function getWaterEventByPlantId(waterEvents, plantId) {
+  return waterEvents.filter((waterEvent) => {
+    if (waterEvent.plant_id == plantId) {
+      return waterEvent;
+    }
+  })
+}
+
 class Card extends React.Component {
   constructor(props) {
     super(props)
 
-    this.lastWatered = this.lastWatered.bind(this)
-    this.waterNext = this.waterNext.bind(this)
+    this.lastWatered  = this.lastWatered.bind(this)
+    this.waterNext    = this.waterNext.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+
   // Triggered by the water button onClick, then passes data to the App component
-  handleSubmit(event){
-    let plantId = event.target.id
-    this.props.waterPlant(plantId)
+  handleSubmit() {
+    this.props.waterPlant(this.props.plant.id)
   }
 
   // Calculation for how many days until the plant needs to be watered
