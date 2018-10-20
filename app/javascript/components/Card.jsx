@@ -50,7 +50,7 @@ function getWaterEventByPlantId(waterEvents, plantId) {
     if (waterEvent.plant_id == plantId) {
       return waterEvent;
     }
-  })
+  }).shift()
 }
 
 class Card extends React.Component {
@@ -68,13 +68,10 @@ class Card extends React.Component {
 
   render() {
     const plant = this.props.plant;
-    const waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)[0]
+    const waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
     const timeToNextWater = waterNext(waterEvent.water_date);
+    const lastWaterEvent = lastWatered(waterEvent.water_date, plant.water_freq);
     const { waterNextString, plantHealth, waterFrequency } = formatCardCountdown(plant.water_freq, timeToNextWater)
-
-    if (plant.id == waterEvent.plant_id) {
-      lastWaterEvent = <div>{lastWatered(waterEvent.water_date, plant.water_freq)}</div>
-    }
 
     return (
       <div key={plant.index} className="card" >
