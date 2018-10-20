@@ -16,33 +16,24 @@ function waterNext(waterEvent) {
   return Math.floor(1 - hours);
 }
 
-// TODO: Break this into two functions
-function formatCardCountdown (waterFreq, timeToNextWater) {
-  let waterNextString, plantHealth;
-  let waterFrequency = (waterFreq === 1) ? "1 day" : `${waterFreq} days`;
+function getWaterNextString (timeToNextWater) {
+  let countdown = Math.floor(timeToNextWater / 24);
 
   if (timeToNextWater >= 48) {
-    // if more than one day, display in days
-    plantHealth = 'good';
-    countdown = Math.floor(timeToNextWater / 24);
-    waterNextString = `Water in ${countdown} days`
+    return `Water in ${countdown} days`;
   } else if (timeToNextWater >= 24) {
-    // if exactly one day, display in singular day
-    plantHealth = 'good';
-    countdown = Math.floor(timeToNextWater / 24);
-    waterNextString = `Water in ${countdown} day`
+    return `Water in ${countdown} day`;
   } else if (timeToNextWater > 1) {
-    // If less than one day away, display in hours
-    plantHealth = 'trouble';
-    countdown = timeToNextWater;
-    waterNextString = `Water in ${countdown} hours`
+    return `Water in ${timeToNextWater} hours`;
   } else {
-    // if overdue, don't display scale or countdown
-    plantHealth = 'bad';
-    waterNextString = `Your plant is thirsty!`
+    return `Your plant is thirsty!`;
   }
+}
 
-  return { waterNextString, plantHealth, waterFrequency };
+function getPlantHealth(timeToNextWater) {
+  if (timeToNextWater >= 24) return plantHealth = 'good';
+  if (timeToNextWater >= 1)  return plantHealth = 'trouble';
+  return plantHealth = 'bad';
 }
 
 function getWaterEventByPlantId(waterEvents, plantId) {
@@ -60,7 +51,6 @@ class Card extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-
   // Triggered by the water button onClick, then passes data to the App component
   handleSubmit() {
     this.props.waterPlant(this.props.plant.id)
@@ -71,7 +61,9 @@ class Card extends React.Component {
     const waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
     const timeToNextWater = waterNext(waterEvent.water_date);
     const lastWaterEvent = lastWatered(waterEvent.water_date, plant.water_freq);
-    const { waterNextString, plantHealth, waterFrequency } = formatCardCountdown(plant.water_freq, timeToNextWater)
+    const plantHealth = getPlantHealth(timeToNextWater);
+    const waterNextString = getWaterNextString(timeToNextWater)
+    const waterFrequency = (plant.water_freq === 1) ? "1 day" : `${plant.water_freq} days`;
 
     return (
       <div key={plant.index} className="card" >
