@@ -1,6 +1,14 @@
 const React = require('react');
 const Card  = require('./Card')
 
+function getWaterEventByPlantId(waterEvents, plantId) {
+  return waterEvents.filter((waterEvent) => {
+    if (waterEvent.plant_id == plantId) {
+      return waterEvent;
+    }
+  }).shift()
+}
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props)
@@ -11,11 +19,12 @@ class Dashboard extends React.Component {
         <div className="wrapper">
           {
             this.props.plants.map((plant, index) => {
+              waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
               return (
                 <Card
                   key={plant.id}
                   plant={plant}
-                  waterEvents={this.props.waterEvents}
+                  waterEvent={waterEvent}
                   waterPlant={this.props.waterPlant}
                 />
               )
