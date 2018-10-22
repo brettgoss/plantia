@@ -23,7 +23,6 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      plants: this.props.plants,
       waterEvents: this.props.waterEvents,
       messageText: '',
     }
@@ -53,7 +52,7 @@ class App extends React.Component {
         <Message
           messageText={this.state.messageText} />
         <Dashboard
-          plants={this.state.plants}
+          plants={this.props.plants}
           waterEvents={this.state.waterEvents}
           waterPlant={this.handlePlantWatering}
         />
