@@ -1,50 +1,78 @@
 const React = require('react');
+const CardBody = require('./CardBody');
+const CardHeader = require('./CardHeader');
+const CardFooter = require('./CardFooter');
 
-// Calculation for how many days until the plant needs to be watered
-// based on the provided water frequency and the most recent waterEvent
-// TODO: Why is the waterFreq being used here?
-function lastWatered(waterEvent, waterFreq) {
-  let num = moment(waterEvent);
-  let freq = moment.duration(waterFreq, 'days').asHours();
-  let result = moment(num).subtract(freq, 'hours').format('lll');
-  return result;
+function waterNext(waterEvent) {
+  let num = waterEvent;
+  let now = moment();
+  let hours = moment.duration(now.diff(num)).asHours();
+  let timeToNextWater = Math.floor(1 - hours);
+  return timeToNextWater;
 }
 
-function getWaterNextString(timeToNextWater) {
-  let countdown = Math.floor(timeToNextWater / 24);
-
-  if (timeToNextWater >= 48) {
-    return `Water in ${countdown} days`;
-  } else if (timeToNextWater >= 24) {
-    return `Water in ${countdown} day`;
-  } else if (timeToNextWater > 1) {
-    return `Water in ${timeToNextWater} hours`;
-  } else {
-    return `Your plant is thirsty!`;
-  }
-}
-
-class CardBody extends React.Component {
-  constructor (props) {
+class Card extends React.Component {
+  constructor(props) {
     super(props)
+
+    this.state = {
+      waterDate: this.props.waterEvent.water_date,
+      timeToNextWater: '',
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.updateCard = this.updateCard.bind(this)
+  }
+
+  componentDidMount() {
+    this.updateCard()
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.waterEvent.water_date !== state.waterDate) {
+      let timeToNextWater = waterNext(props.waterEvent.water_date);
+
+      return {
+        waterDate: props.waterEvent.water_date,
+        timeToNextWater: timeToNextWater,
+      };
+    }
+    return null;
+  }
+
+  // Triggered by the water button onClick, then passes data to the App component
+  handleSubmit() {
+    this.props.waterPlant(this.props.plant.id)
+  }
+
+  updateCard() {
+    let timeToNextWater = waterNext(this.state.waterDate);
+    this.setState({
+      timeToNextWater: timeToNextWater,
+    })
   }
 
   render() {
-    let lastWaterEvent  = lastWatered(this.props.waterDate, this.props.plant.water_freq);
-    let waterNextString = getWaterNextString(this.props.timeToNextWater);
-    let waterFrequency  = (this.props.plant.water_freq === 1) ? "1 day" : `${this.props.plant.water_freq} days`;
-
+    console.log('rendered')
     return (
-      <div className="plant-content">
-        <h5 className="plant-details">{waterNextString}</h5>
-        <div className="card-info">Last Watered</div>
-        <div className="plant-details">{lastWaterEvent}</div>
-        <div className="card-info">Needs</div>
-        <div className="plant-details">Watering every {waterFrequency}</div>
-        <div className="plant-details">{this.props.plant.light}</div>
+      <div key={this.props.plant.index} className="card" >
+        <a href={"/plants/" + this.props.plant.id}>
+          <CardHeader
+            plant={this.props.plant}
+          />
+          <CardBody
+            plant={this.props.plant}
+            waterDate={this.state.waterDate}
+            timeToNextWater={this.state.timeToNextWater}
+          />
+        </a>
+        <CardFooter
+          timeToNextWater={this.state.timeToNextWater}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     )
   }
 }
 
-module.exports = CardBody;
+module.exports = Card;
