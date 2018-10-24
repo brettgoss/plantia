@@ -19,10 +19,16 @@
     text-decoration: none;
   }
 
-  .message0 {
-    position: absolute;
+  #messageWrapper {
+    display: flex;
+    justify-content: center;
+    top: $nav-height;
+  }
+
+  .message {
+    position: fixed;
     display: none;
-    top: 90px;
+    top: 150px;
     font-size: 2em;
     line-height: 1.5em;
     font-weight: 300;
@@ -30,9 +36,10 @@
     padding: 0 20px;
     border-radius: 4px;
     color: white;
+    z-index: 998;
 
     @media screen and (max-width: 640px) {
-      top: 65px;
+      top: 155px;
       margin: 0;
       font-size: 1.3em;
     }
@@ -51,7 +58,7 @@
     }
   }
 
-  #button-all {
+  #buttonBar {
     display: flex;
     position: fixed;
     justify-content: center;

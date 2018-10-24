@@ -13,9 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require react
-//= require react_ujs
-//= require components
+//= require moment
 //= require serviceworker-companion
 //= require_tree .
 //= stub "serviceworker.js"

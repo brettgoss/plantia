@@ -1,13 +1,20 @@
 class WaterEventsController < ApplicationController
-
+  # FIXME: This controller is a mess. Refactor pls.
   # Handles request to water one plant
   def create
     plant_id = params[:plant_id]
     e = create_water_event(plant_id)
 
     if e.save
+      @water_events = []
       @plants = current_user.plants.all
-      response = WaterEvent.where(plant_id: @plants.ids, watered: false)
+
+      if @plants.present?
+        @plants.each do |plant|
+          @water_events << WaterEvent.where(plant_id: plant.id).last
+        end
+      end
+      response = @water_events
       render json: response, status: :ok
     else
       render json: response.errors, status: :unprocessable_entity
@@ -29,7 +36,7 @@ class WaterEventsController < ApplicationController
     end
 
     if !success_plants.empty?
-      response = WaterEvent.where(plant_id: @plants.ids, watered: false)
+      response = WaterEvent.where(plant_id: @plants.ids).order("created_at DESC").limit(@plants.count)
       render json: response, status: :ok
     end
   end
@@ -44,11 +51,10 @@ class WaterEventsController < ApplicationController
     event = WaterEvent.new(plant_hash)
 
     @plant = Plant.find(plant_id)
-    # @plant.updated_at = Time.current
     @plant.save
 
     # Should be today plus water freq
-    event.water_date = @plant.water_freq.days.from_now
+    event.water_date = DateTime.now + @plant.water_freq.days
     event
   end
 
