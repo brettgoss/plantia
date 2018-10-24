@@ -26,7 +26,7 @@ private
       :water_freq => water_freq,
       :user_id => current_user.id
     })]
-    water_date = Time.now + water_freq.days
+    water_date = Time.now + (water_freq.days - 2.hours)
     @water_events = [WaterEvent.new(:plant_id => 0, :water_date => water_date)]
   end
 

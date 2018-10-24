@@ -1,5 +1,5 @@
 class WaterEventsController < ApplicationController
-
+  # FIXME: This controller is a mess. Refactor pls.
   # Handles request to water one plant
   def create
     plant_id = params[:plant_id]
@@ -36,7 +36,7 @@ class WaterEventsController < ApplicationController
     end
 
     if !success_plants.empty?
-      response = WaterEvent.where(plant_id: @plants.ids, watered: false)
+      response = WaterEvent.where(plant_id: @plants.ids).order("created_at DESC").limit(@plants.count)
       render json: response, status: :ok
     end
   end
