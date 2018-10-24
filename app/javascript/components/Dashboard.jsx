@@ -19,7 +19,10 @@ class Dashboard extends React.Component {
         <div className="wrapper">
           {
             this.props.plants.map((plant, index) => {
-              waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
+              if (this.props.waterEvents) {
+                waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
+              }
+
               return (
                 <Card
                   key={plant.id}
