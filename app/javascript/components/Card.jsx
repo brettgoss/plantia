@@ -41,8 +41,11 @@ class Card extends React.Component {
   }
 
   // Triggered by the water button onClick, then passes data to the App component
-  handleSubmit() {
-    this.props.waterPlant(this.props.plant.id)
+  handleSubmit(e) {
+    if (this.props.plant.id > 0) {
+      e.preventDefault()
+      this.props.waterPlant(this.props.plant.id)
+    }
   }
 
   updateCard() {
@@ -53,23 +56,25 @@ class Card extends React.Component {
   }
 
   render() {
-    console.log('rendered')
+    let plant = this.props.plant;
+
     return (
       <div key={this.props.plant.index} className="card" >
-        <a href={"/plants/" + this.props.plant.id}>
+        <a href={"/plants/" + (plant.id > 0 ? plant.id : 'new')}>
           <CardHeader
-            plant={this.props.plant}
+            plant={plant}
           />
           <CardBody
-            plant={this.props.plant}
+            plant={plant}
             waterDate={this.state.waterDate}
             timeToNextWater={this.state.timeToNextWater}
           />
+          <CardFooter
+            id={plant.id}
+            timeToNextWater={this.state.timeToNextWater}
+            handleSubmit={this.handleSubmit}
+          />
         </a>
-        <CardFooter
-          timeToNextWater={this.state.timeToNextWater}
-          handleSubmit={this.handleSubmit}
-        />
       </div>
     )
   }

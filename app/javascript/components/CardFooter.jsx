@@ -12,15 +12,17 @@ class CardFooter extends React.Component {
   }
 
   render() {
-    let plantHealth = getPlantHealth(this.props.timeToNextWater)
+    let plantHealth = getPlantHealth(this.props.timeToNextWater);
+    let inputText = this.props.id > 0 ? "Water" : "Create New Plant";
 
     return (
       <React.Fragment>
         <input
           type="button"
-          value={"Water"}
+          value={inputText}
           className={"card-button card-button-" + plantHealth}
-          onClick={this.props.handleSubmit} />
+          onClick={this.props.handleSubmit}
+        />
       </React.Fragment>
     )
   }

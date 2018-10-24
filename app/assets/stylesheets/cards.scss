@@ -14,8 +14,11 @@
   }
 
   a {
-    color: #333
+    color: #333;
+    height: 100%;
+    display: block;
   }
+
   .plant-header {
     background: $accent-color;
     padding: 0em;
@@ -55,7 +58,7 @@
     }
   }
   .card-button {
-    width: inherit;
+    width: 100%;
     position: absolute;
     bottom: 0;
     margin: 0;
