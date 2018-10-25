@@ -22,7 +22,6 @@ Rails.application.routes.draw do
 
   resources :water, only: [:create, :destroy], controller: 'water_events'
 
-  post '/waterall' => 'water_events#water_all'
   post '/subscribe' => 'subscriptions#create'
   delete '/unsubscribe' => 'subscriptions#destroy'
   post '/push' => 'push_notifications#create'
