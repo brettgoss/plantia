@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180923194600) do
+ActiveRecord::Schema.define(version: 20181024042526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,9 +47,8 @@ ActiveRecord::Schema.define(version: 20180923194600) do
   create_table "water_events", force: :cascade do |t|
     t.datetime "water_date"
     t.integer  "plant_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "watered",    default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["plant_id"], name: "index_water_events_on_plant_id", using: :btree
   end
 
