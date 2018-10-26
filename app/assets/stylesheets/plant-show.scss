@@ -22,7 +22,7 @@
 }
 
 #plantlog_logtext {
-  width: 30em;
+  width: 100%;
 }
 
 #log_submit {
@@ -62,7 +62,7 @@
 }
 
 //Plantlog History
-#plant_log_box {
+.plantlog__box {
   padding: 20px 20px;
   color: #555;
   letter-spacing: .1rem;
@@ -82,13 +82,13 @@
   }
 }
 
-#logtitle_logtime {
+.plantlog__box {
   h6 {
     margin-top: 9px;
   }
 }
 
-#history_logtext {
+.plantlog__text {
   word-wrap: break-word;
 }
 
