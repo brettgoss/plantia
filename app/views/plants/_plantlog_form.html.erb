@@ -1,0 +1,28 @@
+<%= form_for([@plant, @plantlog]) do |f| %>
+  <% if @plantlog.errors.any? %>
+    <div>
+      <strong>The following errors prevented saving:</strong>
+      <ul>
+        <% @plantlog.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div id="log_date">
+    <%= f.label "Date" %>
+    <%= f.date_field :logtime, :value => Time.current.strftime('%Y-%m-%d') %>
+  </div>
+  <div id="log_title">
+    <%= f.label "Title" %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label "Entry" %>
+  </div>
+    <%= f.text_area :logtext, id: 'plantlog_logtext' %>
+  <div id="log_submit">
+    <%= f.submit 'Create Plantlog', class: 'button'%>
+  </div>
+<% end %>

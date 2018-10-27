@@ -1,13 +1,14 @@
 <div class="container">
   <div class="row">
-    <!-- Plant info -->
+
     <div class="six columns">
-        <h1>
-          <strong><%= @plant.nickname%></strong>
-        </h1>
-        <h5>
-          <em><%= @plant.common_name%></em>
-        </h5>
+      <h1>
+        <strong><%= @plant.nickname%></strong>
+      </h1>
+      <h5>
+        <em><%= @plant.common_name%></em>
+      </h5>
+
       <table>
         <thead>
           <tr>
@@ -22,51 +23,36 @@
           </tr>
         </tbody>
       </table>
-        <%= link_to 'Edit Plant' , edit_plant_path(@plant), class: 'button' %>
+      <%= link_to 'Edit Plant', edit_plant_path(@plant), class: 'button' %>
     </div>
-    <!-- Plantlog form -->
+
     <div class="six columns">
       <h3>Plant Log</h3>
       <h5>Create a new entry</h5>
-      <%= form_for [@plant, @plantlog] do |f| %>
-        <div id="log_date">
-          <%= f.label "Date" %>
-          <%= f.date_field :logtime, :value => Time.current.strftime('%Y-%m-%d') %>
-        </div>
-        <div id="log_title">
-          <%= f.label "Title" %>
-          <%= f.text_field :title %>
-        </div>
-        <div>
-          <%= f.label "Entry" %>
-        </div>
-          <%= f.text_area :logtext %>
-        <div id="log_submit">
-          <%= f.submit 'Create Plantlog', class: 'button'%>
-        </div>
-      <% end %>
+      <%= render 'plantlog_form' %>
     </div>
+
   </div>
+
   <div class="row">
+
     <div class="six columns">
       <h3>Watering History</h3>
       <div id="water_events">
-        <% @past_events.order("water_date desc").each do |e| %>
+        <% @past_events.order("water_date desc").each do |water_event| %>
         <div>
-          <time class="timestring"><%= e.created_at %></time>
-          <%= link_to fa_icon('trash'), water_path(e.id), class: 'button', method: :delete, data: { confirm: "Are you sure you want to delete this?" } %>
+          <time class="timestring"><%= water_event.created_at %></time>
+          <%= link_to fa_icon('trash'), water_path(water_event.id), class: 'button', method: :delete,
+              data: { confirm: "Are you sure you want to delete this?" } %>
         </div>
         <% end %>
       </div>
     </div>
-    <!--  ENDWatervents -->
 
-    <!-- Plantlog history -->
     <div class= "six columns">
       <h3>Log History </h3>
-      <%= render @plant.plantlogs.order("logtime desc") %>
+      <%= render @plantlogs %>
     </div>
-    <!-- ENDPlantlog History -->
 
   </div>
 </div>
