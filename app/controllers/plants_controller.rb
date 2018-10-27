@@ -11,10 +11,12 @@ class PlantsController < ApplicationController
   end
 
   def show
-    @plant = Plant.find params[:id]
+    @plant = Plant.find(params[:id])
     @past_events = WaterEvent.where(plant_id: @plant.id)
+
     @plantlog = Plantlog.new
-    @plantlogs = Plantlog.all
+    @plantlogs = Plantlog.where(plant_id: @plant.id).order("created_at desc")
+
     if @plant.user != User.find(current_user.id)
       redirect_to '/'# make this show an error.
     end
