@@ -1,4 +1,5 @@
 class PlantlogsController < ApplicationController
+  before_action :authorize
 
   def index
     plant = Plant.find(params[:plant_id])

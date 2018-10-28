@@ -3,8 +3,12 @@ class UsersController < ApplicationController
   helper UsersHelper
   # User Page
   def index
-    @user = current_user
-    @plants = @user.plants.all
+    if !current_user
+      redirect_to(root_path)
+    else
+      @user = current_user
+      @plants = @user.plants.all
+    end
   end
 
   # Signup Logic
@@ -12,9 +16,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to '/plants'
+      redirect_to(dashboard_index_path)
     else
-      render '/welcome/index'
+      redirect_to(root_path)
     end
 
   end
@@ -23,11 +27,9 @@ class UsersController < ApplicationController
     current_user.save!
     redirect_to '/plants'
   end
-end
-
 
 private
-
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+end
