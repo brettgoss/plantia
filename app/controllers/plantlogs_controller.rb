@@ -2,8 +2,8 @@ class PlantlogsController < ApplicationController
   before_action :authorize
 
   def index
-    plant = Plant.find(params[:plant_id])
     @plantlogs = plant.plantlogs
+
     respond_to do |format|
       format.html
       format.json { render :json => @plantlogs }
@@ -11,8 +11,8 @@ class PlantlogsController < ApplicationController
   end
 
   def new
-    plant = Plant.find(params[:plant_id])
     @plantlog = plant.plantlogs.build
+
     respond_to do |format|
       format.html
       format.json { render :json => @plantlog }
@@ -20,7 +20,6 @@ class PlantlogsController < ApplicationController
   end
   
   def create
-    plant = Plant.find(params[:plant_id])
     @plantlog = plant.plantlogs.create(plantlog_params)
 
     respond_to do |format|
@@ -35,7 +34,6 @@ class PlantlogsController < ApplicationController
   end
 
   def destroy
-    plant = Plant.find(params[:plant_id])
     @plantlog = plant.plantlogs.find(params[:id])
     @plantlog.destroy
 
@@ -48,5 +46,9 @@ class PlantlogsController < ApplicationController
 private
   def plantlog_params
     params.require(:plantlog).permit(:logtime, :title, :logtext, :plant_id)
+  end
+
+  def plant
+    plant = Plant.find(params[:plant_id])
   end
 end
