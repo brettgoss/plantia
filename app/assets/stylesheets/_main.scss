@@ -33,3 +33,22 @@ body {
     padding-top: ($nav-height + 40px);
   }
 }
+
+%error {
+  width: 30%;
+  padding: 4px;
+  margin: 0 auto;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.notice {
+  @extend %error;
+  background: $primary-color;
+}
+
+.alert {
+  @extend %error;
+  background-color: #E94B35;
+}
