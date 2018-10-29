@@ -25,20 +25,14 @@ class WaterEventsController < ApplicationController
 
 private
   def water_one_plant
-    @plants = Plant.where(id: params[:plant_id])
-    create_water_event()
+    plant = Plant.find(params[:plant_id])
+    helpers.create_water_event(plant)
   end
 
   def water_all_plants
-    @plants = current_user.plants.all
-    create_water_event()
-  end
-
-  def create_water_event
-    @plants.each do |plant|
-      water_event = WaterEvent.new({plant_id: plant.id})
-      water_event.water_date = DateTime.now + plant.water_freq.days
-      water_event.save
+    plants = current_user.plants.all
+    plants.each do |plant|
+      helpers.create_water_event(plant)
     end
   end
 end
