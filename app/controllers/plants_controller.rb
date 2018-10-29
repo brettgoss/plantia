@@ -7,10 +7,6 @@ class PlantsController < ApplicationController
     @plants = @user.plants.all
   end
 
-  def new
-  	@plant = Plant.new
-  end
-
   def show
     user = User.find(current_user.id)
     @plant = Plant.where(id: params[:id], user_id: user.id).first
@@ -22,6 +18,14 @@ class PlantsController < ApplicationController
     else
       redirect_to plants_path()
     end
+  end
+
+  def new
+    @plant = Plant.new
+  end
+
+  def edit
+    @plant = Plant.find(params[:id])
   end
 
   def create
@@ -42,12 +46,8 @@ class PlantsController < ApplicationController
     if @plant.update(plant_params)
       redirect_to @plant
     else
-      render 'edit'
+      render :edit
     end
-  end
-
-  def edit
-    @plant = Plant.find(params[:id])
   end
 
   def destroy
