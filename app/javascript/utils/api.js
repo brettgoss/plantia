@@ -6,7 +6,7 @@ axios.defaults.headers.common = {
 };
 
 function postWaterAll () {
-  return axios.post('/waterall')
+  return axios.post('/water')
     .then(function (response) {
       return response.data;
     })

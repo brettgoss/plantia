@@ -1,35 +1,40 @@
 class PlantsController < ApplicationController
   before_action :authorize
+  include WaterEventsHelper
 
   def index
     @user = User.find(current_user.id)
     @plants = @user.plants.all
   end
 
-  def new
-  	@plant = Plant.new
+  def show
+    user = User.find(current_user.id)
+    @plant = Plant.where(id: params[:id], user_id: user.id).first
+
+    if @plant
+      @past_events = WaterEvent.where(plant_id: @plant.id)
+      @plantlog    = Plantlog.new
+      @plantlogs   = Plantlog.where(plant_id: @plant.id).order("created_at desc")
+    else
+      redirect_to plants_path()
+    end
   end
 
-  def show
-    @plant = Plant.find params[:id]
-    @past_events = WaterEvent.where(plant_id: @plant.id)
-    @plantlog = Plantlog.new
-    @plantlogs = Plantlog.all
-    if @plant.user != User.find(current_user.id)
-      redirect_to '/'# make this show an error.
-    end
+  def new
+    @plant = Plant.new
+  end
+
+  def edit
+    @plant = Plant.find(params[:id])
   end
 
   def create
   	@plant = Plant.new(plant_params)
     @plant.user = current_user
+
     if @plant.save
-
-      @event = WaterEvent.new({plant_id: @plant.id})
-      @event.water_date = @plant.water_freq.days.from_now
-      @event.save
-
-      redirect_to dashboard_index_url, notice: 'Plant created!'
+      create_water_event(@plant)
+      redirect_to dashboard_index_path(), notice: 'Plant created!'
     else
       render :new
     end
@@ -41,12 +46,8 @@ class PlantsController < ApplicationController
     if @plant.update(plant_params)
       redirect_to @plant
     else
-      render 'edit'
+      render :edit
     end
-  end
-
-  def edit
-    @plant = Plant.find(params[:id])
   end
 
   def destroy

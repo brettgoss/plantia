@@ -7,8 +7,8 @@ const Dashboard = require('./Dashboard');
 function waterPlants (plantId) {
   if (plantId > 0) {
     return api.waterOnePlant(plantId)
-      .then((waterEvent) => {
-        return waterEvent;
+      .then((waterEvents) => {
+        return waterEvents;
       })
   } else {
     return api.waterAllPlants()
