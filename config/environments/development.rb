@@ -33,6 +33,7 @@ config.webpacker.check_yarn_integrity = true
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Whitelist vagrant
   config.web_console.whitelisted_ips = '10.0.2.2'
