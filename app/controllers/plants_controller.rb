@@ -1,5 +1,5 @@
 class PlantsController < ApplicationController
-  before_action :authorize
+  before_action :authenticate_user!
   include WaterEventsHelper
 
   def index
