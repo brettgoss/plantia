@@ -17,6 +17,8 @@
         <div>
           <span class="userfunc u-pull-right"><%= link_to current_user.name, '/me' %> | <%= link_to "Logout", destroy_user_session_path %></span>
         </div>
+      <% else %>
+        <span class="userfunc u-pull-right"><%= render "devise/shared/links" %></span>
       <% end %>
     </div>
 
