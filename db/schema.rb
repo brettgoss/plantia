@@ -10,46 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181024042526) do
+ActiveRecord::Schema.define(version: 2018_10_29_032155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "plantlogs", force: :cascade do |t|
-    t.date     "logtime"
-    t.string   "title"
-    t.text     "logtext"
-    t.integer  "plant_id"
+  create_table "plantlogs", id: :serial, force: :cascade do |t|
+    t.date "logtime"
+    t.string "title"
+    t.text "logtext"
+    t.integer "plant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["plant_id"], name: "index_plantlogs_on_plant_id", using: :btree
+    t.index ["plant_id"], name: "index_plantlogs_on_plant_id"
   end
 
-  create_table "plants", force: :cascade do |t|
-    t.string   "nickname"
-    t.string   "common_name"
-    t.string   "light"
-    t.integer  "water_freq"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["user_id"], name: "index_plants_on_user_id", using: :btree
+  create_table "plants", id: :serial, force: :cascade do |t|
+    t.string "nickname"
+    t.string "common_name"
+    t.string "light"
+    t.integer "water_freq"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_plants_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "water_events", force: :cascade do |t|
+  create_table "water_events", id: :serial, force: :cascade do |t|
     t.datetime "water_date"
-    t.integer  "plant_id"
+    t.integer "plant_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["plant_id"], name: "index_water_events_on_plant_id", using: :btree
+    t.index ["plant_id"], name: "index_water_events_on_plant_id"
   end
 
   add_foreign_key "plantlogs", "plants"

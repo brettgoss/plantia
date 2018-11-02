@@ -4,25 +4,32 @@
 @import "vars";
 
 .welcome {
-  margin-top: 6em;
+  margin-top: $nav-height;
   background-image: url(/splash.jpg);
   background-size: cover;
-  background-position: 45% 45%;
+  background-position: center bottom;
   background-repeat: no-repeat;
   color: #333;
 
   @media screen and (max-width: 640px) {
     margin: 0;
   }
+
+  .remember-me label {
+    font-weight: 400;
+  }
+
+  label {
+    display: inline-block;
+  }
 }
 
 .main-container {
-  // margin-top: 3em;
-
   input.button {
     color: #ffffff;
     opacity: 0.7;
     background-color: $primary-color;
+    margin: 0 1em 0 0;
   }
 
   input.button:hover {
@@ -61,7 +68,6 @@
     width: 100%;
     box-shadow: 1px 2px 7px 0px #555;
     background-color: rgba(#f5f5f5,.74);
-    margin-bottom: 20em;
     margin-left: 8em;
 
     @media screen and (max-width: 640px) {
@@ -70,5 +76,4 @@
       width: 90%;
     }
   }
-
 }

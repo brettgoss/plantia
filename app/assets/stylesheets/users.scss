@@ -2,6 +2,32 @@
   border: 1px solid #aaa;
   width: 50%;
   padding: 15px;
-  // background-color: #eee;
   border-radius: 5px;
+}
+
+#edit-user {
+  input {
+    display: block;
+    width: 100%;
+  }
+
+  label {
+    display: inline-block;
+  }
+
+  i {
+    font-size: 0.9em;
+  }
+
+  #action-buttons .button {
+    display: inline-block;
+    width: 12em;
+  }
+
+  #action-buttons {
+    .back {
+      background: #eee;
+      color: #333;
+    }
+  }
 }

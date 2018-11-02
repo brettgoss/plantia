@@ -15,16 +15,10 @@
 
       <% if current_user %>
         <div>
-          <span class="userfunc u-pull-right"><%= link_to current_user.name, '/me' %> | <%= link_to "Logout", logout_path %></span>
+          <span class="userfunc u-pull-right"><%= link_to current_user.name, '/me' %> | <%= link_to "Logout", destroy_user_session_path %></span>
         </div>
       <% else %>
-      <span class="login u-pull-right">
-        <%= form_for :sessions, url: '/login' do |f| %>
-          <%= f.text_field :email, placeholder: "email", class: "input" %>
-          <%= f.password_field :password, placeholder: "password", class: "input" %>
-          <%= f.submit "Login", class: 'button-default' %>
-        <% end %>
-      </span>
+        <span class="userfunc u-pull-right"><%= render "devise/shared/links" %></span>
       <% end %>
     </div>
 
