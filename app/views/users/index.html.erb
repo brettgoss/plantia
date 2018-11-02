@@ -30,6 +30,10 @@
     </div>
   </div>
 
+  <div class="row">
+    <%= link_to 'Edit Account', edit_registration_path(@user), class: "button" %>
+  </div>
+
   <script type="text/javascript">
     window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
     $('#push-simple-app').on('click', (e) => {

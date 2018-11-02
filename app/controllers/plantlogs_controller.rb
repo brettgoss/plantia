@@ -1,5 +1,5 @@
 class PlantlogsController < ApplicationController
-  before_action :authorize
+  before_action :authenticate_user!
 
   def index
     @plantlogs = plant.plantlogs

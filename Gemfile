@@ -43,9 +43,8 @@ gem 'dotenv-rails'
 gem 'serviceworker-rails'
 # Push notifications
 gem 'webpush'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Devise for user management
+gem 'devise'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

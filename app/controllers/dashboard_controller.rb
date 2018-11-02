@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authorize
+  include Devise::Controllers::Helpers
 
   def index
     user = User.find(current_user.id)
