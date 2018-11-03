@@ -1,3 +1,5 @@
+@import 'vars';
+
 #user-info {
   border: 1px solid #aaa;
   width: 50%;
@@ -5,7 +7,7 @@
   border-radius: 5px;
 }
 
-#edit-user {
+.user {
   input {
     display: block;
     width: 100%;
@@ -18,7 +20,15 @@
   i {
     font-size: 0.9em;
   }
+}
 
+#forgot-password {
+  .button {
+    background: $primary-color;
+  }
+}
+
+#edit-user {
   #action-buttons .button {
     display: inline-block;
     width: 12em;
