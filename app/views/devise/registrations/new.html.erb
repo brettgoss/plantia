@@ -31,6 +31,10 @@
 
             <%= f.submit "Sign up", class: "button" %>
           <% end %>
+
+          <%- if controller_name != 'sessions' && controller_name != 'passwords' %>
+            <%= link_to "Already have an account?", new_session_path(resource_name) %><br />
+          <% end -%>
         </div>
       </div>
     </div>
