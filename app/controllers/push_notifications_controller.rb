@@ -5,6 +5,15 @@ class PushNotificationsController < ApplicationController
     head :ok
   end
 
+  def subscribe
+    response = {"subscribed": true}
+    render json: response, status: :ok
+  end
+
+  def destroy
+    puts "unsubscribed"
+  end
+
   private
 
   def push_params
