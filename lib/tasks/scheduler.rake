@@ -2,14 +2,6 @@
 require 'seed_helper'
 require 'json'
 
-# desc "This task is called by the Heroku scheduler add-on"
-# task :send_text => :environment do
-#   twilio = TwilioHelper.new
-#   User.has_thristy_plant.each do |user|
-#     twilio.send_text(user)
-#   end
-# end
-
 desc "This will be called only once on Heroku manually"
 task :seed => :environment do
   seedhelper = SeedHelper.new
@@ -24,7 +16,7 @@ task :notify => :environment do
     users.each do |user|
       water_events = user.water_events.where("water_date > ?", num_days.days.ago.beginning_of_day).to_a
       if water_events.any?
-        @users_with_thirsty_plants["user_#{user.id}"] = water_events
+        @users_with_thirsty_plants["#{user.id}"] = water_events
       end
     end
   end
@@ -35,9 +27,9 @@ task :notify => :environment do
       plants = {}
       events.each do |event|
         if (!plants.include? event.plant_id) && event.water_date <= DateTime.now
-          plants["plant_#{event.plant_id}"] = event.water_date
+          plants["#{event.plant_id}"] = event.water_date
         elsif event.water_date > DateTime.now
-          plants.delete("plant_#{event.plant_id}")
+          plants.delete("#{event.plant_id}")
         end
       end
       @thirsty_plants["#{user}"] = plants
@@ -45,12 +37,17 @@ task :notify => :environment do
   end
 
   def notify_user(user, plant_info)
-    puts user
     include PushNotifications
+
+    plant_nickname = Plant.find(plant_info.first[0])[:nickname]
     params = {
-      :message => 'You clicked a button!',
+      :message => {
+        :title => "Your plants are thirsty!",
+        :body => "Your plant #{plant_nickname} needs watering!",
+      },
       :subscription => user[:subscription]
     }
+
     send_webpush_notification(params)
   end
 
@@ -58,16 +55,20 @@ task :notify => :environment do
   get_users_with_thirsty_plants()
 
   @thirsty_plants.map do |user, plant|
-    user_hash = {
-      :subscription => {
-        :endpoint => ENV['SUBSCRIPTION_ENDPOINT'],
-        :keys => {
-          :p256dh => ENV['SUBSCRIPTION_KEY'],
-          :auth => ENV['SUBSCRIPTION_AUTH']
-        },
+    @subscriptions = Subscription.where(user_id: user)
+    @subscriptions.each do |subscription|
+      subscription = subscription[:subscription]
+      user_hash = {
+        :subscription => {
+          :endpoint => subscription['endpoint'],
+          :keys => {
+            :p256dh => subscription['p256dh'],
+            :auth => subscription['auth']
+          },
+        }
       }
-    }
-    notify_user(user_hash, plant)
+      notify_user(user_hash, plant)
+    end
   end
   puts "\nThirsty plants: "
   puts @thirsty_plants.to_json
