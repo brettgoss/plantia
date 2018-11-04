@@ -44,8 +44,31 @@ task :notify => :environment do
     end
   end
 
-  get_users_with_recently_watered_plants()
+  def notify_user(user, plant_info)
+    puts user
+    include PushNotifications
+    params = {
+      :message => 'You clicked a button!',
+      :subscription => user[:subscription]
+    }
+    send_webpush_notification(params)
+  end
+
+  get_users_with_recently_watered_plants(2)
   get_users_with_thirsty_plants()
-  puts "Thirsty plants: "
+
+  @thirsty_plants.map do |user, plant|
+    user_hash = {
+      :subscription => {
+        :endpoint => ENV['SUBSCRIPTION_ENDPOINT'],
+        :keys => {
+          :p256dh => ENV['SUBSCRIPTION_KEY'],
+          :auth => ENV['SUBSCRIPTION_AUTH']
+        },
+      }
+    }
+    notify_user(user_hash, plant)
+  end
+  puts "\nThirsty plants: "
   puts @thirsty_plants.to_json
 end
