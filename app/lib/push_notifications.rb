@@ -1,4 +1,5 @@
 module PushNotifications
+  # TODO: Refactor this into a service
   require 'json'
   def send_webpush_notification(params)
     Rails.logger.info "Sending push notification from #{params.inspect}"
