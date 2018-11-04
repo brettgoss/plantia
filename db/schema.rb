@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_032155) do
+ActiveRecord::Schema.define(version: 2018_11_04_191709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2018_10_29_032155) do
     t.index ["user_id"], name: "index_plants_on_user_id"
   end
 
+  create_table "subscriptions", primary_key: "subscription_hash", id: :string, force: :cascade do |t|
+    t.json "subscription"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "email", default: "", null: false
@@ -59,5 +67,6 @@ ActiveRecord::Schema.define(version: 2018_10_29_032155) do
 
   add_foreign_key "plantlogs", "plants"
   add_foreign_key "plants", "users"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "water_events", "plants"
 end

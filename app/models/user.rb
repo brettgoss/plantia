@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :plants
   has_many :water_events, through: :plants
+  has_many :subscriptions
 
   validates :name, presence: true, length: { minimum: 2 }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
