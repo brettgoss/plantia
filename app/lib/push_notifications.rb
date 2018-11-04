@@ -5,8 +5,15 @@ module PushNotifications
     Rails.logger.info "Sending push notification from #{params.inspect}"
     begin
       @endpoint = params[:subscription][:endpoint]
+      title = params[:message][:title].nil? ? params[:message] : params[:message][:title]
+      body = params[:message][:body].nil? ? params[:message] : params[:message][:body]
+      puts "Title " + title
+      message = {
+          title: title,
+          body: body,
+      }
       Webpush.payload_send(
-        message: params[:message],
+        message: JSON.generate(message),
         endpoint: params[:subscription][:endpoint],
         p256dh: params[:subscription][:keys][:p256dh],
         auth: params[:subscription][:keys][:auth],

@@ -1,5 +1,4 @@
 class PushNotificationsController < ApplicationController
-  before_action :authenticate_user!
 
   include PushNotifications
   require 'json'

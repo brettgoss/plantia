@@ -1,4 +1,4 @@
-var CACHE_VERSION = 'v1';
+var CACHE_VERSION = 'v2';
 var CACHE_NAME = CACHE_VERSION + ':sw-cache-';
 
 function onInstall(event) {
@@ -60,9 +60,10 @@ function onFetch(event) {
 }
 
 function onPush(event) {
+  let message = JSON.parse(event.data.text())
   console.log("received a push:", event.data.text());
-  let title = (event.data && event.data.text()) || "Message from Plantia";
-  let body = (event.data.text()) || "Your plant needs watering!";
+  let title = (message && message.title) || "Message from Plantia";
+  let body = (message && message.body) || "Your plant needs watering!";
   let tag = "push-notification-plantia" + Date.now();
   let icon = '/logo.png';
 
