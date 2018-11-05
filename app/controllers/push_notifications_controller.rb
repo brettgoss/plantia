@@ -4,20 +4,12 @@ class PushNotificationsController < ApplicationController
   require 'json'
 
   def create
-    send_webpush_notification(params)
+    send_webpush_notification(current_user.id, params)
     head :ok
   end
 
   def subscribe
-    subscription = {
-      :user_id => current_user.id,
-      :subscription => {
-        endpoint: params[:subscription][:endpoint],
-        p256dh: params[:subscription][:keys][:p256dh],
-        auth: params[:subscription][:keys][:auth]
-      }
-    }
-    subscription.merge!(subscription_hash: Digest::SHA2.new(512).hexdigest(subscription.to_json))
+    subscription = Subscription.create_hash(current_user.id, params)
     subscription = Subscription.new(subscription)
     begin subscription.save
       response = {"success": "You have successfully subscribed to push notifications"}
