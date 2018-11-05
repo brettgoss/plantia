@@ -8,6 +8,7 @@ task :seed => :environment do
   seedhelper.seed_data
 end
 
+# TODO: Make this modular and move logic out of task
 desc "This checks for plants that need watering and triggers the webpush notifications"
 task :notify => :environment do
   def get_users_with_recently_watered_plants(num_days = 2)
@@ -36,10 +37,9 @@ task :notify => :environment do
     end
   end
 
-  def notify_user(user, plant_info)
+  def notify_user(user, plants)
     include PushNotifications
-
-    plant_nickname = Plant.find(plant_info.first[0])[:nickname]
+    plant_nickname = Plant.find(plants.first.first)[:nickname]
     params = {
       :message => {
         :title => "Your plants are thirsty!",
@@ -47,15 +47,15 @@ task :notify => :environment do
       },
       :subscription => user[:subscription]
     }
-
-    send_webpush_notification(params)
+    send_webpush_notification(@user_id, params)
   end
 
   get_users_with_recently_watered_plants(2)
   get_users_with_thirsty_plants()
 
   @thirsty_plants.map do |user, plant|
-    @subscriptions = Subscription.where(user_id: user)
+    @user_id = user
+    @subscriptions = Subscription.where(user_id: @user_id)
     @subscriptions.each do |subscription|
       subscription = subscription[:subscription]
       user_hash = {

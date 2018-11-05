@@ -1,16 +1,12 @@
 module PushNotifications
   # TODO: Refactor this into a service
   require 'json'
-  def send_webpush_notification(params)
+  def send_webpush_notification(user_id, params)
     Rails.logger.info "Sending push notification from #{params.inspect}"
     begin
-      @endpoint = params[:subscription][:endpoint]
-      title = params[:message][:title].nil? ? params[:message] : params[:message][:title]
-      body = params[:message][:body].nil? ? params[:message] : params[:message][:body]
-      puts "Title " + title
       message = {
-          title: title,
-          body: body,
+        title: params[:message][:title],
+        body: params[:message][:body],
       }
       Webpush.payload_send(
         message: JSON.generate(message),
@@ -27,9 +23,10 @@ module PushNotifications
         read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
       )
     rescue Webpush::InvalidSubscription => ex
-      puts @endpoint
-      puts "Rescued"
-      puts ex
+      puts "Subscription not valid. Deleting..."
+      subscription_hash = Subscription.create_hash(user_id, params)[:subscription_hash]
+      subscription = Subscription.find(subscription_hash)
+      subscription.destroy
     end
   end
 end
