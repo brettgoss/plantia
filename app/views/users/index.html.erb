@@ -28,6 +28,7 @@
 
       <button id="push-simple-app" class="button">Send notification</button>
       <button id="subscribe" class="button">Subscribe to notifications</button>
+      <button id="unsubscribe" class="button">Unsubscribe from notifications</button>
     </div>
   </div>
 
@@ -63,6 +64,26 @@
                 console.log(data)
                 $('#subscribe').text('Subscribed!');
                 console.log("Subscribed!")
+              })
+            });
+        });
+    });
+    $('#unsubscribe').on('click', (e) => {
+      console.log('attempting to unsubscribe...')
+      navigator.serviceWorker.ready
+        .then((serviceWorkerRegistration) => {
+          serviceWorkerRegistration.pushManager.getSubscription()
+            .then((subscription) => {
+              $.ajax('/unsubscribe', {
+                type: 'DELETE',
+                data: {
+                  subscription: subscription.toJSON(),
+                  user_id: <%= @user.id %>
+                }
+              }).done(function(data, status) {
+                console.log(data)
+                $('#unsubscribe').text('Unsubscribed!');
+                console.log("Unsubscribed!")
               })
             });
         });

@@ -21,7 +21,17 @@ class PushNotificationsController < ApplicationController
   end
 
   def destroy
-    puts "unsubscribed"
+    subscription_hash = Subscription.create_hash(current_user.id, params)[:subscription_hash]
+    begin
+      subscription = Subscription.find(subscription_hash)
+      subscription.destroy
+      response = {"success": "You have successfully unsubscribed"}
+    rescue ActiveRecord::RecordNotFound => ex
+      puts "failed"
+      response = {"failed": "You have already unsubscribed"}
+      puts ex
+    end
+    render json: response, status: :ok
   end
 
   private
