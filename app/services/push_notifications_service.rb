@@ -1,18 +1,22 @@
-module PushNotifications
-  # TODO: Refactor this into a service
+module PushNotificationsService
   require 'json'
+
   def send_webpush_notification(user_id, params)
     Rails.logger.info "Sending push notification from #{params.inspect}"
+    @endpoint = params[:subscription][:endpoint]
+    @auth     = params[:subscription][:keys][:auth]
+    @key      = params[:subscription][:keys][:p256dh]
+    @message  = JSON.generate({
+        title:  params[:message][:title],
+        body:   params[:message][:body],
+    })
+
     begin
-      message = {
-        title: params[:message][:title],
-        body: params[:message][:body],
-      }
       Webpush.payload_send(
-        message: JSON.generate(message),
-        endpoint: params[:subscription][:endpoint],
-        p256dh: params[:subscription][:keys][:p256dh],
-        auth: params[:subscription][:keys][:auth],
+        message: @message,
+        endpoint: @endpoint,
+        p256dh: @key,
+        auth: @auth,
         vapid: {
           subject: "mailto:plantiapp@gmail.com",
           public_key: ENV['VAPID_PUBLIC_KEY'],

@@ -1,6 +1,6 @@
 class PushNotificationsController < ApplicationController
 
-  include PushNotifications
+  include PushNotificationsService
   require 'json'
 
   def create
@@ -27,9 +27,7 @@ class PushNotificationsController < ApplicationController
       subscription.destroy
       response = {"success": "You have successfully unsubscribed"}
     rescue ActiveRecord::RecordNotFound => ex
-      puts "failed"
       response = {"failed": "You have already unsubscribed"}
-      puts ex
     end
     render json: response, status: :ok
   end

@@ -38,7 +38,7 @@ task :notify => :environment do
   end
 
   def notify_user(user, plants)
-    include PushNotifications
+    include PushNotificationsService
     plant_nickname = Plant.find(plants.first.first)[:nickname]
     params = {
       :message => {
