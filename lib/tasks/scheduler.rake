@@ -39,6 +39,7 @@ task :notify => :environment do
 
   def notify_user(user, plants)
     include PushNotificationsService
+
     plant_nickname = Plant.find(plants.first.first)[:nickname]
     params = {
       :message => {
@@ -54,20 +55,22 @@ task :notify => :environment do
   get_users_with_thirsty_plants()
 
   @thirsty_plants.map do |user, plant|
-    @user_id = user
-    @subscriptions = Subscription.where(user_id: @user_id)
-    @subscriptions.each do |subscription|
-      subscription = subscription[:subscription]
-      user_hash = {
-        :subscription => {
-          :endpoint => subscription['endpoint'],
-          :keys => {
-            :p256dh => subscription['p256dh'],
-            :auth => subscription['auth']
-          },
+    if plant.any?
+      @user_id = user
+      @subscriptions = Subscription.where(user_id: @user_id)
+      @subscriptions.each do |subscription|
+        subscription = subscription[:subscription]
+        user_hash = {
+          :subscription => {
+            :endpoint => subscription['endpoint'],
+            :keys => {
+              :p256dh => subscription['p256dh'],
+              :auth => subscription['auth']
+            },
+          }
         }
-      }
-      notify_user(user_hash, plant)
+        notify_user(user_hash, plant)
+      end
     end
   end
   puts "\nThirsty plants: "
