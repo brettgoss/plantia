@@ -11,35 +11,10 @@ end
 # TODO: Make this modular and move logic out of task
 desc "This checks for plants that need watering and triggers the webpush notifications"
 task :notify => :environment do
-  def get_users_with_recently_watered_plants(num_days = 2)
-    @users_with_thirsty_plants = {}
-    users = User.all
-    users.each do |user|
-      water_events = user.water_events.where("water_date > ?", num_days.days.ago.beginning_of_day).to_a
-      if water_events.any?
-        @users_with_thirsty_plants["#{user.id}"] = water_events
-      end
-    end
-  end
+  @thirsty_plants = User.get_thirsty_plants_by_user(7)
 
-  def get_users_with_thirsty_plants
-    @thirsty_plants = {}
-    @users_with_thirsty_plants.map do |user, events|
-      plants = {}
-      events.each do |event|
-        if (!plants.include? event.plant_id) && event.water_date <= DateTime.now
-          plants["#{event.plant_id}"] = event.water_date
-        elsif event.water_date > DateTime.now
-          plants.delete("#{event.plant_id}")
-        end
-      end
-      @thirsty_plants["#{user}"] = plants
-    end
-  end
-
-  def notify_user(user, plants)
+  def notify_user(user_id, user, plants)
     include PushNotificationsService
-
     plant_nickname = Plant.find(plants.first.first)[:nickname]
     params = {
       :message => {
@@ -48,16 +23,12 @@ task :notify => :environment do
       },
       :subscription => user[:subscription]
     }
-    send_webpush_notification(@user_id, params)
+    send_webpush_notification(user_id, params)
   end
 
-  get_users_with_recently_watered_plants(2)
-  get_users_with_thirsty_plants()
-
-  @thirsty_plants.map do |user, plant|
+  @thirsty_plants.map do |user_id, plant|
     if plant.any?
-      @user_id = user
-      @subscriptions = Subscription.where(user_id: @user_id)
+      @subscriptions = Subscription.where(user_id: user_id)
       @subscriptions.each do |subscription|
         subscription = subscription[:subscription]
         user_hash = {
@@ -69,7 +40,7 @@ task :notify => :environment do
             },
           }
         }
-        notify_user(user_hash, plant)
+        notify_user(user_id, user_hash, plant)
       end
     end
   end
