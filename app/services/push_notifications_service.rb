@@ -1,6 +1,19 @@
 module PushNotificationsService
   require 'json'
 
+  def notify_user_of_thirsty_plant(details, subscription_hash)
+    user_id    = details['user_id']
+    plant_name = details['plant_name']
+    message_params = {
+      :message => {
+        :title => "Your plants are thirsty!",
+        :body => "Your plant #{plant_name} needs watering!",
+      },
+      :subscription => subscription_hash
+    }
+    send_webpush_notification(user_id, message_params)
+  end
+
   def send_webpush_notification(user_id, params)
     Rails.logger.info "Sending push notification from #{params.inspect}"
     @endpoint = params[:subscription][:endpoint]

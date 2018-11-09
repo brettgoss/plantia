@@ -21,34 +21,4 @@ class User < ApplicationRecord
       Digest::SHA1.hexdigest(password) == encrypted_password
     end
   end
-
-  def self.get_thirsty_plants_by_user(days_since_watered = 2)
-    get_users_with_recently_watered_plants(days_since_watered)
-
-    @thirsty_plants = {}
-    @users_with_recently_watered_plants.map do |user, events|
-      plants = {}
-      events.each do |event|
-        if (!plants.include? event.plant_id) && event.water_date <= DateTime.now
-          plants["#{event.plant_id}"] = event.water_date
-        elsif event.water_date > DateTime.now
-          plants.delete("#{event.plant_id}")
-        end
-      end
-      @thirsty_plants["#{user}"] = plants
-    end
-
-    return @thirsty_plants
-  end
-
-private
-  def self.get_users_with_recently_watered_plants(days_since_watered)
-    @users_with_recently_watered_plants = {}
-    User.all.each do |user|
-      water_events = user.water_events.where("water_date > ?", days_since_watered.days.ago.beginning_of_day).to_a
-      if water_events.any?
-        @users_with_recently_watered_plants["#{user.id}"] = water_events
-      end
-    end
-  end
 end
