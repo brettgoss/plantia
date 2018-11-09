@@ -15,14 +15,14 @@ class Subscription < ApplicationRecord
     subscription.merge!(subscription_hash: Digest::SHA2.new(512).hexdigest(subscription.to_json))
   end
 
-  def self.fetch_dry_plant_subscriptions
+  def self.fetch_dry_plant_subscriptions(days_since_watered)
     sql = <<-SQL
       SELECT s.user_id, MAX(p.nickname) AS plant_name, s.subscription
       FROM water_events e
         INNER JOIN plants p ON e.plant_id = p.id
         INNER JOIN users u ON p.user_id = u.id
         INNER JOIN subscriptions s ON s.user_id = u.id
-      WHERE e.water_date BETWEEN (CURRENT_DATE - INTERVAL '7 days') AND (CURRENT_DATE - INTERVAL '1 day')
+      WHERE e.water_date BETWEEN (CURRENT_DATE - INTERVAL '#{days_since_watered} days') AND (CURRENT_DATE - INTERVAL '1 day')
       GROUP BY s.subscription_hash
     SQL
 
