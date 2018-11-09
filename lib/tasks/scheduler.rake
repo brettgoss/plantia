@@ -1,19 +1,23 @@
-# require 'twilio_helper'
-require 'seed_helper'
+require 'json'
 
-# desc "This task is called by the Heroku scheduler add-on"
-# task :send_text => :environment do
-#   twilio = TwilioHelper.new
-#   User.has_thristy_plant.each do |user|
-#     twilio.send_text(user)
-#   end
-# end
+namespace :notifications do
+  desc "Sends users a push notification if their plants are thristy"
+  task :send_watering_notification, [:days_since_watered] => :environment do |task, args|
+    include PushNotificationsService
 
-desc "This will be called only once on Heroku manually"
-task :seed => :environment do
-  seedhelper = SeedHelper.new
-  seedhelper.seed_data
+    days_since_watered = args[:days_since_watered] ? args[:days_since_watered].to_i : 2
+    dry_plant_subscriptions = Subscription.fetch_dry_plant_subscriptions(days_since_watered)
+    dry_plant_subscriptions.each do |notification|
+      subscription = JSON.parse(notification['subscription'])
+      subscription_hash = {
+        :endpoint => subscription['endpoint'],
+        :keys => {
+          :p256dh => subscription['p256dh'],
+          :auth => subscription['auth']
+        }
+      }
+
+      notify_user_of_thirsty_plant(notification, subscription_hash)
+    end
+  end
 end
-
-# desc "This checks for plants that need watering and triggers the webpush notifications"
-# task :notify => :environment do

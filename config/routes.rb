@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   devise_for :users,
     # Override default registrations actions to allow name field
     :controllers => { registrations: 'registrations' }
-    devise_scope :user do
-      # Allow logging out by getting this route
-      get '/users/sign_out' => 'devise/sessions#destroy'
-    end
+  devise_scope :user do
+    # Allow logging out by getting this route
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
   get 'welcome/index'
   root to: 'welcome#index'
@@ -26,8 +26,8 @@ Rails.application.routes.draw do
 
   resources :water, only: [:create, :destroy], controller: 'water_events'
 
-  post '/subscribe' => 'subscriptions#create'
-  delete '/unsubscribe' => 'subscriptions#destroy'
+  post '/subscribe' => 'push_notifications#subscribe'
+  delete '/unsubscribe' => 'push_notifications#destroy'
   post '/push' => 'push_notifications#create'
 
 end
