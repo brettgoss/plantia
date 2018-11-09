@@ -1,12 +1,4 @@
-# require 'twilio_helper'
-require 'seed_helper'
 require 'json'
-
-desc "This will be called only once on Heroku manually"
-task :seed => :environment do
-  seedhelper = SeedHelper.new
-  seedhelper.seed_data
-end
 
 namespace :notifications do
   desc "Sends users a push notification if their plants are thristy"
