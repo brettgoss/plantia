@@ -18,11 +18,15 @@
 //= require_tree .
 //= stub "serviceworker.js"
 
+// Check for service worker support
 if ('serviceWorker' in navigator) {
   console.log('Service Worker is supported');
+  // Register the serviceworker (and serviceworker.js)
   navigator.serviceWorker.register('/serviceworker.js')
     .then(function (registration) {
       console.log('Successfully registered!', ':)', registration);
+      // Ask the user for permissions to send notifications
+      // TODO: Move this out to after a user clicks a button
       navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
         serviceWorkerRegistration.pushManager
           .subscribe({
@@ -35,6 +39,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// This is a duplicate of the above?
 if (navigator.serviceWorker) {
   navigator.serviceWorker.register('/serviceworker.js')
     .then(function (reg) {
