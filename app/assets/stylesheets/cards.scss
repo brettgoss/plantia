@@ -31,11 +31,17 @@
     }
 
     .plant-head {
-      margin: 10px 2px;
+      margin: 10px 0;
+      padding-right: 1em;
+      width: 100%;
       flex-wrap: wrap;
+      @media screen and (min-width: 640px) {
+        min-height: 4em;
+      }
 
       .plant-nickname {
         font-size: 1.2em;
+        line-height: 1.2em;
         font-weight: 600;
         color: #fff;
       }
