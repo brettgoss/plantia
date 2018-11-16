@@ -16,24 +16,29 @@
         <div><h3>Hello, <%= @user.name %>.</h3></div>
         <div>You currently have <%= plant_count %>.</div>
       </div>
+
+      <br />
+
+      <div>
+        <%= link_to 'Edit Account', edit_registration_path(@user), class: "button" %>
+      </div>
     </div>
 
     <div class="six columns">
-      <h2>Push Simple</h2>
+      <h2>Push Notifications</h2>
 
       <p>
-        <strong>Objective</strong>: Simple example of the Web Push API through Service Workers. Send notifications to users even when the page is not open.<br/>
-        Eventually this will be used to trigger plant watering notifications.
+        Click 'Subscribe' below to enable push notifications on this device. 
+        Notifications will be sent when one of your plants are 2 days past their water date.
       </p>
 
-      <button id="push-simple-app" class="button">Send notification</button>
       <button id="subscribe" class="button">Subscribe to notifications</button>
       <button id="unsubscribe" class="button">Unsubscribe from notifications</button>
+      <button id="push-simple-app" class="button">Send test notification</button>
     </div>
   </div>
 
   <div class="row">
-    <%= link_to 'Edit Account', edit_registration_path(@user), class: "button" %>
   </div>
 
   <script type="text/javascript">
