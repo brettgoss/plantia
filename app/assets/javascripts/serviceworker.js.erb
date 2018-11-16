@@ -65,15 +65,20 @@ function onFetch(event) {
 
 // Receive a push notification
 function onPush(event) {
-  let message = JSON.parse(event.data.text())
-  console.log("received a push:", event.data.text());
-  let title = (message && message.title) || "Message from Plantia";
-  let body = (message && message.body) || "Your plant needs watering!";
-  let tag = "push-notification-plantia" + Date.now();
-  let icon = '/logo.png';
+  let message = event.data.json()
+  let icon    = '/logo.png';
+  let tag     = "push-notification-plantia-" + Date.now();
+  let title   = (message && message.title) || "Message from Plantia";
+  let body    = (message && message.body)  || "Your plant needs watering!";
+
+  let options = {
+    icon,
+    tag,
+    body
+  }
 
   event.waitUntil(
-    self.registration.showNotification(title, { body, icon, tag })
+    self.registration.showNotification(title, options)
   )
 }
 

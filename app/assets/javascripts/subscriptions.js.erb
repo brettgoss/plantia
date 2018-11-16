@@ -1,0 +1,39 @@
+document.addEventListener("DOMContentLoaded", (event) => {
+
+  if ('serviceWorker' in navigator) {
+    checkSubscription(navigator).then((hasSubscription) => {
+      if (hasSubscription === true) {
+        document.getElementById('subscribe').style.display = "none";
+      } else {
+        document.getElementById('unsubscribe').style.display = "none";
+      }
+    })
+  }
+
+  $('#push-simple-app').on('click', (e) => {
+    console.log('pushed!')
+    navigator.serviceWorker.ready
+      .then((serviceWorkerRegistration) => {
+        serviceWorkerRegistration.pushManager.getSubscription()
+          .then((subscription) => {
+            $.post('/push', {
+              subscription: subscription.toJSON(),
+              message: {
+                "title": "You clicked a button!",
+                "body": "Good job!"
+              }
+            });
+          });
+      });
+  });
+})
+
+function checkSubscription(navigator) {
+  return navigator.serviceWorker.ready
+    .then((serviceWorkerRegistration) => {
+      return serviceWorkerRegistration.pushManager.getSubscription()
+        .then((subscription) => {
+          return subscription != null;
+        })
+    });
+}
