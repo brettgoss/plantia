@@ -2,8 +2,7 @@
   <div class="row">
     <div class="twelve columns">
       <p>
-        This page is a bit of a work in progress.
-        If there is any other information you would like to see on this page,
+        If there is anything you would like to see added to Plantia,
         feel free to email us suggestions at
         <%= mail_to "plantiapp@gmail.com", "plantiapp@gmail.com" ,subject: "Feature Suggestion:" %>
       </p>
@@ -14,7 +13,11 @@
     <div class="six columns">
       <div id="user-info">
         <div><h3>Hello, <%= @user.name %>.</h3></div>
-        <div>You currently have <%= plant_count %>.</div>
+        <ul>
+          <div>You currently have:</div>
+          <li><%= plant_count %>.</li>
+          <li><%= subscriptions_count %>.</li>
+        </ul>
       </div>
 
       <br />
@@ -36,9 +39,6 @@
       <button id="unsubscribe" class="button hide">Unsubscribe from notifications</button>
       <button id="test-notification" class="button hide">Send test notification</button>
     </div>
-  </div>
-
-  <div class="row">
   </div>
 
   <script type="text/javascript">
