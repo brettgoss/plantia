@@ -1,9 +1,11 @@
 var CACHE_VERSION = 'v2';
 var CACHE_NAME = CACHE_VERSION + ':sw-cache-';
 
+// Once the serviceworker is installed...
 function onInstall(event) {
   console.log('[Serviceworker]', "Installing!", event);
   event.waitUntil(
+    // Add to the browser cache
     caches.open(CACHE_NAME).then(function prefill(cache) {
       return cache.addAll([
 
@@ -20,9 +22,11 @@ function onInstall(event) {
   );
 }
 
+// Once the serviceworker is activated...
 function onActivate(event) {
   console.log('[Serviceworker]', "Activating!", event);
   event.waitUntil(
+    // Update the cache if the file is out of date
     caches.keys().then(function(cacheNames) {
       return Promise.all(
         cacheNames.filter(function(cacheName) {
@@ -59,19 +63,26 @@ function onFetch(event) {
   );
 }
 
+// Receive a push notification
 function onPush(event) {
-  let message = JSON.parse(event.data.text())
-  console.log("received a push:", event.data.text());
-  let title = (message && message.title) || "Message from Plantia";
-  let body = (message && message.body) || "Your plant needs watering!";
-  let tag = "push-notification-plantia" + Date.now();
-  let icon = '/logo.png';
+  let message = event.data.json()
+  let icon    = '/logo.png';
+  let tag     = "push-notification-plantia-" + Date.now();
+  let title   = (message && message.title) || "Message from Plantia";
+  let body    = (message && message.body)  || "Your plant needs watering!";
+
+  let options = {
+    icon,
+    tag,
+    body
+  }
 
   event.waitUntil(
-    self.registration.showNotification(title, { body, icon, tag })
+    self.registration.showNotification(title, options)
   )
 }
 
+// Handle clicking on the push notification
 function onNotificationClick (event) {
   console.log('[Service Worker] Notification click Received.');
 

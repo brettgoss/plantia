@@ -16,76 +16,86 @@
         <div><h3>Hello, <%= @user.name %>.</h3></div>
         <div>You currently have <%= plant_count %>.</div>
       </div>
+
+      <br />
+
+      <div>
+        <%= link_to 'Edit Account', edit_registration_path(@user), class: "button" %>
+      </div>
     </div>
 
     <div class="six columns">
-      <h2>Push Simple</h2>
+      <h2>Push Notifications</h2>
 
       <p>
-        <strong>Objective</strong>: Simple example of the Web Push API through Service Workers. Send notifications to users even when the page is not open.<br/>
-        Eventually this will be used to trigger plant watering notifications.
+        Click 'Subscribe' below to enable push notifications on this device.
+        Notifications will be sent when one of your plants are 2 days past their water date.
       </p>
 
-      <button id="push-simple-app" class="button">Send notification</button>
-      <button id="subscribe" class="button">Subscribe to notifications</button>
-      <button id="unsubscribe" class="button">Unsubscribe from notifications</button>
+      <button id="subscribe" class="button hide">Subscribe to notifications</button>
+      <button id="unsubscribe" class="button hide">Unsubscribe from notifications</button>
+      <button id="test-notification" class="button hide">Send test notification</button>
     </div>
   </div>
 
   <div class="row">
-    <%= link_to 'Edit Account', edit_registration_path(@user), class: "button" %>
   </div>
 
   <script type="text/javascript">
+    function sendSubscriptionToServer(subscription) {
+      $.post('/subscribe', {
+        subscription: subscription.toJSON(),
+        user_id: <%= @user.id %>
+      })
+      .done((data, status) => {
+        console.log(data, status)
+        $('#subscribe').text('Subscribed!');
+        setTimeout(() => {
+          location.reload()
+        }, 500);
+      })
+    }
+
+    function unsubscribe(subscription) {
+      $.ajax('/unsubscribe', {
+        type: 'DELETE',
+        data: {
+          subscription: subscription.toJSON(),
+          user_id: <%= @user.id %>
+        }
+      })
+      .done(function(data, status) {
+        subscription.unsubscribe()
+        console.log(data, status)
+        $('#unsubscribe').text('Unsubscribed!');
+        setTimeout(() => {
+          location.reload()
+        }, 500);
+      })
+    }
+
     window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['VAPID_PUBLIC_KEY']).bytes %>);
-    $('#push-simple-app').on('click', (e) => {
-      console.log('pushed!')
-      navigator.serviceWorker.ready
-        .then((serviceWorkerRegistration) => {
-          serviceWorkerRegistration.pushManager.getSubscription()
-            .then((subscription) => {
-              $.post('/push', {
-                subscription: subscription.toJSON(),
-                message: {"title": "You clicked a button!", "body": "Good job!"}
-              });
-            });
-        });
-    });
+
     $('#subscribe').on('click', (e) => {
-      console.log('attempting subscription...')
       navigator.serviceWorker.ready
         .then((serviceWorkerRegistration) => {
-          serviceWorkerRegistration.pushManager.getSubscription()
-            .then((subscription) => {
-              $.post('/subscribe', {
-                subscription: subscription.toJSON(),
-                user_id: <%= @user.id %>
-              }).done(function(data, status) {
-                console.log(data)
-                $('#subscribe').text('Subscribed!');
-                console.log("Subscribed!")
-              })
-            });
-        });
+          const options = {
+            userVisibleOnly: true,
+            applicationServerKey: window.vapidPublicKey
+          }
+
+          serviceWorkerRegistration.pushManager.subscribe(options)
+            .then(pushSubscription => sendSubscriptionToServer(pushSubscription))
+            .catch(error => console.warn("There was an subscribing: ", error))
+        })
     });
+
     $('#unsubscribe').on('click', (e) => {
-      console.log('attempting to unsubscribe...')
       navigator.serviceWorker.ready
         .then((serviceWorkerRegistration) => {
           serviceWorkerRegistration.pushManager.getSubscription()
-            .then((subscription) => {
-              $.ajax('/unsubscribe', {
-                type: 'DELETE',
-                data: {
-                  subscription: subscription.toJSON(),
-                  user_id: <%= @user.id %>
-                }
-              }).done(function(data, status) {
-                console.log(data)
-                $('#unsubscribe').text('Unsubscribed!');
-                console.log("Unsubscribed!")
-              })
-            });
+            .then(subscription => unsubscribe(subscription))
+            .catch(error => console.warn("There was an subscribing: ", error))
         });
     });
   </script>
