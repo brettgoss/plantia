@@ -1,0 +1,43 @@
+document.addEventListener("DOMContentLoaded", (event) => {
+
+  if ('serviceWorker' in navigator) {
+    checkSubscription(navigator).then(hasSubscription => {
+      if (hasSubscription === false) {
+        // TODO: Refactor this to not suck.
+        let subscribeButton = document.getElementById('subscribe')
+        if (subscribeButton) subscribeButton.classList.remove("hide")
+      } else {
+        let unsubscribeButton = document.getElementById('unsubscribe')
+        if (unsubscribeButton) unsubscribeButton.classList.remove("hide")
+        if (unsubscribeButton) document.getElementById('test-notification').classList.remove("hide")
+      }
+    })
+  }
+
+  $('#test-notification').on('click', (e) => {
+    console.log('pushed!')
+    navigator.serviceWorker.ready
+      .then((serviceWorkerRegistration) => {
+        serviceWorkerRegistration.pushManager.getSubscription()
+          .then((subscription) => {
+            $.post('/push', {
+              subscription: subscription.toJSON(),
+              message: {
+                "title": "You clicked a button!",
+                "body": "Good job!"
+              }
+            });
+          });
+      });
+  });
+})
+
+function checkSubscription(navigator) {
+  return navigator.serviceWorker.ready
+    .then((serviceWorkerRegistration) => {
+      return serviceWorkerRegistration.pushManager.getSubscription()
+        .then((subscription) => {
+          return subscription != null;
+        })
+    });
+}
