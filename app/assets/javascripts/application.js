@@ -27,13 +27,13 @@ if ('serviceWorker' in navigator) {
       console.log('Successfully registered!', ':)', registration);
       // Ask the user for permissions to send notifications
       // TODO: Move this out to after a user clicks a button
-      navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
-        serviceWorkerRegistration.pushManager
-          .subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: window.vapidPublicKey
-          });
-      })
+      // navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+      //   serviceWorkerRegistration.pushManager
+      //     .subscribe({
+      //       userVisibleOnly: true,
+      //       applicationServerKey: window.vapidPublicKey
+      //     });
+      // })
     }).catch(function (error) {
       console.log('Registration failed', ':(', error);
     });
