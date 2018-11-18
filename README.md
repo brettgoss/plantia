@@ -6,6 +6,7 @@ Keep track of your houseplants, the easy way.
 
 A web app where users can store houseplant care information and track watering schedules
 
+Credit to [@Bean0B](https://github.com/Bean0B) and [@Kimberleydillon](https://github.com/Kimberleydillon) 
 
 ## Local Setup
 1. Clone the repo: `git clone git@github.com:brettgoss/plantia.git`
