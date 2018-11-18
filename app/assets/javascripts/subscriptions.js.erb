@@ -1,16 +1,20 @@
 document.addEventListener("DOMContentLoaded", (event) => {
 
   if ('serviceWorker' in navigator) {
-    checkSubscription(navigator).then((hasSubscription) => {
-      if (hasSubscription === true) {
-        document.getElementById('subscribe').style.display = "none";
+    checkSubscription(navigator).then(hasSubscription => {
+      if (hasSubscription === false) {
+        // TODO: Refactor this to not suck.
+        let subscribeButton = document.getElementById('subscribe')
+        if (subscribeButton) subscribeButton.classList.remove("hide")
       } else {
-        document.getElementById('unsubscribe').style.display = "none";
+        let unsubscribeButton = document.getElementById('unsubscribe')
+        if (unsubscribeButton) unsubscribeButton.classList.remove("hide")
+        if (unsubscribeButton) document.getElementById('test-notification').classList.remove("hide")
       }
     })
   }
 
-  $('#push-simple-app').on('click', (e) => {
+  $('#test-notification').on('click', (e) => {
     console.log('pushed!')
     navigator.serviceWorker.ready
       .then((serviceWorkerRegistration) => {

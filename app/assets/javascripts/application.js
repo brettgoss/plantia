@@ -25,26 +25,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/serviceworker.js')
     .then(function (registration) {
       console.log('Successfully registered!', ':)', registration);
-      // Ask the user for permissions to send notifications
-      // TODO: Move this out to after a user clicks a button
-      // navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
-      //   serviceWorkerRegistration.pushManager
-      //     .subscribe({
-      //       userVisibleOnly: true,
-      //       applicationServerKey: window.vapidPublicKey
-      //     });
-      // })
     }).catch(function (error) {
       console.log('Registration failed', ':(', error);
     });
-}
-
-// This is a duplicate of the above?
-if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('/serviceworker.js')
-    .then(function (reg) {
-      console.log('Service worker change, registered the service worker');
-    });
-} else { // Otherwise, no push notifications :(
-  console.error('Service workers are not supported in this browser');
 }
