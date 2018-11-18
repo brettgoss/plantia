@@ -8,11 +8,11 @@ A web app where users can store houseplant care information and track watering s
 
 
 ## Local Setup
-1. Clone the repo: `git clone git@github.com:Plantia/plantia-web.git`
-1. Navigate to the root of the project: `cd plantia-web`
+1. Clone the repo: `git clone git@github.com:brettgoss/plantia.git`
+1. Navigate to the root of the project: `cd plantia`
 1. Install dependencies: `bundle`
-1. Create the database with `rake db:create`
-1. Start application with: `bundle exec puma`
+1. Create the database: `rake db:create`
+1. Start application: `bundle exec puma`
 1. Visit `localhost:3000` in your browser to access the application
 
 
@@ -21,3 +21,6 @@ A web app where users can store houseplant care information and track watering s
 - Ruby
 - [Rails](https://rubygems.org/gems/rails)
 - [PostgreSQL](https://rubygems.org/gems/pg)
+
+## Contributing
+Contributions welcome!
