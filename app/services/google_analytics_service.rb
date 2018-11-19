@@ -1,19 +1,20 @@
 class GoogleAnalyticsService
+  require 'http'
 
   def event(category, action, client_id = '555')
     return unless ENV['GA_TRACKING_ID'].present?
 
     params = {
-      v: 1,
-      tid: ENV['GA_TRACKING_ID'],
-      cid: client_id,
-      t: "event",
-      ec: category,
-      ea: action,
+      :v   => 1,
+      :tid => ENV['GA_TRACKING_ID'],
+      :cid => client_id,
+      :t   => "event",
+      :ec  => category,
+      :ea  => action,
     }
 
     begin
-      RestClient.get('http://www.google-analytics.com/collect', params: params, timeout: 4, open_timeout: 4)
+      HTTP.timeout(4).get('https://www.google-analytics.com/collect', :params => params).to_s
       return true
     rescue  RestClient::Exception => rex
       return false
