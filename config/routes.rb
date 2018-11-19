@@ -2,17 +2,20 @@ Rails.application.routes.draw do
 
   devise_for :users,
     # Override default registrations actions to allow name field
-    :controllers => { registrations: 'registrations' }
+    :controllers => { registrations: 'registrations' },
+    path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
+
   devise_scope :user do
-    # Allow logging out by getting this route
-    get '/users/sign_out' => 'devise/sessions#destroy'
+    # Allow logging out by GET'ing this route (as opposed to POST'ing)
+    get '/logout' => 'devise/sessions#destroy'
+
+    authenticated :user do
+      root 'welcome#index', as: :authenticated_root
+    end
   end
 
-  get 'welcome/index'
-  root to: 'welcome#index'
+  root 'devise/registrations#new', as: :unauthenticated_root
 
-  # These routes will be for signup. The first renders a form in the browse, the second will
-  # receive the form and create a user in our database using the data given to us by the user.
   get '/welcome' => 'users#new'
   get '/profile' => 'users#index'
   post '/users' => 'users#create'
