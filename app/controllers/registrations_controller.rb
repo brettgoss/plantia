@@ -4,7 +4,6 @@ class RegistrationsController < Devise::RegistrationsController
     super do |created_user|
       if created_user.id
         uuid = User.find(created_user.id).uuid
-        # TODO: Make this async
         GoogleAnalyticsService.new.event('users', 'signup', uuid)
       end
     end

@@ -12,7 +12,6 @@ class PushNotificationsController < ApplicationController
     subscription = Subscription.create_hash(current_user.id, params)
     subscription = Subscription.new(subscription)
     begin subscription.save
-      # TODO: Make these async
       GoogleAnalyticsService.new.event('users', 'subscribe', current_user.uuid)
       response = {"success": "You have successfully subscribed to push notifications"}
     rescue ActiveRecord::RecordNotUnique

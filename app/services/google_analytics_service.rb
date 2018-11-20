@@ -14,9 +14,9 @@ class GoogleAnalyticsService
     }
 
     begin
-      HTTP.timeout(4).get('https://www.google-analytics.com/collect', :params => params).to_s
+      AnalyticsWorker.perform_async(params)
       return true
-    rescue  RestClient::Exception => rex
+    rescue  HTTP::Error => ex
       return false
     end
   end
