@@ -15,7 +15,7 @@
 
       <% if current_user %>
         <div>
-          <span class="userfunc u-pull-right"><%= link_to current_user.name, '/me', 'data-turbolinks': 'false' %> | <%= link_to "Logout", destroy_user_session_path %></span>
+          <span class="userfunc u-pull-right"><%= link_to current_user.name, profile_path, 'data-turbolinks': 'false' %> | <%= link_to "Logout", destroy_user_session_path %></span>
         </div>
       <% else %>
         <span class="userfunc u-pull-right"><%= render "devise/shared/links" %></span>
