@@ -37,6 +37,11 @@
     width: 50px;
     float: left;
     padding: 0px 8px;
+
+    @media screen and (max-width: 640px) {
+      width: 35px;
+      padding: 8px;
+    }
   }
   a {
     position: relative;

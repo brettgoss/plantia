@@ -1,5 +1,13 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def create
+    super do |created_user|
+      if created_user.id
+        uuid = User.find(created_user.id).uuid
+        GoogleAnalyticsService.new.event('users', 'signup', uuid)
+      end
+    end
+  end
   private
 
   def sign_up_params
