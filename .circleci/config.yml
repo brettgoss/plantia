@@ -13,7 +13,7 @@ jobs:
           PGUSER: plantia_test
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/postgres:10.5-alpine
+      - image: circleci/postgres:10.6-alpine
         environment:
           POSTGRES_USER: plantia_test
           POSTGRES_DB: plantia_test
