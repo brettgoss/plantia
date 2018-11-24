@@ -72,7 +72,7 @@ jobs:
           command: |
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
-                              --out test_results/rspec.xml \
+                              --out test-results/rspec.xml \
                               --format progress \
                               --require spec_helper \
                               $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
