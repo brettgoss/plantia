@@ -9,6 +9,15 @@
       You don’t have to be blessed with a green thumb to keep houseplants alive and thriving.
       Let Plantia keep track of your houseplants and their watering schedules.">
     <%= csrf_meta_tags %>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=ENV['GA_TRACKING_ID']%>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '<%=ENV['GA_TRACKING_ID']%>');
+    </script>
+    <%= javascript_include_tag 'gtag' %>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,500" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>

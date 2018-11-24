@@ -16,6 +16,7 @@
 //= require moment
 //= require serviceworker-companion
 //= require_tree .
+//= stub "gtag.js"
 //= stub "serviceworker.js"
 
 // Check for service worker support
