@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/Plantia/plantia-web
-    parallelism: 4
+    parallelism: 2
     docker:
       - image: circleci/ruby:2.5.1-node
         environment:
@@ -13,7 +13,7 @@ jobs:
           PGUSER: plantia_test
           RAILS_ENV: test
           RACK_ENV: test
-      - image: circleci/postgres:9.5-alpine
+      - image: circleci/postgres:10.5-alpine
         environment:
           POSTGRES_USER: plantia_test
           POSTGRES_DB: plantia_test
@@ -26,26 +26,33 @@ jobs:
           name: Which bundler?
           command: bundle -v
 
-      # Restore bundle cache
+      # Bundler
       - restore_cache:
           keys:
-          # This branch if available
-          - v1-dep-{{ .Branch }}-
-          # Default branch if not
-          - v1-dep-master-
-          # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
-          - v1-dep-
+            - plantia-bundle-{{ checksum "Gemfile.lock" }}
+            - plantia-bundle-
+
       - run:
           name: Bundle Install
           command: bundle check || bundle install
 
-      # Store bundle cache
       - save_cache:
-          key: v1-dep-{{ .Branch }}-{{ epoch }}
+          key: plantia-bundle-{{ checksum "Gemfile.lock" }}
           paths:
-          # This is a broad list of cache paths to include many possible development environments
-          # You can probably delete some of these entries
-          - vendor/bundle
+            - vendor/bundle
+
+      # NPM & Node Modules
+      - restore_cache:
+          key: plantia-npm-{{ checksum "package.json" }}
+
+      - run:
+          name: npm Install
+          command: npm install
+
+      - save_cache:
+          key: plantia-npm-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
 
       - run:
           name: Wait for DB
@@ -62,7 +69,14 @@ jobs:
       # Run rspec in parallel
       - run:
           name: Run rspec
-          command: bundle exec rspec --color --require spec_helper --format progress $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              --require spec_helper \
+                              $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
+
       # Save test results for timing analysis
       - store_test_results:
           path: test-results
