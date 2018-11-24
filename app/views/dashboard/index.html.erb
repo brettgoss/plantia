@@ -1,3 +1,4 @@
+<% @title="Dashboard" %>
 <body class="dashboard">
   <%= javascript_pack_tag 'application' %>
   <%= react_component "App", { plants: @plants, waterEvents: @water_events }, prerender: false %>
