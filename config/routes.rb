@@ -16,10 +16,8 @@ Rails.application.routes.draw do
 
   root 'devise/registrations#new', as: :unauthenticated_root
 
-  get '/welcome' => 'users#new'
   get '/profile' => 'users#index'
-  post '/users' => 'users#create'
-  put '/users' => 'users#update'
+  put '/users/session' => 'users#update_session'
 
   resources :dashboard, only: [:index]
 
