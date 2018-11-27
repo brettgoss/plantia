@@ -17,6 +17,15 @@
                 Head to your <%= link_to 'Dashboard', dashboard_index_path, 'data-turbolinks': 'false' %> to take a look at the status of your plants.
                 Or pop on over to <%= link_to 'My Plants', plants_path %> to view a list of all your current plants.
               </p>
+                <p>
+                <% if session[:subscribed] != true %>
+                  You aren't currently subscribed to push notifications on this device.
+                <% else %>
+                  You're currently subscribed to push notifications on this device.
+                <% end %>
+                  <br />
+                  Manage your notification preferences <%= link_to 'here', profile_path %>.
+                </p>
             </div>
           <% end %>
         </div>
