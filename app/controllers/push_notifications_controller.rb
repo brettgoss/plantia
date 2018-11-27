@@ -18,6 +18,7 @@ class PushNotificationsController < ApplicationController
       puts "Failed to save subscription"
       response = {"failed": "You have already subscribed to push notifications"}
     end
+    session[:subscribed] = true
     render json: response, status: :ok
   end
 
@@ -31,6 +32,7 @@ class PushNotificationsController < ApplicationController
     rescue ActiveRecord::RecordNotFound => ex
       response = {"failed": "You have already unsubscribed"}
     end
+    session[:subscribed] = false
     render json: response, status: :ok
   end
 
