@@ -10,4 +10,9 @@ class UsersController < ApplicationController
       @plants = @user.plants.all
     end
   end
+
+  def update_session
+    session[:subscribed] = params[:subscribed]
+    render json: { 'subscribed': session[:subscribed] }, status: :ok
+  end
 end
