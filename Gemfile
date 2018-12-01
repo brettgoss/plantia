@@ -56,6 +56,7 @@ group :development, :test do
 end
 group :test do
   gem 'rspec-rails', '~> 3.5'
+  gem "rspec_junit_formatter"
   gem 'capybara'
   gem 'poltergeist'
   # for Testing
