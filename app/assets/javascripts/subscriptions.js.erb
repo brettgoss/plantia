@@ -19,23 +19,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     })
   }
-
-  $('#test-notification').on('click', (e) => {
-    console.log('pushed!')
-    navigator.serviceWorker.ready
-      .then((serviceWorkerRegistration) => {
-        serviceWorkerRegistration.pushManager.getSubscription()
-          .then((subscription) => {
-            axios.post('/push', {
-              subscription: subscription.toJSON(),
-              message: {
-                "title": "You clicked a button!",
-                "body": "Good job!"
-              }
-            });
-          });
-      });
-  });
 })
 
 function checkSubscription(navigator) {
