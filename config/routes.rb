@@ -33,4 +33,11 @@ Rails.application.routes.draw do
   delete '/unsubscribe' => 'push_notifications#destroy'
   post '/push' => 'push_notifications#create'
 
+  # api
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :create, :show, :update, :destroy]
+      resources :plants, only: [:index, :create, :show, :update, :destroy]
+    end
+  end
 end
