@@ -310,6 +310,7 @@ DEPENDENCIES
   http
   jbuilder (~> 2.5)
   jquery-rails
+  jwt
   listen (~> 3.0.5)
   momentjs-rails
   normalize-rails

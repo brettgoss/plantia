@@ -45,6 +45,8 @@ gem 'serviceworker-rails'
 gem 'webpush'
 # Devise for user management
 gem 'devise'
+# JWT for API auth
+gem 'jwt'
 # For http requests
 gem 'http'
 # For job queuing

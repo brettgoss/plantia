@@ -1,6 +1,6 @@
 class Api::V1::PlantSerializer < Api::V1::BaseSerializer
   attributes(*Plant.attribute_names.map(&:to_sym))
-  has_many :water_events, each_serializer: Api::V1::WaterEventSerializer, if: :include_water_events?
+  has_many :water_events, if: :include_water_events?
   has_many :plantlogs, if: :include_plantlogs?
 
   def include_water_events?
