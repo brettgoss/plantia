@@ -18,7 +18,7 @@ class Api::V1::BaseController < ActionController::API
   end
 
   def set_user_id
-    @user_id = current_user&.id || @jwt_id
+    @user_id = current_user&.id || User.where(uuid: @jwt_uuid).first.id
   end
 
   def authenticate_user
@@ -26,7 +26,7 @@ class Api::V1::BaseController < ActionController::API
       authenticate_or_request_with_http_token do |token|
         begin
           jwt_payload = JsonWebToken.decode(token)
-          @jwt_id = jwt_payload[:id]
+          @jwt_uuid = jwt_payload[:uuid]
         rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
           head :unauthorized
         end
