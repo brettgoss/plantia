@@ -9,7 +9,8 @@ class Api::V1::PlantsController < Api::V1::BaseController
 
   def show
     plant = Plant.where(id: params[:id], user_id: @user.id).first
+    @included = params[:with] || []
 
-    render json: plant, serializer: Api::V1::PlantSerializer
+    render json: plant, included: @included, serializer: Api::V1::PlantSerializer
   end
 end
