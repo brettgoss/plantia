@@ -31,7 +31,7 @@ class Api::V1::BaseController < ActionController::API
           head :unauthorized
         end
       end
-    else
+    elsif !current_user
       head :unauthorized
     end
   end
