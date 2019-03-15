@@ -19,7 +19,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:10.5-alpine
+    image: postgres:10.7-alpine
     volumes:
       - 'postgres:/var/lib/postgresql/data'
 
