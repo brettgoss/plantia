@@ -1,16 +1,16 @@
-FROM ruby:2.5-alpine
+FROM ruby:2.6.2-alpine
 
-RUN apk add --update \
-    build-base \
-    postgresql-dev \
-    tzdata \
-    nodejs \
-    redis
+ENV BUILD_PACKAGES build-base postgresql-dev tzdata
+ENV RUBY_PACKAGES nodejs redis
+
+RUN apk add --update --no-cache \
+    $BUILD_PACKAGES \
+    $RUBY_PACKAGES
 
 RUN gem install rails -v '5.2.0'
 
 WORKDIR /app
 
-RUN echo "2.5.4" > .ruby-version
+RUN echo $RUBY_VERSION > .ruby-version
 ADD Gemfile Gemfile.lock /app/
 RUN bundle install
