@@ -1,9 +1,17 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   devise_for :users,
-    # Override default registrations actions to allow name field
-    :controllers => { registrations: 'registrations' },
-    path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'signup' }
+            path: '',
+            # Override default registrations actions to allow name field
+            controllers: {
+              registrations: 'registrations'
+            },
+            path_names: {
+              sign_in: 'login',
+              sign_out: 'logout',
+              sign_up: 'signup'
+            }
 
   devise_scope :user do
     # Allow logging out by GET'ing this route (as opposed to POST'ing)
@@ -27,7 +35,7 @@ Rails.application.routes.draw do
     resources :plantlogs
   end
 
-  resources :water, only: [:create, :destroy], controller: 'water_events'
+  resources :water, only: %i[create destroy], controller: 'water_events'
 
   post '/subscribe' => 'push_notifications#subscribe'
   delete '/unsubscribe' => 'push_notifications#destroy'
@@ -36,8 +44,9 @@ Rails.application.routes.draw do
   # api
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create, :show, :update, :destroy]
-      resources :plants, only: [:index, :create, :show, :update, :destroy]
+      resources :token, only: %i[index create destroy]
+      resources :users, only: %i[index create show update destroy]
+      resources :plants, only: %i[index create show update destroy]
     end
   end
 end
