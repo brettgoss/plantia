@@ -13,6 +13,28 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 2 }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
+  def generate_token
+    # TODO: Move this to a scheduled worker
+    expire_old_tokens
+
+    token = SecureRandom.base64(64)
+
+    token_object = {
+      token: token,
+      created_at: Time.now.utc,
+      expires_at: 30.days.from_now.utc
+    }
+
+    tokens << token_object.to_json
+    save
+    token_object
+  end
+
+  def expire_old_tokens
+    tokens.clear
+    save
+  end
+
   # Because we have some old legacy users in the database, we need to override Devises method for checking if a password is valid.
   # We first ask Devise if the password is valid, and if it throws an InvalidHash exception, we know that we're dealing with a
   # legacy user, so we check the password against the SHA1 algorithm that was used to hash the password in the old database.
