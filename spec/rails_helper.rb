@@ -7,6 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'devise'
 require 'support/spec_test_helper'
+require 'database_cleaner'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -36,6 +37,18 @@ RSpec.configure do |config|
   # Include controller spec helpers
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.include SpecTestHelper, :type => :controller
+  config.include FactoryBot::Syntax::Methods
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

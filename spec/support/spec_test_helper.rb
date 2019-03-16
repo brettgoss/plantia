@@ -2,8 +2,9 @@
 
 module SpecTestHelper
   def login_as(user)
-    user = User.where(login: user.to_s).first if user.is_a?(Symbol)
-    request.session[:user] = user.id
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    # user = User.where(login: user.to_s) if user.is_a?(Symbol)
+    sign_in user
   end
 
   def current_user

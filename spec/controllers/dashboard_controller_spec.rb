@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe DashboardController, type: :controller do
   before do
-    @user = FactoryGirl.create :user
+    @user = FactoryBot.create :user
   end
 
   describe 'GET index' do
