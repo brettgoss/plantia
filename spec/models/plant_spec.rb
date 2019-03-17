@@ -1,60 +1,58 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Plant, type: :model do
-  describe 'Validations' do
-    #Create stub user when testing
-    user = User.create({
-      name: "Aileen",
-      email: "aileen@fake.com",
-      password: "aileen",
-    })
+  before do
+    @user = FactoryBot.create :user
+    @plant = FactoryBot.build :plant
+    @plant.user = @user
+  end
 
-    it "is true with valid attributes" do
-
-      plant = Plant.new({
-        nickname:"test",
-        common_name: "testy",
-        light: "test test",
-        water_freq: 2,
-      })
-      plant.user = user
-
-      expect(plant.save).to be true
+  describe 'Successful validations' do
+    context 'with all parameters' do 
+      it 'should save with all valid attributes' do
+        expect(@plant.save).to be true
+      end
     end
+  end
 
-    it "is false with no nickname" do
-      plant = Plant.new({
-        nickname:"",
-        common_name: "testy",
-        light: "test test",
-        water_freq: 2,
-      })
-      plant.user = user
+  describe 'Unsuccessful validations' do
+    context 'with missing parameters' do
+      it 'should not save with no user associated' do
+        @plant.user = nil
+        expect(@plant.save).to be false
+      end
 
-      expect(plant.save).to be false
+      it 'should not save with no nickname' do
+        @plant.nickname = ''
+        expect(@plant.save).to be false
+      end
+
+      it 'should not save with no common name' do
+        @plant.common_name = ''
+        expect(@plant.save).to be false
+      end
+
+      it 'should not save with no light requirements' do
+        @plant.light = ''
+        expect(@plant.save).to be false
+      end
+
+      it 'should not save with no water frequency' do
+        @plant.water_freq = nil
+        expect(@plant.save).to be false
+      end
+
+      it 'should not save with a water frequency greater than 1 year' do
+        @plant.water_freq = 400
+        expect(@plant.save).to be false
+      end
+
+      it 'should not save with a non-numeric water frequency' do
+        @plant.water_freq = 'string'
+        expect(@plant.save).to be false
+      end
     end
-
-    it "is false with no common name" do
-      plant = Plant.new({
-        nickname:"Test",
-        common_name: "",
-        light: "test test",
-        water_freq: 2,
-      })
-      plant.user = user
-      expect(plant.save).to be false
-    end
-
-    it "is false with no light requirements" do
-      plant = Plant.new({
-        nickname:"Test",
-        common_name: "testy",
-        light: "",
-        water_freq: 2,
-      })
-      plant.user = user
-      expect(plant.save).to be false
-    end
-    
   end
 end
