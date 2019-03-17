@@ -55,11 +55,13 @@ group :development, :test do
   gem 'byebug', platform: :mri
 end
 group :test do
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
   gem "rspec_junit_formatter"
   gem 'capybara'
   gem 'poltergeist'
-  # for Testing
 end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
