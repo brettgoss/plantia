@@ -59,6 +59,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
+  gem 'simplecov'
   gem "rspec_junit_formatter"
   gem 'capybara'
   gem 'poltergeist'

@@ -8,6 +8,7 @@ require 'rspec/rails'
 require 'devise'
 require 'support/spec_test_helper'
 require 'database_cleaner'
+require 'simplecov'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -35,10 +36,11 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # Include controller spec helpers
-  config.include Devise::Test::ControllerHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Warden::Test::Helpers, type: :request
-  config.include SpecTestHelper, :type => :controller
+  config.include SpecTestHelper, type: :controller
   config.include FactoryBot::Syntax::Methods
+  SimpleCov.start 'rails'
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
