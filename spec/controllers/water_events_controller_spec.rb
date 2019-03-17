@@ -48,6 +48,7 @@ RSpec.describe WaterEventsController, type: :controller do
 
     it 'should error without a valid water event ID' do
       delete :destroy, params: { id: 1000 }
+      expect(flash[:notice]).to_not be(nil)
       expect(response.status).to_not eq(200)
     end
   end

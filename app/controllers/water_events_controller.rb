@@ -18,8 +18,7 @@ class WaterEventsController < ApplicationController
     @water_event.destroy
     redirect_to plant_path(@water_event.plant)
   rescue ActiveRecord::RecordNotFound
-    puts 'Attempted to delete a water event that does not exist'
-    redirect_to plant_path
+    redirect_to plant_path, notice: 'Attempted to delete a water event that does not exist'
   end
 
   private
