@@ -95,6 +95,7 @@ RSpec.describe PlantsController, type: :controller do
       expect do
         post plants_path plant: plant_attributes
       end.to_not change(Plant, :count)
+      expect(response).to redirect_to '/login'
     end
 
     it 'denies access to plants#update' do
