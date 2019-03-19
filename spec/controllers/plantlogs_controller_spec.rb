@@ -62,10 +62,10 @@ RSpec.describe PlantlogsController, type: :controller do
 
     # Skipping because there's no show action currently,
     # but there might be in the future
-    xit 'denies access to plantlogs#show' do
-      get plant_plantlog_path id: @plantlog.id, plant_id: @plant.id
-      expect(response).to redirect_to '/login'
-    end
+    # xit 'denies access to plantlogs#show' do
+    #   get plant_plantlog_path id: @plantlog.id, plant_id: @plant.id
+    #   expect(response).to redirect_to '/login'
+    # end
 
     it 'denies access to plantlogs#new' do
       get new_plant_plantlog_path plant_id: @plant.id
@@ -74,10 +74,10 @@ RSpec.describe PlantlogsController, type: :controller do
 
     # Skipping because there's no edit action currently,
     # but there might be in the future
-    xit 'denies access to plantlogs#edit' do
-      get edit_plant_plantlog_path plant_id: @plant.id
-      expect(response).to redirect_to '/login'
-    end
+    # xit 'denies access to plantlogs#edit' do
+    #   get edit_plant_plantlog_path plant_id: @plant.id
+    #   expect(response).to redirect_to '/login'
+    # end
 
     it 'denies access to plantlogs#create' do
       expect do
@@ -88,13 +88,13 @@ RSpec.describe PlantlogsController, type: :controller do
 
     # Skipping because there's no update action currently,
     # but there might be in the future
-    xit 'denies access to plantlogs#update' do
-      plantlog_attributes = FactoryBot.attributes_for(:plantlog, title: 'new')
-      expect do
-        patch plant_plantlog_path id: @plantlog.id, params: plantlog_attributes
-      end.to_not change(Plantlog, :name)
-      expect(response).to redirect_to '/login'
-    end
+    # xit 'denies access to plantlogs#update' do
+    #   plantlog_attributes = FactoryBot.attributes_for(:plantlog, title: 'new')
+    #   expect do
+    #     patch plant_plantlog_path id: @plantlog.id, params: plantlog_attributes
+    #   end.to_not change(Plantlog, :name)
+    #   expect(response).to redirect_to '/login'
+    # end
 
     it 'denies access to plantlogs#destroy' do
       expect do
