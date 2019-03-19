@@ -15,6 +15,7 @@ module PushNotificationsService
   end
 
   def send_webpush_notification(user_id, params)
+    return false if params[:message].blank?
     Rails.logger.info "Sending push notification from #{params.inspect}"
     @endpoint = params[:subscription][:endpoint]
     @auth     = params[:subscription][:keys][:auth]
@@ -39,11 +40,13 @@ module PushNotificationsService
         open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
         read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
       )
+      return true
     rescue Webpush::InvalidSubscription => ex
       puts "Subscription not valid. Deleting..."
       subscription_hash = Subscription.create_hash(user_id, params)[:subscription_hash]
       subscription = Subscription.find(subscription_hash)
       subscription.destroy
+      return false
     end
   end
 end

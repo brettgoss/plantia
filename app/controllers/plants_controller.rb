@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlantsController < ApplicationController
   before_action :authenticate_user!
   include WaterEventsHelper
@@ -8,15 +10,14 @@ class PlantsController < ApplicationController
   end
 
   def show
-    user = User.find(current_user.id)
-    @plant = Plant.where(id: params[:id], user_id: user.id).first
+    @plant = Plant.where(id: params[:id], user_id: current_user.id).first
 
     if @plant
       @past_events = WaterEvent.where(plant_id: @plant.id)
       @plantlog    = Plantlog.new
-      @plantlogs   = Plantlog.where(plant_id: @plant.id).order("created_at desc")
+      @plantlogs   = Plantlog.where(plant_id: @plant.id).order('created_at desc')
     else
-      redirect_to plants_path()
+      redirect_to plants_path
     end
   end
 
@@ -29,12 +30,12 @@ class PlantsController < ApplicationController
   end
 
   def create
-  	@plant = Plant.new(plant_params)
+    @plant = Plant.new(plant_params)
     @plant.user = current_user
 
     if @plant.save
       create_water_event(@plant)
-      redirect_to dashboard_index_path(), notice: 'Plant created!'
+      redirect_to dashboard_index_path, notice: 'Plant created!'
     else
       render :new
     end
@@ -56,8 +57,8 @@ class PlantsController < ApplicationController
     redirect_to [:plants], notice: 'Plant deleted!'
   end
 
+  private
 
-private
   def plant_params
     params.require(:plant).permit(
       :nickname,
@@ -66,5 +67,4 @@ private
       :water_freq
     )
   end
-
 end

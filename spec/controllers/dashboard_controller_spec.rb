@@ -16,9 +16,18 @@ RSpec.describe DashboardController, type: :controller do
     end
 
     context 'when the user is logged in' do
-      it 'should show the dashboard' do
+      it 'should show the dashboard with their plants' do
+        @plant = FactoryBot.create :plant, user_id: @user.id
         login_as(@user)
         get :index
+        expect(assigns(:plants)).to_not be(nil)
+        expect(response).to render_template(:index)
+      end
+
+      it 'should show the dashboard with empty state' do
+        login_as(@user)
+        get :index
+        expect(assigns(:plants).first[:nickname]).to include('Example')
         expect(response).to render_template(:index)
       end
     end
