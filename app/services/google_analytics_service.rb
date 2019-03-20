@@ -4,7 +4,7 @@ class GoogleAnalyticsService
   require 'http'
 
   def event(category, action, client_id = '555')
-    return unless ENV['GA_TRACKING_ID'].present?
+    return false unless ENV['GA_TRACKING_ID'].present?
 
     @params = get_params(category, action, client_id)
 
@@ -21,6 +21,7 @@ class GoogleAnalyticsService
     false
   rescue Redis::CannotConnectError
     Rails.logger.error('Failed to connect to Redis')
+    false
   end
 
   def get_params(category, action, client_id)
