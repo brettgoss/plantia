@@ -19,6 +19,7 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
+  url: <%= ENV['DATABASE_URL'] %>
 
 development:
   <<: *default

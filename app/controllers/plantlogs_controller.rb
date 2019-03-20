@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlantlogsController < ApplicationController
   before_action :authenticate_user!
 
@@ -6,7 +8,7 @@ class PlantlogsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @plantlogs }
+      format.json { render json: @plantlogs }
     end
   end
 
@@ -15,20 +17,20 @@ class PlantlogsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @plantlog }
+      format.json { render json: @plantlog }
     end
   end
-  
+
   def create
     @plantlog = plant.plantlogs.create(plantlog_params)
 
     respond_to do |format|
       if @plantlog.save
-        format.html { redirect_to(plant, :notice => 'Plantlog was successfully created.') }
-        format.json { render :json => @plantlog, :status => :created, :location => [@plantlog.plant, @plantlog] }
+        format.html { redirect_to(plant, notice: 'Plantlog was successfully created.') }
+        format.json { render json: @plantlog, status: :created, location: [@plantlog.plant, @plantlog] }
       else
         format.html { redirect_to(plant) }
-        format.json { render :json => @plantlog.errors, :status => :unprocessable_entity }
+        format.json { render json: @plantlog.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -38,12 +40,13 @@ class PlantlogsController < ApplicationController
     @plantlog.destroy
 
     respond_to do |format|
-      format.html { redirect_to(plant, :notice => 'Plantlog was successfully deleted.') }
+      format.html { redirect_to(plant, notice: 'Plantlog was successfully deleted.') }
       format.json { head :ok }
-    end  
+    end
   end
 
-private
+  private
+
   def plantlog_params
     params.require(:plantlog).permit(:logtime, :title, :logtext, :plant_id)
   end

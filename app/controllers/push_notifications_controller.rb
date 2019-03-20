@@ -1,22 +1,26 @@
-class PushNotificationsController < ApplicationController
+# frozen_string_literal: true
 
+class PushNotificationsController < ApplicationController
   include PushNotificationsService
   require 'json'
 
   def create
-    send_webpush_notification(current_user.id, params)
-    head :ok
+    if send_webpush_notification(current_user.id, params)
+      head :ok
+    else
+      head 404
+    end
   end
 
   def subscribe
     subscription = Subscription.create_hash(current_user.id, params)
     subscription = Subscription.new(subscription)
     begin subscription.save
-      GoogleAnalyticsService.new.event('users', 'subscribe', current_user.uuid)
-      response = {"success": "You have successfully subscribed to push notifications"}
+          GoogleAnalyticsService.new.event('users', 'subscribe', current_user.uuid)
+          response = { "success": 'You have successfully subscribed to push notifications' }
     rescue ActiveRecord::RecordNotUnique
-      puts "Failed to save subscription"
-      response = {"failed": "You have already subscribed to push notifications"}
+      Rails.logger.info 'Failed to save subscription'
+      response = { "failed": 'You have already subscribed to push notifications' }
     end
     render json: response, status: :ok
   end
@@ -27,9 +31,9 @@ class PushNotificationsController < ApplicationController
       subscription = Subscription.find(subscription_hash)
       subscription.destroy
       GoogleAnalyticsService.new.event('users', 'unsubscribe', current_user.uuid)
-      response = {"success": "You have successfully unsubscribed"}
+      response = { "success": 'You have successfully unsubscribed' }
     rescue ActiveRecord::RecordNotFound => ex
-      response = {"failed": "You have already unsubscribed"}
+      response = { "failed": 'You have already unsubscribed' }
     end
     render json: response, status: :ok
   end
@@ -37,6 +41,6 @@ class PushNotificationsController < ApplicationController
   private
 
   def push_params
-    params.permit(:message, { subscription: [:endpoint, :expirationTime, keys: [:auth, :p256dh]]})
+    params.permit(:message, subscription: [:endpoint, :expirationTime, keys: %i[auth p256dh]])
   end
 end

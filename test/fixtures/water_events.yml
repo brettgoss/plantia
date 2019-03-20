@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  water_date: 2016-11-19 16:14:24
-  plant_id: 1
-
-two:
-  water_date: 2016-11-19 16:14:24
-  plant_id: 1
