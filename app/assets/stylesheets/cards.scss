@@ -9,6 +9,9 @@
   height: 22em;
   transition: 200ms ease-in-out;
   box-shadow: 0px 3px 10px #bbb;
+  border-radius: 5px;
+  overflow: hidden;
+
   @media screen and (max-width: 640px) {
     width: 100%;
   }
@@ -35,6 +38,7 @@
       padding-right: 1em;
       width: 100%;
       flex-wrap: wrap;
+
       @media screen and (min-width: 640px) {
         min-height: 4em;
       }
@@ -51,18 +55,21 @@
       }
     }
   }
+
   .plant-content {
     margin: 1em;
-    // line-height: 1em;
+
     h5 {
       line-height: 1em;
       margin-bottom: 0.5em;
     }
-    .card-info{
+
+    .card-info {
       font-weight: 600;
       margin-top: 5px;
     }
   }
+
   .card-button {
     width: 100%;
     position: absolute;
@@ -75,7 +82,7 @@
   }
 
   .card-button:focus {
-    color:white;
+    color: white;
   }
 
   .card-button.card-button-good {
@@ -90,7 +97,7 @@
     background-color: #f33434;
   }
 
-    .card-button.card-button-good:hover {
+  .card-button.card-button-good:hover {
     background-color: rgba(#2a8bff, 0.8);
     color: #fff
   }
@@ -105,6 +112,7 @@
     color: #fff
   }
 }
+
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0px 5px 13px #888;
