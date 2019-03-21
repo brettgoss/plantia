@@ -22,7 +22,7 @@ RSpec.describe PushNotificationsService do
       ex = Webpush::InvalidSubscription.new(error, 'body')
       allow(Webpush).to receive(:payload_send).and_raise(ex)
 
-      expect do |_e|
+      expect do
         response = send_webpush_notification(@user.id, @subs_attributes)
         expect(response).to be(false)
       end.to_not raise_error

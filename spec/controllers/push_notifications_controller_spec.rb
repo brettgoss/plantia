@@ -7,6 +7,8 @@ RSpec.describe PushNotificationsController, type: :controller do
       @user = FactoryBot.create :user
       @push_params = FactoryBot.attributes_for(:subscription, user_id: @user.id)
       login_as(@user)
+      ENV['VAPID_PUBLIC_KEY'] = 'key'
+      ENV['VAPID_PRIVATE_KEY'] = 'key'
     end
 
     it 'should allow #create' do
