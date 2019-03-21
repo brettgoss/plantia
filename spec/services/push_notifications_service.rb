@@ -1,39 +1,50 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+RSpec::Matchers.define_negated_matcher :not_change, :change
 
 RSpec.describe PushNotificationsService do
   include PushNotificationsService
   before do
     @user = FactoryBot.create :user
-    @subscription = FactoryBot.attributes_for :subscription
-    @subscription.merge!(user_id: @user.id,
-                         message: {
-                           title: 'Testing',
-                           body: 'Test'
-                         })
+    @subs_attributes = FactoryBot.attributes_for :subscription
+    @subs_attributes[:user_id] = @user.id
+    @subs_attributes[:message] = {
+      title: 'Testing',
+      body: 'Test'
+    }
   end
 
   describe 'when an exception occurs' do
     it 'should not throw an error if the webpush subscription is invalid' do
       # Webpush::InvalidSubscription requires an object, not a hash :(
       error = OpenStruct.new(body: 404)
-      allow(Webpush).to receive(:payload_send).and_raise(
-        Webpush::InvalidSubscription.new(error, 'body')
-      )
+      ex = Webpush::InvalidSubscription.new(error, 'body')
+      allow(Webpush).to receive(:payload_send).and_raise(ex)
 
-      expect do
-        response = send_webpush_notification(@user.id, @subscription)
+      expect do |_e|
+        response = send_webpush_notification(@user.id, @subs_attributes)
         expect(response).to be(false)
       end.to_not raise_error
     end
 
-    it 'should not error with no vapid keys' do
-      ENV['VAPID_PUBLIC_KEY'] = ''
-      ENV['VAPID_PRIVATE_KEY'] = ''
+    it 'should delete the subscription if the subscription is invalid' do
+      error = OpenStruct.new(body: 404)
+      ex = Webpush::InvalidSubscription.new(error, 'body')
+      allow(Webpush).to receive(:payload_send).and_raise(ex)
 
       expect do
-        response = send_webpush_notification(@user.id, @subscription)
+        response = send_webpush_notification(@user.id, @subs_attributes)
+        expect(response).to be(false)
+      end.to change(Subscription, :count)
+    end
+
+    it 'should not error with no vapid keys' do
+      ENV['VAPID_PUBLIC_KEY'] = nil
+      ENV['VAPID_PRIVATE_KEY'] = nil
+
+      expect do
+        response = send_webpush_notification(@user.id, @subs_attributes)
         expect(response).to be(false)
       end.to_not raise_error
     end
@@ -46,7 +57,7 @@ RSpec.describe PushNotificationsService do
       allow(Webpush).to receive(:payload_send)
 
       expect do
-        response = send_webpush_notification(@user.id, @subscription)
+        response = send_webpush_notification(@user.id, @subs_attributes)
         expect(response).to be(true)
       end.to_not raise_error
 
