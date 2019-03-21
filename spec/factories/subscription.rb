@@ -11,6 +11,7 @@ FactoryBot.define do
         }
       }
     end
+    subscription_hash { '7cf011c4cfd2f2aebb509a37b8541006c0c1' }
     user_id { nil }
   end
 end
