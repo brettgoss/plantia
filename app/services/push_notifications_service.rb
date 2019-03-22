@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PushNotificationsService
   require 'json'
 
@@ -5,25 +7,27 @@ module PushNotificationsService
     user_id    = details['user_id']
     plant_name = details['plant_name']
     message_params = {
-      :message => {
-        :title => "Your plants are thirsty!",
-        :body => "Your plant #{plant_name} needs watering!",
+      message: {
+        title: 'Your plants are thirsty!',
+        body: "Your plant #{plant_name} needs watering!"
       },
-      :subscription => subscription_hash
+      subscription: subscription_hash
     }
     send_webpush_notification(user_id, message_params)
   end
 
   def send_webpush_notification(user_id, params)
     return false if params[:message].blank?
+    return false if ENV['VAPID_PUBLIC_KEY'].blank? || ENV['VAPID_PRIVATE_KEY'].blank?
+
     Rails.logger.info "Sending push notification from #{params.inspect}"
     @endpoint = params[:subscription][:endpoint]
     @auth     = params[:subscription][:keys][:auth]
     @key      = params[:subscription][:keys][:p256dh]
-    @message  = JSON.generate({
-        title:  params[:message][:title],
-        body:   params[:message][:body],
-    })
+    @message  = JSON.generate(
+      title: params[:message][:title],
+      body: params[:message][:body]
+    )
 
     begin
       Webpush.payload_send(
@@ -32,7 +36,7 @@ module PushNotificationsService
         p256dh: @key,
         auth: @auth,
         vapid: {
-          subject: "mailto:plantiapp@gmail.com",
+          subject: 'mailto:plantiapp@gmail.com',
           public_key: ENV['VAPID_PUBLIC_KEY'],
           private_key: ENV['VAPID_PRIVATE_KEY']
         },
@@ -42,10 +46,14 @@ module PushNotificationsService
       )
       return true
     rescue Webpush::InvalidSubscription => ex
-      puts "Subscription not valid. Deleting..."
-      subscription_hash = Subscription.create_hash(user_id, params)[:subscription_hash]
-      subscription = Subscription.find(subscription_hash)
-      subscription.destroy
+      Rails.logger.info 'Subscription not valid. Deleting...'
+      begin
+        subscription_hash = Subscription.create_hash(user_id, params)[:subscription_hash]
+        subscription = Subscription.find(subscription_hash)
+        subscription.destroy
+      rescue ActiveRecord::RecordNotFound
+        Rails.logger.info 'Error while deleting: subscription not found.'
+      end
       return false
     end
   end
