@@ -7,6 +7,8 @@ RSpec.describe PushNotificationsController, type: :controller do
       @user = FactoryBot.create :user
       @push_params = FactoryBot.attributes_for(:subscription, user_id: @user.id)
       login_as(@user)
+      ENV['VAPID_PUBLIC_KEY'] = 'key'
+      ENV['VAPID_PRIVATE_KEY'] = 'key'
     end
 
     it 'should allow #create' do
@@ -61,54 +63,4 @@ RSpec.describe PushNotificationsController, type: :controller do
       expect(response.body).to include('failed')
     end
   end
-
-  # describe 'public access to plants', type: :request do
-  #   before do
-  #     @user = FactoryBot.create :user
-  #     @plant = FactoryBot.create(:plant, user: @user)
-  #   end
-
-  #   it 'denies access to plants#index' do
-  #     get plants_path
-  #     expect(response).to redirect_to '/login'
-  #   end
-
-  #   it 'denies access to plants#show' do
-  #     get plant_path id: @plant.id
-  #     expect(response).to redirect_to '/login'
-  #   end
-
-  #   it 'denies access to plants#new' do
-  #     get new_plant_path
-  #     expect(response).to redirect_to '/login'
-  #   end
-
-  #   it 'denies access to plants#edit' do
-  #     get edit_plant_path id: @plant.id
-  #     expect(response).to redirect_to '/login'
-  #   end
-
-  #   it 'denies access to plants#create' do
-  #     plant_attributes = FactoryBot.attributes_for(:plant)
-  #     expect do
-  #       post plants_path plant: plant_attributes
-  #     end.to_not change(Plant, :count)
-  #     expect(response).to redirect_to '/login'
-  #   end
-
-  #   it 'denies access to plants#update' do
-  #     plant_attributes = FactoryBot.attributes_for(:plant, name: 'new')
-  #     expect do
-  #       patch plant_path id: @plant.id, params: plant_attributes
-  #     end.to_not change(Plant, :name)
-  #     expect(response).to redirect_to '/login'
-  #   end
-
-  #   it 'denies access to plants#destroy' do
-  #     expect do
-  #       delete plant_path id: @plant.id
-  #     end.to_not change(Plant, :count)
-  #     expect(response).to redirect_to '/login'
-  #   end
-  # end
 end
