@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class PushNotificationsController < ApplicationController
-  include PushNotificationsService
   require 'json'
 
   def create
-    if send_webpush_notification(current_user.id, params)
+    if PushNotificationsService.call(current_user.id, params)
       head :ok
     else
       head 404

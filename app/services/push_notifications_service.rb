@@ -1,20 +1,19 @@
 # frozen_string_literal: true
 
-module PushNotificationsService
+# Handles sending of webpush notifications
+class PushNotificationsService < BaseService
   require 'json'
 
-  def notify_user_of_thirsty_plant(details, subscription_hash)
-    user_id    = details['user_id']
-    plant_name = details['plant_name']
-    message_params = {
-      message: {
-        title: 'Your plants are thirsty!',
-        body: "Your plant #{plant_name} needs watering!"
-      },
-      subscription: subscription_hash
-    }
-    send_webpush_notification(user_id, message_params)
+  def initialize(user_id, message_params)
+    @user_id = user_id
+    @message_params = message_params
   end
+
+  def call
+    send_webpush_notification(@user_id, @message_params)
+  end
+
+  private
 
   def send_webpush_notification(user_id, params)
     return false if params[:message].blank?

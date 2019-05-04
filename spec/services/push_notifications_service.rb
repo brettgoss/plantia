@@ -4,7 +4,6 @@ require 'rails_helper'
 RSpec::Matchers.define_negated_matcher :not_change, :change
 
 RSpec.describe PushNotificationsService do
-  include PushNotificationsService
   before do
     @user = FactoryBot.create :user
     @subs_attributes = FactoryBot.attributes_for :subscription
@@ -23,7 +22,7 @@ RSpec.describe PushNotificationsService do
       allow(Webpush).to receive(:payload_send).and_raise(ex)
 
       expect do
-        response = send_webpush_notification(@user.id, @subs_attributes)
+        response = PushNotificationsService.call(@user.id, @subs_attributes)
         expect(response).to be(false)
       end.to_not raise_error
     end
@@ -34,7 +33,7 @@ RSpec.describe PushNotificationsService do
       allow(Webpush).to receive(:payload_send).and_raise(ex)
 
       expect do
-        response = send_webpush_notification(@user.id, @subs_attributes)
+        response = PushNotificationsService.call(@user.id, @subs_attributes)
         expect(response).to be(false)
       end.to change(Subscription, :count)
     end
@@ -44,7 +43,7 @@ RSpec.describe PushNotificationsService do
       ENV['VAPID_PRIVATE_KEY'] = nil
 
       expect do
-        response = send_webpush_notification(@user.id, @subs_attributes)
+        response = PushNotificationsService.call(@user.id, @subs_attributes)
         expect(response).to be(false)
       end.to_not raise_error
     end
@@ -57,7 +56,7 @@ RSpec.describe PushNotificationsService do
       allow(Webpush).to receive(:payload_send)
 
       expect do
-        response = send_webpush_notification(@user.id, @subs_attributes)
+        response = PushNotificationsService.call(@user.id, @subs_attributes)
         expect(response).to be(true)
       end.to_not raise_error
 
