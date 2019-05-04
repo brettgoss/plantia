@@ -12,7 +12,7 @@ RSpec.describe GoogleAnalyticsService do
       allow(AnalyticsWorker).to receive(:perform_async).and_raise(Redis::CannotConnectError)
 
       expect do
-        response = GoogleAnalyticsService.new.event(*@params)
+        response = GoogleAnalyticsService.call(*@params)
         expect(response).to be(false)
       end.to_not raise_error
     end
@@ -21,7 +21,7 @@ RSpec.describe GoogleAnalyticsService do
       allow(AnalyticsWorker).to receive(:perform_async).and_raise(HTTP::Error)
 
       expect do
-        response = GoogleAnalyticsService.new.event(*@params)
+        response = GoogleAnalyticsService.call(*@params)
         expect(response).to be(false)
       end.to_not raise_error
     end
@@ -30,7 +30,7 @@ RSpec.describe GoogleAnalyticsService do
       ENV['GA_TRACKING_ID'] = ''
 
       expect do
-        response = GoogleAnalyticsService.new.event(*@params)
+        response = GoogleAnalyticsService.call(*@params)
         expect(response).to be(false)
       end.to_not raise_error
     end
@@ -42,7 +42,7 @@ RSpec.describe GoogleAnalyticsService do
       allow(AnalyticsWorker).to receive(:perform_async)
 
       expect do
-        response = GoogleAnalyticsService.new.event(*@params)
+        response = GoogleAnalyticsService.call(*@params)
         expect(response).to be(true)
       end.to_not raise_error
 

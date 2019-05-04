@@ -16,7 +16,7 @@ class PushNotificationsController < ApplicationController
     subscription = Subscription.create_hash(current_user.id, params)
     subscription = Subscription.new(subscription)
     begin subscription.save
-          GoogleAnalyticsService.new.event('users', 'subscribe', current_user.uuid)
+          GoogleAnalyticsService.call('users', 'subscribe', current_user.uuid)
           response = { "success": 'You have successfully subscribed to push notifications' }
     rescue ActiveRecord::RecordNotUnique
       Rails.logger.info 'Failed to save subscription'
@@ -30,7 +30,7 @@ class PushNotificationsController < ApplicationController
     begin
       subscription = Subscription.find(subscription_hash)
       subscription.destroy
-      GoogleAnalyticsService.new.event('users', 'unsubscribe', current_user.uuid)
+      GoogleAnalyticsService.call('users', 'unsubscribe', current_user.uuid)
       response = { "success": 'You have successfully unsubscribed' }
     rescue ActiveRecord::RecordNotFound => ex
       response = { "failed": 'You have already unsubscribed' }

@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
     super do |created_user|
       if created_user.id
         uuid = User.find(created_user.id).uuid
-        GoogleAnalyticsService.new.event('users', 'signup', uuid)
+        GoogleAnalyticsService.call('users', 'signup', uuid)
       end
     end
   end
