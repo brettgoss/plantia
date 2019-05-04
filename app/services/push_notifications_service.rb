@@ -10,50 +10,56 @@ class PushNotificationsService < BaseService
   end
 
   def call
-    send_webpush_notification(@user_id, @message_params)
+    return false if @message_params[:message].blank?
+    return false if ENV['VAPID_PUBLIC_KEY'].blank? || ENV['VAPID_PRIVATE_KEY'].blank?
+
+    Rails.logger.info "Sending push notification from #{@message_params.inspect}"
+    send_webpush_notification
   end
 
   private
 
-  def send_webpush_notification(user_id, params)
-    return false if params[:message].blank?
-    return false if ENV['VAPID_PUBLIC_KEY'].blank? || ENV['VAPID_PRIVATE_KEY'].blank?
-
-    Rails.logger.info "Sending push notification from #{params.inspect}"
-    @endpoint = params[:subscription][:endpoint]
-    @auth     = params[:subscription][:keys][:auth]
-    @key      = params[:subscription][:keys][:p256dh]
-    @message  = JSON.generate(
-      title: params[:message][:title],
-      body: params[:message][:body]
-    )
-
+  def send_webpush_notification
+    Webpush.payload_send(build_payload)
+    true
+  rescue Webpush::InvalidSubscription
+    Rails.logger.info 'Subscription not valid. Deleting...'
     begin
-      Webpush.payload_send(
-        message: @message,
-        endpoint: @endpoint,
-        p256dh: @key,
-        auth: @auth,
-        vapid: {
-          subject: 'mailto:plantiapp@gmail.com',
-          public_key: ENV['VAPID_PUBLIC_KEY'],
-          private_key: ENV['VAPID_PRIVATE_KEY']
-        },
-        ssl_timeout: 5, # value for Net::HTTP#ssl_timeout=, optional
-        open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
-        read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
-      )
-      return true
-    rescue Webpush::InvalidSubscription => ex
-      Rails.logger.info 'Subscription not valid. Deleting...'
-      begin
-        subscription_hash = Subscription.create_hash(user_id, params)[:subscription_hash]
-        subscription = Subscription.find(subscription_hash)
-        subscription.destroy
-      rescue ActiveRecord::RecordNotFound
-        Rails.logger.info 'Error while deleting: subscription not found.'
-      end
-      return false
+      delete_invalid_subscription
+    rescue ActiveRecord::RecordNotFound
+      Rails.logger.info 'Error while deleting: subscription not found.'
     end
+    false
+  end
+
+  def delete_invalid_subscription
+    subscription = Subscription.create_hash(@user_id, @message_params)
+    Subscription.find(subscription[:subscription_hash]).destroy
+  end
+
+  def build_payload
+    {
+      message: build_message,
+      vapid: build_vapid,
+      endpoint: @message_params[:subscription][:endpoint],
+      p256dh: @message_params[:subscription][:keys][:p256dh],
+      auth: @message_params[:subscription][:keys][:auth],
+      ssl_timeout: 5, open_timeout: 5, read_timeout: 5
+    }
+  end
+
+  def build_message
+    JSON.generate(
+      title: @message_params[:message][:title],
+      body: @message_params[:message][:body]
+    )
+  end
+
+  def build_vapid
+    {
+      subject: 'mailto:plantiapp@gmail.com',
+      public_key: ENV['VAPID_PUBLIC_KEY'],
+      private_key: ENV['VAPID_PRIVATE_KEY']
+    }
   end
 end
