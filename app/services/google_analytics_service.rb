@@ -1,13 +1,30 @@
 # frozen_string_literal: true
 
-class GoogleAnalyticsService
+# Performs Serverside Google Analytics events
+class GoogleAnalyticsService < BaseService
   require 'http'
 
-  def event(category, action, client_id = '555')
+  module Actions
+    SIGNUP      = 'signup'
+    SUBSCRIBE   = 'subscribe'
+    UNSUBSCRIBE = 'unsubscribe'
+  end
+
+  module Categories
+    USERS  = 'users'
+    PLANTS = 'plants'
+  end
+
+  def initialize(category, action, client_id = '555')
+    @category = category
+    @action = action
+    @client_id = client_id
+  end
+
+  def call
     return false unless ENV['GA_TRACKING_ID'].present?
 
-    @params = get_params(category, action, client_id)
-
+    @params = get_params(@category, @action, @client_id)
     send_analytics_event
   end
 
