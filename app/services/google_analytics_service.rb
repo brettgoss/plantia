@@ -4,6 +4,17 @@
 class GoogleAnalyticsService < BaseService
   require 'http'
 
+  module Actions
+    SIGNUP      = 'signup'
+    SUBSCRIBE   = 'subscribe'
+    UNSUBSCRIBE = 'unsubscribe'
+  end
+
+  module Categories
+    USERS  = 'users'
+    PLANTS = 'plants'
+  end
+
   def initialize(category, action, client_id = '555')
     @category = category
     @action = action
