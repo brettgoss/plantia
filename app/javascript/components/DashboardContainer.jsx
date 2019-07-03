@@ -62,6 +62,6 @@ class DashboardContainer extends Component {
       </Fragment>
     )
   }
-};
+}
 
 export default hot(DashboardContainer);
