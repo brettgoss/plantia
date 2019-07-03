@@ -1,4 +1,4 @@
-const React = require('react');
+import React, { Component } from 'react';
 
 // Calculation for how many days until the plant needs to be watered
 // based on the provided water frequency and the most recent waterEvent
@@ -24,11 +24,7 @@ function getWaterNextString(timeToNextWater) {
   }
 }
 
-class CardBody extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
+class CardBody extends Component {
   render() {
     let lastWaterEvent  = lastWatered(this.props.waterDate, this.props.plant.water_freq);
     let waterNextString = getWaterNextString(this.props.timeToNextWater);
@@ -47,4 +43,4 @@ class CardBody extends React.Component {
   }
 }
 
-module.exports = CardBody;
+export default CardBody;

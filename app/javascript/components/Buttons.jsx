@@ -1,10 +1,6 @@
-const React = require('react');
+import React, { Component } from 'react';
 
-class ButtonBar extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
+class ButtonBar extends Component {
   render() {
     return (
         <div id="buttonBar">
@@ -16,4 +12,4 @@ class ButtonBar extends React.Component {
   }
 };
 
-module.exports = ButtonBar;
+export default ButtonBar;

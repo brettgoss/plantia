@@ -1,9 +1,11 @@
 import { hot } from 'react-hot-loader/root';
-import React, { Component } from 'react';
-const api       = require('../utils/api');
-const ButtonBar = require('./Buttons');
-const Message   = require('./Message');
-const Dashboard = require('./Dashboard');
+import React, { Component, Fragment } from 'react';
+
+import api from '../utils/api';
+
+import ButtonBar from './Buttons';
+import Message   from './Message';
+import Dashboard from './Dashboard';
 
 function waterPlants (plantId) {
   if (plantId > 0) {
@@ -47,7 +49,7 @@ class DashboardContainer extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <ButtonBar
           waterPlants={this.handlePlantWatering} />
         <Message
@@ -57,7 +59,7 @@ class DashboardContainer extends Component {
           waterEvents={this.state.waterEvents}
           waterPlant={this.handlePlantWatering}
         />
-      </React.Fragment>
+      </Fragment>
     )
   }
 };

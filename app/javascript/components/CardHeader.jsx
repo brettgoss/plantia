@@ -1,13 +1,9 @@
-const React = require('react');
+import React, { Component } from 'react';
 
-class CardHeader extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
+class CardHeader extends Component {
   render() {
     return (
-      <React.Fragment>
+      <>
         <header className="plant-header">
           <img className="plant-image" src="/favicon.ico" />
           <div className="plant-head">
@@ -15,9 +11,9 @@ class CardHeader extends React.Component {
             <div className="plant-common">{this.props.plant.common_name}</div>
           </div>
         </header>
-      </React.Fragment>
+      </>
     )
   }
 }
 
-module.exports = CardHeader;
+export default CardHeader;

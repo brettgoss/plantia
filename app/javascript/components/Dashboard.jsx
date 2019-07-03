@@ -1,5 +1,5 @@
-const React = require('react');
-const Card  = require('./Card')
+import React, { Component } from 'react';
+import Card from './Card';
 
 function getWaterEventByPlantId(waterEvents, plantId) {
   return waterEvents.filter((waterEvent) => {
@@ -9,7 +9,7 @@ function getWaterEventByPlantId(waterEvents, plantId) {
   }).shift()
 }
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props)
   }
@@ -19,6 +19,7 @@ class Dashboard extends React.Component {
         <div className="wrapper">
           {
             this.props.plants.map((plant, index) => {
+              let waterEvent = {};
               if (this.props.waterEvents) {
                 waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
               }
@@ -38,4 +39,4 @@ class Dashboard extends React.Component {
   }
 };
 
-module.exports = Dashboard;
+export default Dashboard;

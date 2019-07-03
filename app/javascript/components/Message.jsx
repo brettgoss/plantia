@@ -1,6 +1,6 @@
-const React = require('react');
+import React, { Component } from 'react';
 
-class Message extends React.Component {
+class Message extends Component {
 
   componentDidUpdate() {
     // TODO: Switch this to React Animations: https://reactjs.org/docs/animation.html
@@ -16,4 +16,4 @@ class Message extends React.Component {
   }
 }
 
-module.exports = Message;
+export default Message;

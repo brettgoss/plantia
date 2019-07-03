@@ -1,16 +1,12 @@
-const React = require('react');
+import React, { Component } from 'react';
 
 function getPlantHealth(timeToNextWater) {
-  if (timeToNextWater >= 24) return plantHealth = 'good';
-  if (timeToNextWater >= 1) return plantHealth = 'trouble';
-  return plantHealth = 'bad';
+  if (timeToNextWater >= 24) return 'good';
+  if (timeToNextWater >= 1) return 'trouble';
+  return 'bad';
 }
 
-class CardFooter extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
+class CardFooter extends Component {
   render() {
     let plantHealth = getPlantHealth(this.props.timeToNextWater);
     let inputText = this.props.id > 0 ? "Water" : "Create New Plant";
@@ -28,4 +24,4 @@ class CardFooter extends React.Component {
   }
 }
 
-module.exports = CardFooter;
+export default CardFooter;

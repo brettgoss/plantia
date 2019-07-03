@@ -1,7 +1,7 @@
-const React = require('react');
-const CardBody = require('./CardBody');
-const CardHeader = require('./CardHeader');
-const CardFooter = require('./CardFooter');
+import React, { Component } from 'react';
+import CardBody from './CardBody';
+import CardHeader from './CardHeader';
+import CardFooter from './CardFooter';
 
 function waterNext(waterEvent) {
   let num = waterEvent;
@@ -11,7 +11,7 @@ function waterNext(waterEvent) {
   return timeToNextWater;
 }
 
-class Card extends React.Component {
+class Card extends Component {
   constructor(props) {
     super(props)
 
@@ -59,7 +59,7 @@ class Card extends React.Component {
     let plant = this.props.plant;
 
     return (
-      <div key={this.props.plant.index} className="card" >
+      <div key={this.props.plant.index} className="card">
         <a href={"/plants/" + (plant.id > 0 ? plant.id : 'new')}>
           <CardHeader
             plant={plant}
@@ -80,4 +80,4 @@ class Card extends React.Component {
   }
 }
 
-module.exports = Card;
+export default Card;
