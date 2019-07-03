@@ -1,15 +1,17 @@
 {
   "dependencies": {
-    "@rails/webpacker": "3.5",
-    "axios": "^0.18.0",
-    "babel-preset-react": "^6.24.1",
+    "@rails/webpacker": "^4.0.7",
+    "axios": "^0.19.0",
     "prop-types": "^15.6.2",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react_ujs": "^2.4.4"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react_ujs": "^2.5.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "2.11.2"
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "webpack-dev-server": "^3.7.2"
   },
   "engines": {
     "node": "10.11.0"
