@@ -13,19 +13,19 @@ function waterNext(waterEvent) {
 
 class Card extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       waterDate: this.props.waterEvent.water_date,
       timeToNextWater: '',
-    }
+    };
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.updateCard = this.updateCard.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateCard = this.updateCard.bind(this);
   }
 
   componentDidMount() {
-    this.updateCard()
+    this.updateCard();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -43,8 +43,8 @@ class Card extends Component {
   // Triggered by the water button onClick, then passes data to the App component
   handleSubmit(e) {
     if (this.props.plant.id > 0) {
-      e.preventDefault()
-      this.props.waterPlant(this.props.plant.id)
+      e.preventDefault();
+      this.props.waterPlant(this.props.plant.id);
     }
   }
 
@@ -52,7 +52,7 @@ class Card extends Component {
     let timeToNextWater = waterNext(this.state.waterDate);
     this.setState({
       timeToNextWater: timeToNextWater,
-    })
+    });
   }
 
   render() {
@@ -60,10 +60,8 @@ class Card extends Component {
 
     return (
       <div key={this.props.plant.index} className="card">
-        <a href={"/plants/" + (plant.id > 0 ? plant.id : 'new')}>
-          <CardHeader
-            plant={plant}
-          />
+        <a href={'/plants/' + (plant.id > 0 ? plant.id : 'new')}>
+          <CardHeader plant={plant} />
           <CardBody
             plant={plant}
             waterDate={this.state.waterDate}
@@ -76,7 +74,7 @@ class Card extends Component {
           />
         </a>
       </div>
-    )
+    );
   }
 }
 

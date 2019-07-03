@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
 // Calculation for how many days until the plant needs to be watered
 // based on the provided water frequency and the most recent waterEvent
 // TODO: Why is the waterFreq being used here?
 function lastWatered(waterEvent, waterFreq) {
   let num = moment(waterEvent);
-  let freq = moment.duration(waterFreq, "days").asHours();
+  let freq = moment.duration(waterFreq, 'days').asHours();
   let result = moment(num)
-    .subtract(freq, "hours")
-    .format("lll");
+    .subtract(freq, 'hours')
+    .format('lll');
   return result;
 }
 
@@ -30,7 +30,7 @@ function CardBody({ waterDate, plant, timeToNextWater }) {
   let lastWaterEvent = lastWatered(waterDate, plant.water_freq);
   let waterNextString = getWaterNextString(timeToNextWater);
   let waterFrequency =
-    plant.water_freq === 1 ? "1 day" : `${plant.water_freq} days`;
+    plant.water_freq === 1 ? '1 day' : `${plant.water_freq} days`;
 
   return (
     <div className="plant-content">
