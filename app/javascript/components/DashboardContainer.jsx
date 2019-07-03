@@ -1,4 +1,5 @@
-const React     = require('react');
+import { hot } from 'react-hot-loader/root';
+import React, { Component } from 'react';
 const api       = require('../utils/api');
 const ButtonBar = require('./Buttons');
 const Message   = require('./Message');
@@ -18,7 +19,7 @@ function waterPlants (plantId) {
   }
 }
 
-class DashboardContainer extends React.Component {
+class DashboardContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -61,4 +62,4 @@ class DashboardContainer extends React.Component {
   }
 };
 
-module.exports = DashboardContainer;
+export default hot(DashboardContainer);
