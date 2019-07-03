@@ -18,7 +18,7 @@ function waterPlants (plantId) {
   }
 }
 
-class App extends React.Component {
+class DashboardContainer extends React.Component {
   constructor(props) {
     super(props)
 
@@ -61,4 +61,4 @@ class App extends React.Component {
   }
 };
 
-module.exports = App;
+module.exports = DashboardContainer;
