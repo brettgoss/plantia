@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 
 import api from '../utils/api';
 
-import ButtonBar from './Buttons';
+import ButtonBar from './ButtonBar';
 import Message   from './Message';
 import Dashboard from './Dashboard';
 
