@@ -15,16 +15,11 @@ function Dashboard({ plants, waterEvents, waterPlant }) {
   return (
     <div className="wrapper">
       {plants.map(plant => {
-        let waterEvent = {};
-        if (waterEvents) {
-          waterEvent = getWaterEventByPlantId(waterEvents, plant.id);
-        }
-
         return (
           <Card
             key={plant.id}
             plant={plant}
-            waterEvent={waterEvent}
+            waterEvent={waterEvents && getWaterEventByPlantId(waterEvents, plant.id)}
             waterPlant={waterPlant}
           />
         );

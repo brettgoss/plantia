@@ -1,36 +1,33 @@
 import React from 'react';
 
-// Calculation for how many days until the plant needs to be watered
-// based on the provided water frequency and the most recent waterEvent
-// TODO: Why is the waterFreq being used here?
-function lastWatered(waterEvent, waterFreq) {
-  let num = moment(waterEvent);
-  let freq = moment.duration(waterFreq, 'days').asHours();
-  let result = moment(num)
-    .subtract(freq, 'hours')
+// TODO: Should be saving the last waterEvent rather than the next one
+//       since this is needlessly complicated as a result
+function getLastWatered(waterEvent, waterFreq) {
+  return moment(waterEvent)
+    .subtract(waterFreq, 'days')
     .format('lll');
-  return result;
+}
+
+function getWaterFreqString(waterFreq) {
+  return waterFreq === 1 ? '1 day' : `${waterFreq} days`;
 }
 
 function getWaterNextString(timeToNextWater) {
-  let countdown = Math.floor(timeToNextWater / 24);
+  const countdown = Math.floor(timeToNextWater / 24);
 
-  if (timeToNextWater >= 48) {
-    return `Water in ${countdown} days`;
-  } else if (timeToNextWater >= 24) {
-    return `Water in ${countdown} day`;
-  } else if (timeToNextWater > 1) {
-    return `Water in ${timeToNextWater} hours`;
-  } else {
-    return `Your plant is thirsty!`;
-  }
+  return timeToNextWater >= 48
+    ? `Water in ${countdown} days`
+    : timeToNextWater >= 24
+    ? `Water in ${countdown} day`
+    : timeToNextWater > 1
+    ? `Water in ${timeToNextWater} hours`
+    : `Your plant is thirsty!`;
 }
 
 function CardBody({ waterDate, plant, timeToNextWater }) {
-  let lastWaterEvent = lastWatered(waterDate, plant.water_freq);
-  let waterNextString = getWaterNextString(timeToNextWater);
-  let waterFrequency =
-    plant.water_freq === 1 ? '1 day' : `${plant.water_freq} days`;
+  const lastWaterEvent = getLastWatered(waterDate, plant.water_freq);
+  const waterNextString = getWaterNextString(timeToNextWater);
+  const waterFrequency = getWaterFreqString(plant.water_freq);
 
   return (
     <div className="plant-content">
