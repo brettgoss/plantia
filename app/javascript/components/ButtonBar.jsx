@@ -1,12 +1,12 @@
 import React from 'react';
 
-function ButtonBar({ waterPlants }) {
+function ButtonBar({ handlePlantWatering }) {
   return (
     <div id="buttonBar">
       <a className="button" href="/plants">
         See All
       </a>
-      <button className="button" onClick={waterPlants}>
+      <button className="button" onClick={() => handlePlantWatering()}>
         Water All
       </button>
       <a className="button" href="/plants/new">
