@@ -8,9 +8,13 @@ function getPlantHealth(timeToNextWater) {
     : 'bad';
 }
 
+function getInputText(plantId) {
+  return plantId ? 'Water' : 'Create New Plant';
+}
+
 function CardFooter({ id, timeToNextWater, handleSubmit }) {
   const plantHealth = getPlantHealth(timeToNextWater);
-  const inputText = id > 0 ? 'Water' : 'Create New Plant';
+  const inputText = getInputText(id);
 
   return (
     <input
