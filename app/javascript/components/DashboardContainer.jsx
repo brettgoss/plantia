@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root';
 import React, { useState } from 'react';
 
-import api from '../utils/api';
+import { waterAllPlants, waterOnePlant } from '../utils/api';
 
 import ButtonBar from './ButtonBar';
 import Message from './Message';
@@ -9,10 +9,10 @@ import Dashboard from './Dashboard';
 
 function waterPlants(plantId) {
   return plantId
-    ? api.waterOnePlant(plantId).then(waterEvents => {
+    ? waterOnePlant(plantId).then(waterEvents => {
         return waterEvents;
       })
-    : api.waterAllPlants().then(waterEvents => {
+    : waterAllPlants().then(waterEvents => {
         return waterEvents;
       });
 }
