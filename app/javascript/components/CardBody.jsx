@@ -1,50 +1,44 @@
-const React = require('react');
+import React from 'react';
 
-// Calculation for how many days until the plant needs to be watered
-// based on the provided water frequency and the most recent waterEvent
-// TODO: Why is the waterFreq being used here?
-function lastWatered(waterEvent, waterFreq) {
-  let num = moment(waterEvent);
-  let freq = moment.duration(waterFreq, 'days').asHours();
-  let result = moment(num).subtract(freq, 'hours').format('lll');
-  return result;
+// TODO: Should be saving the last waterEvent rather than the next one
+//       since this is needlessly complicated as a result
+function getLastWatered(waterEvent, waterFreq) {
+  return moment(waterEvent)
+    .subtract(waterFreq, 'days')
+    .format('lll');
+}
+
+function getWaterFreqString(waterFreq) {
+  return waterFreq === 1 ? '1 day' : `${waterFreq} days`;
 }
 
 function getWaterNextString(timeToNextWater) {
-  let countdown = Math.floor(timeToNextWater / 24);
+  const countdown = Math.floor(timeToNextWater / 24);
 
-  if (timeToNextWater >= 48) {
-    return `Water in ${countdown} days`;
-  } else if (timeToNextWater >= 24) {
-    return `Water in ${countdown} day`;
-  } else if (timeToNextWater > 1) {
-    return `Water in ${timeToNextWater} hours`;
-  } else {
-    return `Your plant is thirsty!`;
-  }
+  return timeToNextWater >= 48
+    ? `Water in ${countdown} days`
+    : timeToNextWater >= 24
+    ? `Water in ${countdown} day`
+    : timeToNextWater > 1
+    ? `Water in ${timeToNextWater} hours`
+    : `Your plant is thirsty!`;
 }
 
-class CardBody extends React.Component {
-  constructor (props) {
-    super(props)
-  }
+function CardBody({ waterDate, plant, timeToNextWater }) {
+  const lastWaterEvent = getLastWatered(waterDate, plant.water_freq);
+  const waterNextString = getWaterNextString(timeToNextWater);
+  const waterFrequency = getWaterFreqString(plant.water_freq);
 
-  render() {
-    let lastWaterEvent  = lastWatered(this.props.waterDate, this.props.plant.water_freq);
-    let waterNextString = getWaterNextString(this.props.timeToNextWater);
-    let waterFrequency  = (this.props.plant.water_freq === 1) ? "1 day" : `${this.props.plant.water_freq} days`;
-
-    return (
-      <div className="plant-content">
-        <h5 className="plant-details">{waterNextString}</h5>
-        <div className="card-info">Last Watered</div>
-        <div className="plant-details">{lastWaterEvent}</div>
-        <div className="card-info">Needs</div>
-        <div className="plant-details">Watering every {waterFrequency}</div>
-        <div className="plant-details">{this.props.plant.light}</div>
-      </div>
-    )
-  }
+  return (
+    <div className="plant-content">
+      <h5 className="plant-details">{waterNextString}</h5>
+      <div className="card-info">Last Watered</div>
+      <div className="plant-details">{lastWaterEvent}</div>
+      <div className="card-info">Needs</div>
+      <div className="plant-details">Watering every {waterFrequency}</div>
+      <div className="plant-details">{plant.light}</div>
+    </div>
+  );
 }
 
-module.exports = CardBody;
+export default CardBody;

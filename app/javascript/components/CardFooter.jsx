@@ -1,31 +1,29 @@
-const React = require('react');
+import React from 'react';
 
 function getPlantHealth(timeToNextWater) {
-  if (timeToNextWater >= 24) return plantHealth = 'good';
-  if (timeToNextWater >= 1) return plantHealth = 'trouble';
-  return plantHealth = 'bad';
+  return timeToNextWater >= 24
+    ? 'good'
+    : timeToNextWater >= 1
+    ? 'trouble'
+    : 'bad';
 }
 
-class CardFooter extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
-  render() {
-    let plantHealth = getPlantHealth(this.props.timeToNextWater);
-    let inputText = this.props.id > 0 ? "Water" : "Create New Plant";
-
-    return (
-      <React.Fragment>
-        <input
-          type="button"
-          value={inputText}
-          className={"card-button card-button-" + plantHealth}
-          onClick={this.props.handleSubmit}
-        />
-      </React.Fragment>
-    )
-  }
+function getInputText(plantId) {
+  return plantId ? 'Water' : 'Create New Plant';
 }
 
-module.exports = CardFooter;
+function CardFooter({ id, timeToNextWater, handleSubmit }) {
+  const plantHealth = getPlantHealth(timeToNextWater);
+  const inputText = getInputText(id);
+
+  return (
+    <input
+      type="button"
+      value={inputText}
+      className={'card-button card-button-' + plantHealth}
+      onClick={handleSubmit}
+    />
+  );
+}
+
+export default CardFooter;
