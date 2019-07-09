@@ -9,12 +9,8 @@ import Dashboard from './Dashboard';
 
 function waterPlants(plantId) {
   return plantId
-    ? waterOnePlant(plantId).then(waterEvents => {
-        return waterEvents;
-      })
-    : waterAllPlants().then(waterEvents => {
-        return waterEvents;
-      });
+    ? waterOnePlant(plantId).then(waterEvents => waterEvents)
+    : waterAllPlants().then(waterEvents => waterEvents);
 }
 
 function DashboardContainer({ waterEvents: initialWaterEvents, plants }) {

@@ -24,6 +24,7 @@ export const waterOnePlant = plantId => {
 };
 
 const handleError = error => {
+  // TODO: Post this error to a logging endpoint
   console.warn(error);
   return null;
 };
