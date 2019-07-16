@@ -26,7 +26,7 @@ class WaterEventsController < ApplicationController
   def water_one_plant
     plant = Plant.find(params[:plant_id])
   rescue ActiveRecord::RecordNotFound
-    puts 'Attempted to water a plant that does not exist'
+    logger.error('Attempted to water a plant that does not exist')
   else
     helpers.create_water_event(plant) if plant.present?
   end

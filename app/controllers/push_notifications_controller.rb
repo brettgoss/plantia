@@ -25,7 +25,7 @@ class PushNotificationsController < ApplicationController
 
       response = { "success": 'You have successfully subscribed to push notifications' }
     rescue ActiveRecord::RecordNotUnique
-      Rails.logger.info 'Failed to save subscription'
+      logger.error('Failed to save subscription')
       response = { "failed": 'You have already subscribed to push notifications' }
     end
     render json: response, status: :ok
