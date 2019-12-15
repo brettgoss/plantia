@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
+# Handles webpush subscriptions
 class PushNotificationsController < ApplicationController
-  include PushNotificationsService
   require 'json'
 
   def create
-    if send_webpush_notification(current_user.id, params)
+    if PushNotificationsService.call(current_user.id, params)
       head :ok
     else
       head 404
@@ -15,9 +15,15 @@ class PushNotificationsController < ApplicationController
   def subscribe
     subscription = Subscription.create_hash(current_user.id, params)
     subscription = Subscription.new(subscription)
-    begin subscription.save
-          GoogleAnalyticsService.new.event('users', 'subscribe', current_user.uuid)
-          response = { "success": 'You have successfully subscribed to push notifications' }
+    begin
+      subscription.save
+      GoogleAnalyticsService.call(
+        GoogleAnalyticsService::Categories::USERS,
+        GoogleAnalyticsService::Actions::SUBSCRIBE,
+        current_user.uuid
+      )
+
+      response = { "success": 'You have successfully subscribed to push notifications' }
     rescue ActiveRecord::RecordNotUnique
       Rails.logger.info 'Failed to save subscription'
       response = { "failed": 'You have already subscribed to push notifications' }
@@ -30,9 +36,14 @@ class PushNotificationsController < ApplicationController
     begin
       subscription = Subscription.find(subscription_hash)
       subscription.destroy
-      GoogleAnalyticsService.new.event('users', 'unsubscribe', current_user.uuid)
+      GoogleAnalyticsService.call(
+        GoogleAnalyticsService::Categories::USERS,
+        GoogleAnalyticsService::Actions::UNSUBSCRIBE,
+        current_user.uuid
+      )
+
       response = { "success": 'You have successfully unsubscribed' }
-    rescue ActiveRecord::RecordNotFound => ex
+    rescue ActiveRecord::RecordNotFound
       response = { "failed": 'You have already unsubscribed' }
     end
     render json: response, status: :ok

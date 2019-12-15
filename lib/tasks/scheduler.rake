@@ -3,7 +3,6 @@ require 'json'
 namespace :notifications do
   desc "Sends users a push notification if their plants are thristy"
   task :send_watering_notification, [:days_since_watered] => :environment do |task, args|
-    include PushNotificationsService
 
     days_since_watered = args[:days_since_watered] ? args[:days_since_watered].to_i : 2
     dry_plant_subscriptions = Subscription.fetch_dry_plant_subscriptions(days_since_watered)
@@ -17,7 +16,8 @@ namespace :notifications do
         }
       }
 
-      notify_user_of_thirsty_plant(notification, subscription_hash)
+      @user = User.find(notification['user_id'])
+      @user.notify_of_thirsty_plant(notification, subscription_hash)
     end
   end
 end

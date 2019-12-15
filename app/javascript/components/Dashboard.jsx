@@ -1,41 +1,27 @@
-const React = require('react');
-const Card  = require('./Card')
+import React from 'react';
+import Card from './Card';
 
 function getWaterEventByPlantId(waterEvents, plantId) {
-  return waterEvents.filter((waterEvent) => {
-    if (waterEvent.plant_id == plantId) {
-      return waterEvent;
-    }
-  }).shift()
+  return waterEvents
+    .filter(waterEvent => waterEvent.plant_id == plantId && waterEvent)
+    .shift();
 }
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-        <div className="wrapper">
-          {
-            this.props.plants.map((plant, index) => {
-              if (this.props.waterEvents) {
-                waterEvent = getWaterEventByPlantId(this.props.waterEvents, plant.id)
-              }
-
-              return (
-                <Card
-                  key={plant.id}
-                  plant={plant}
-                  waterEvent={waterEvent}
-                  waterPlant={this.props.waterPlant}
-                />
-              )
-            })
+function Dashboard({ plants, waterEvents, waterPlant }) {
+  return (
+    <div className="wrapper">
+      {plants.map(plant => (
+        <Card
+          key={plant.id}
+          plant={plant}
+          waterEvent={
+            waterEvents && getWaterEventByPlantId(waterEvents, plant.id)
           }
-      </div>
-    )
-  }
-};
+          waterPlant={waterPlant}
+        />
+      ))}
+    </div>
+  );
+}
 
-module.exports = Dashboard;
+export default Dashboard;
