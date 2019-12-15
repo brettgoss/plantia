@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'hello@plantia.io'
+  default from: 'hello@plantia.app'
   layout 'mailer'
 
     # send a signup email to the user, pass in the user object that contains the user's email address
