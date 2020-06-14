@@ -1,4 +1,4 @@
-FROM ruby:2.6.2-alpine
+FROM ruby:2.6.3-alpine
 
 ENV BUILD_PACKAGES build-base postgresql-dev tzdata
 ENV RUBY_PACKAGES nodejs redis
